@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Exact Logo Color Palette: Deep Wine Plum #60315F, Dark Aubergine #331632, Warm Champagne Cream #FAF6EE, Soft Mauve #92718B */
+    --primary: 301 32% 28%; /* #60315F - Cor principal da logo */
+    --primary-dark: 302 40% 14%; /* #331632 - Tom escuro de base da logo */
+    --primary-hover: 301 35% 22%; /* #4D254C */
+    --primary-light: 301 34% 36%; /* #7A3D76 */
+    --primary-subtle: 303 26% 95%; /* #F5EDF4 */
+    
+    --mauve-accent: 308 13% 51%; /* #92718B - Rosa queimado/malva da logo */
+    --mauve-light: 308 24% 90%; /* #ECE0EA */
+    
+    --champagne: 40 40% 96%; /* #FAF6EE - Marfim champanhe da tipografia da logo */
+    --champagne-gold: 37 57% 68%; /* #DFB77C - Dourado champanhe nobre */
+    
+    --ice-white: 40 40% 96%; /* #FAF6EE */
+    --ice-white-card: 0 0% 100%;
+    --ice-border: 303 18% 90%;
+    
+    --text-primary: 302 40% 14%; /* #331632 */
+    --text-secondary: 302 18% 38%; /* #553954 */
+    --text-muted: 302 10% 56%; /* #826E81 */
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  body {
+    background-color: #FAF6EE;
+    color: hsl(var(--text-primary));
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Fredoka', 'Nunito', -apple-system, sans-serif;
+    letter-spacing: -0.025em;
+  }
+}
+
+/* Custom scrollbar in logo plum tones */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F5EDF4;
+}
+::-webkit-scrollbar-thumb {
+  background: #CDB9CA;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #92718B;
+}

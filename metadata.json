@@ -1,0 +1,6 @@
+{
+  "name": "Rouvana Modas - Roupas em Fibras Naturais",
+  "description": "Catálogo exclusivo de roupas em fibras 100% naturais, linho e algodão orgânico em Chavantes - SP. Moda consciente, duradoura e respirável.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
