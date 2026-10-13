@@ -114,29 +114,29 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* 2. MAIN HEADER: LOGO ESTICADA ATÉ A LUPA DE PESQUISA */}
-      <div className="border-b border-[#60315F]/15 py-3 sm:py-4 px-4 sm:px-8 bg-[#FAF6EE]">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 sm:gap-6">
-          {/* Brand Logo - Esticada e ampla até a proximidade da lupa */}
+      {/* 2. MAIN HEADER: LOGO AMPLA, AUMENTADA E AJUSTADA ATÉ A LUPA */}
+      <div className="border-b border-[#60315F]/15 py-2.5 sm:py-3.5 px-3 sm:px-6 bg-[#FAF6EE]">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 sm:gap-5">
+          {/* Brand Logo - Tamanho aumentado, esticada e perfeitamente ajustada */}
           <a
             href="#inicio"
             onClick={(e) => handleScrollTo(e, 'inicio')}
-            className="flex-1 flex items-center group cursor-pointer py-1 min-w-0 pr-2 sm:pr-4"
+            className="flex-1 flex items-center group cursor-pointer min-w-0 pr-2 sm:pr-4"
           >
             <img
               src="/logo.jpg"
               alt="Rouvana Modas"
-              className="h-20 sm:h-24 md:h-28 lg:h-32 w-full max-w-[340px] sm:max-w-[480px] md:max-w-[620px] lg:max-w-[780px] object-contain object-left rounded-2xl shadow-sm border border-[#60315F]/20 group-hover:scale-[1.01] transition-all duration-300"
+              className="w-full h-28 sm:h-36 md:h-44 lg:h-52 object-fill rounded-2xl shadow-md border border-[#60315F]/25 group-hover:scale-[1.005] transition-all duration-300"
             />
           </a>
 
           {/* Right Action Icons: Lupa de Pesquisa, Perfil, Favoritos, Sacola */}
-          <div className="flex items-center gap-2 sm:gap-3.5 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0 self-center">
             {/* Lupa de Pesquisa posicionada diretamente ao lado da logo expandida */}
             <button
               onClick={onOpenSearch}
               aria-label="Buscar produtos"
-              className="flex items-center gap-2 px-3 py-2.5 sm:px-4 sm:py-2.5 text-slate-700 hover:text-[#60315F] bg-white hover:bg-[#F5EDF4] rounded-2xl transition-all cursor-pointer border border-[#60315F]/20 shadow-xs"
+              className="flex items-center gap-2 px-3.5 py-3 sm:px-5 sm:py-3 text-slate-700 hover:text-[#60315F] bg-white hover:bg-[#F5EDF4] rounded-2xl transition-all cursor-pointer border border-[#60315F]/20 shadow-xs"
             >
               <Search className="w-5 h-5 text-[#60315F]" />
               <span className="hidden md:inline text-xs font-bold text-slate-600">
@@ -229,7 +229,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <img
                 src="/logo.jpg"
                 alt="Rouvana Modas"
-                className="h-20 w-auto rounded-xl shadow-xs border border-[#60315F]/20 object-contain"
+                className="w-full h-28 sm:h-36 object-fill rounded-xl shadow-xs border border-[#60315F]/20"
               />
             </div>
             {navMenuItems.map((item) => (
