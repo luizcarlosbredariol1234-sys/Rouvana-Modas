@@ -47,7 +47,7 @@ ${message ? `Mensagem: ${message}` : ''}`;
   ];
 
   return (
-    <section id="contato" className="py-24 bg-white relative">
+    <section id="contato" className="py-24 bg-[#FAF6EE] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">

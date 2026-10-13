@@ -47,16 +47,19 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
   }, [activeTab]);
 
   return (
-    <section id="produtos" className="py-12 bg-white">
+    <section id="produtos" className="py-16 bg-[#FAF6EE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 1. SECTION TITLE & TABS (Trending Products) */}
-        <div className="text-center mb-8">
-          <h2 className="font-display font-bold text-2xl sm:text-3xl text-[#331632] mb-5">
+        <div className="text-center mb-10">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#60315F] block mb-2">
+            Catálogo Exclusivo · Chavantes - SP
+          </span>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#331632] mb-5">
             Produtos em Destaque
           </h2>
 
-          {/* Filter Pills */}
-          <div className="inline-flex items-center gap-2 p-1 bg-[#F5EDF4] rounded-full border border-[#60315F]/15">
+          {/* Filter Tabs Harmonized with Logo */}
+          <div className="inline-flex items-center gap-1.5 p-1 bg-[#F5EDF4] rounded-full border border-[#60315F]/20 shadow-xs">
             <button
               onClick={() => setActiveTab('bestseller')}
               className={`px-5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
@@ -331,31 +334,34 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
           </div>
         </div>
 
-        {/* 4. SECONDARY PROMO BANNER (Harmonized with Logo Palette) */}
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FAF5F9] via-[#F4E8F2] to-[#EBD5E7] min-h-[360px] flex items-center px-6 sm:px-14 py-8 mb-16 border border-[#60315F]/15 shadow-xs">
+        {/* 4. SECONDARY PROMO BANNER (Fiel à Identidade Visual da Logo) */}
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#331632] via-[#4D254C] to-[#60315F] text-[#FAF6EE] min-h-[360px] flex items-center px-6 sm:px-14 py-10 mb-16 border border-[#DFB77C]/30 shadow-xl">
+          {/* Decorative glowing plum orb */}
+          <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-[#7A3D76]/30 rounded-full blur-3xl pointer-events-none" />
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full z-10">
             {/* Left promo copy */}
             <div className="lg:col-span-7 flex flex-col items-start text-left">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#92718B] mb-2 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#60315F]" />
-                Nova Coleção Exclusiva
+              <span className="text-xs font-bold uppercase tracking-widest text-[#DFB77C] mb-3 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-[#DFB77C]" />
+                Atelier & Alfaiataria Rouvana Modas
               </span>
 
-              <h3 className="font-display font-bold text-[#331632] text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-3">
-                Lançamentos <br />
-                <span className="text-[#60315F]">Feitos para Você</span>
+              <h3 className="font-display font-bold text-[#FAF6EE] text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4">
+                Elegância Feita <br />
+                <span className="text-[#DFB77C] italic">Sob Medida para Você</span>
               </h3>
 
-              <p className="text-sm text-[#553954] max-w-md mb-6 leading-relaxed">
-                Aproveite até 40% OFF no seu primeiro pedido. Peças selecionadas pela Rouvana Modas para valorizar sua beleza com conforto e sofisticação.
+              <p className="text-sm text-[#E6D4E3] max-w-md mb-6 leading-relaxed">
+                Tamanhos do P ao G6 com modelagens que abraçam sua beleza. Conte com nossos ajustes sem custo para que cada peça chegue impecável ao seu corpo.
               </p>
 
               <button
                 onClick={onContactClick}
-                className="px-7 py-3.5 rounded-full bg-gradient-to-r from-[#60315F] to-[#7A3D76] hover:from-[#4D254C] hover:to-[#60315F] text-[#FAF6EE] font-bold text-xs sm:text-sm shadow-md shadow-[#60315F]/25 flex items-center gap-2 transition-transform hover:scale-105 cursor-pointer"
+                className="px-8 py-4 rounded-full bg-[#DFB77C] hover:bg-[#E5C38E] text-[#331632] font-bold text-xs sm:text-sm shadow-lg shadow-black/25 flex items-center gap-2.5 transition-transform hover:scale-105 cursor-pointer"
               >
-                <span>Comprar Agora</span>
-                <ArrowRight className="w-4 h-4 text-[#DFB77C]" />
+                <span>Falar no WhatsApp</span>
+                <ArrowRight className="w-4 h-4 text-[#331632]" />
               </button>
             </div>
 
@@ -364,22 +370,35 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
               <img
                 src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=700&q=80"
                 alt="Coleção Rouvana Modas"
-                className="w-64 sm:w-72 h-72 sm:h-80 object-cover object-top rounded-2xl shadow-lg border-2 border-white/90"
+                className="w-64 sm:w-72 h-72 sm:h-80 object-cover object-top rounded-2xl shadow-2xl border-2 border-[#DFB77C]/40"
               />
             </div>
           </div>
         </div>
 
-        {/* 5. BRAND LOGOS STRIP */}
-        <div className="py-6 border-y border-slate-200/80 mb-8">
-          <div className="flex flex-wrap items-center justify-between gap-6 sm:gap-10 opacity-70 grayscale hover:grayscale-0 transition-all text-xs font-bold text-slate-500">
-            <span className="font-display text-xl sm:text-2xl tracking-widest text-slate-900">ZARA</span>
-            <span className="font-display text-xl sm:text-2xl tracking-widest text-red-600 font-extrabold italic">H&M</span>
-            <span className="font-display text-lg sm:text-xl tracking-widest text-slate-900">MANGO</span>
-            <span className="font-display text-lg sm:text-xl tracking-widest bg-red-600 text-white px-2 py-0.5 rounded font-black">Levi's</span>
-            <span className="font-display text-lg sm:text-xl tracking-widest text-slate-900 font-black">GUESS</span>
-            <span className="font-display text-lg sm:text-xl tracking-widest text-slate-900 font-black">NIKE</span>
-            <span className="font-display text-lg sm:text-xl tracking-widest text-slate-900 font-black">ADIDAS</span>
+        {/* 5. ATELIER EXCELLENCE SEALS (Harmonizado com a Logo e Chavantes - SP) */}
+        <div className="py-8 border-y border-[#60315F]/15 mb-8 bg-[#F5EDF4]/60 rounded-2xl px-6">
+          <div className="flex flex-wrap items-center justify-around gap-6 sm:gap-8 text-xs font-bold text-[#60315F]">
+            <div className="flex items-center gap-2 tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#DFB77C]" />
+              <span className="font-display text-sm tracking-wider">ROUVANA MODAS · CHAVANTES</span>
+            </div>
+            <div className="flex items-center gap-2 tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#DFB77C]" />
+              <span className="font-display text-sm tracking-wider">TAMANHOS P AO G6</span>
+            </div>
+            <div className="flex items-center gap-2 tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#DFB77C]" />
+              <span className="font-display text-sm tracking-wider">AJUSTES SEM CUSTO</span>
+            </div>
+            <div className="flex items-center gap-2 tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#DFB77C]" />
+              <span className="font-display text-sm tracking-wider">FIBRAS PURAS & NOBRES</span>
+            </div>
+            <div className="flex items-center gap-2 tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#DFB77C]" />
+              <span className="font-display text-sm tracking-wider">ATENDIMENTO HUMANIZADO</span>
+            </div>
           </div>
         </div>
       </div>
