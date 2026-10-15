@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Sparkles, Ruler, Scissors } from 'lucide-react';
+import { ArrowRight, Sparkles, Ruler, Leaf } from 'lucide-react';
 import { CATEGORY_CARDS, COMPANY_INFO } from '../data/products';
 
 interface HeroProps {
@@ -14,23 +14,23 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick })
   const heroSlides = [
     {
       kicker: 'Coleção Exclusiva Rouvana',
-      titlePart1: 'Renove o Seu',
-      titlePart2: 'Estilo de Vestir',
-      subtitle: 'Aproveite até 40% OFF no primeiro pedido. Peças selecionadas com caimento refinado e tecidos nobres.',
-      modelImg: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80',
-    },
-    {
-      kicker: 'Lançamentos de Verão',
       titlePart1: 'Elegância Pura',
-      titlePart2: 'Feita para Você',
-      subtitle: 'Descubra a sofisticação das peças atemporais com acabamento de alfaiataria impecável.',
+      titlePart2: 'Feita a Você',
+      subtitle: 'Descubra peças atemporais com elegância e estilo.',
       modelImg: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80',
     },
     {
-      kicker: 'Chavantes - SP',
-      titlePart1: 'Moda Feminina',
-      titlePart2: '& Acessórios',
-      subtitle: 'Modelagens que valorizam a sua essência com conforto absoluto em todas as ocasiões.',
+      kicker: 'Diferencial da Loja · Grade Inclusiva',
+      titlePart1: 'Plus Size & Moda Mulher',
+      titlePart2: 'Do P ao G6 Real',
+      subtitle: 'Modelagens exclusivas que abraçam e valorizam suas curvas com caimento impecável e elegância pura.',
+      modelImg: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+    },
+    {
+      kicker: 'Coleção Especial & Conforto',
+      titlePart1: 'Peças Selecionadas',
+      titlePart2: '100% Algodão',
+      subtitle: 'Temos peças 100% algodão com caimento primoroso, maciez incomparável e elegância para o seu dia a dia.',
       modelImg: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
     },
   ];
@@ -73,15 +73,23 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick })
                 {currentSlide.subtitle}
               </p>
 
-              {/* Diferenciais Rouvana Modas: P ao G6 & Ajustes sem custo */}
-              <div className="flex flex-wrap items-center gap-2.5 mb-8">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 border border-[#60315F]/20 text-[#60315F] text-xs font-bold shadow-xs">
-                  <Ruler className="w-3.5 h-3.5 text-[#DFB77C]" />
-                  <span>Diferencial: Tamanhos do P ao G6</span>
+              {/* Diferenciais Rouvana Modas com super destaque aos tamanhos P ao G6, Plus Size e 100% Algodão */}
+              <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2.5 mb-8">
+                <div className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#60315F] text-[#FAF6EE] text-xs font-bold shadow-sm border border-[#4D254C]">
+                  <Ruler className="w-4 h-4 text-[#DFB77C] shrink-0" />
+                  <span>DIFERENCIAL DA LOJA: TAMANHOS DO P AO G6</span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FAF4EB] border border-[#DEC295]/40 text-[#7A4B1A] text-xs font-bold shadow-xs">
-                  <Scissors className="w-3.5 h-3.5 text-[#7A4B1A]" />
-                  <span>Ajustes sem custo</span>
+                <div className="flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/95 border border-[#60315F]/20 text-[#60315F] text-xs font-bold shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-[#DFB77C]" />
+                  <span>Plus Size Especial (G1 ao G6)</span>
+                </div>
+                <div className="flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-[#F5EDF4] border border-[#60315F]/25 text-[#60315F] text-xs font-bold shadow-xs">
+                  <Leaf className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Temos peças 100% algodão</span>
+                </div>
+                <div className="flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-[#FAF4EB] border border-[#DEC295]/40 text-[#7A4B1A] text-xs font-bold shadow-xs">
+                  <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+                  <span>10% OFF no 1º Pedido</span>
                 </div>
               </div>
 

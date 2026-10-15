@@ -5,14 +5,12 @@ import {
   Heart,
   ShoppingBag,
   Instagram,
-  RotateCcw,
   Smartphone,
   Phone,
   Headphones,
   Menu,
   X,
   ChevronDown,
-  Scissors,
   Ruler,
   Sparkles,
 } from 'lucide-react';
@@ -40,10 +38,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navMenuItems = [
     { label: 'Início', href: '#inicio', active: true },
     { label: 'Catálogo de Produtos', href: '#produtos' },
-    { label: 'Moda Feminina', href: '#produtos' },
-    { label: 'Linho Nobre', href: '#produtos' },
-    { label: 'Vestidos & Fluidos', href: '#produtos' },
-    { label: 'Blusas & Tops', href: '#produtos' },
+    { label: 'Moda Mulher', href: '#produtos' },
+    { label: 'Plus Size (G1 ao G6)', href: '#produtos', highlight: true },
+    { label: '100% Algodão', href: '#produtos' },
     { label: 'Sobre a Rouvana', href: '#sobre' },
     { label: 'Localização & Contato', href: '#contato' },
   ];
@@ -61,51 +58,34 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header className="sticky top-0 z-40 bg-white shadow-xs">
       {/* 1. TOP ANNOUNCEMENT BAR (Color matched to logo #60315F) */}
       <div className="bg-[#60315F] text-[#FAF6EE] text-[11px] sm:text-xs py-2 px-4 sm:px-8 border-b border-[#4D254C]">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 font-medium">
-          {/* Announcements list */}
-          <div className="flex items-center gap-3 sm:gap-5 flex-wrap justify-center sm:justify-start">
-            <span className="flex items-center gap-1.5 bg-[#FAF6EE]/15 px-2.5 py-0.5 rounded-full text-[#DFB77C] font-bold">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+          {/* Informações da Loja & Diferenciais */}
+          <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center sm:justify-start">
+            <div className="flex items-center gap-1.5 font-medium">
               <Ruler className="w-3.5 h-3.5 text-[#DFB77C]" />
-              <span>Diferencial: Tamanhos do P ao G6</span>
-            </span>
-            <span className="flex items-center gap-1.5 bg-[#FAF6EE]/15 px-2.5 py-0.5 rounded-full text-[#FAF6EE] font-bold">
-              <Scissors className="w-3.5 h-3.5 text-[#DFB77C]" />
-              <span>Ajustes sem Custo</span>
-            </span>
-            <a
-              href={COMPANY_INFO.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-1.5 opacity-95 hover:text-[#DFB77C] transition-colors"
-            >
-              <Instagram className="w-3.5 h-3.5 text-[#DFB77C]" />
-              <span className="font-semibold">Instagram: {COMPANY_INFO.instagram}</span>
-            </a>
-            <span className="hidden xl:flex items-center gap-1.5 opacity-90">
-              <RotateCcw className="w-3.5 h-3.5 text-[#E6D4E3]" />
-              Troca Fácil 30 Dias
-            </span>
-            <span className="hidden xl:flex items-center gap-1.5 opacity-90">
+              <span>Tamanhos do P ao G6</span>
+            </div>
+            <div className="flex items-center gap-1.5 font-medium">
               <Smartphone className="w-3.5 h-3.5 text-[#DFB77C]" />
-              10% no Pix
-            </span>
+              <span>Compre também pelo WhatsApp</span>
+            </div>
           </div>
 
           {/* Right Phone & Instagram contact */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 sm:gap-4 shrink-0 font-medium">
             <a
               href={COMPANY_INFO.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1 text-[#F5EDF4] hover:text-[#DFB77C] transition-colors font-semibold"
+              className="flex items-center gap-1.5 text-[#F5EDF4] hover:text-[#DFB77C] transition-colors font-medium"
             >
               <Instagram className="w-3.5 h-3.5 text-[#DFB77C]" />
               <span>{COMPANY_INFO.instagram}</span>
             </a>
-            <span className="hidden sm:inline text-white/30">•</span>
+            <span className="text-white/30">•</span>
             <a
               href={`tel:${COMPANY_INFO.phoneClean}`}
-              className="flex items-center gap-1.5 text-[#F5EDF4] hover:text-[#DFB77C] transition-colors"
+              className="flex items-center gap-1.5 text-[#F5EDF4] hover:text-[#DFB77C] transition-colors font-medium"
             >
               <Phone className="w-3.5 h-3.5 text-[#DFB77C]" />
               <span>{COMPANY_INFO.phone}</span>
@@ -199,11 +179,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleScrollTo(e, item.href.replace('#', ''))}
-                className={`transition-colors whitespace-nowrap cursor-pointer hover:text-[#60315F] ${
-                  item.active ? 'text-[#60315F] font-extrabold border-b-2 border-[#60315F] pb-0.5' : ''
+                className={`transition-all whitespace-nowrap cursor-pointer ${
+                  item.highlight
+                    ? 'bg-[#60315F] text-[#FAF6EE] px-3 py-1 rounded-full text-[11px] font-black shadow-xs hover:bg-[#4D254C] hover:text-white flex items-center gap-1.5'
+                    : item.active
+                    ? 'text-[#60315F] font-extrabold border-b-2 border-[#60315F] pb-0.5'
+                    : 'hover:text-[#60315F]'
                 }`}
               >
-                {item.label}
+                {item.highlight && <Sparkles className="w-3 h-3 text-[#DFB77C]" />}
+                <span>{item.label}</span>
               </a>
             ))}
           </nav>
@@ -237,9 +222,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleScrollTo(e, item.href.replace('#', ''))}
-                className="py-2 border-b border-slate-100 hover:text-[#60315F]"
+                className={`py-2 border-b border-slate-100 flex items-center justify-between ${
+                  item.highlight
+                    ? 'text-[#60315F] font-bold bg-[#FAF5F9] px-2.5 rounded-lg'
+                    : 'hover:text-[#60315F]'
+                }`}
               >
-                {item.label}
+                <span>{item.label}</span>
+                {item.highlight && (
+                  <span className="text-[10px] bg-[#60315F] text-[#FAF6EE] px-2 py-0.5 rounded-full font-bold">
+                    Diferencial
+                  </span>
+                )}
               </a>
             ))}
             {/* Diferencial em destaque */}
@@ -249,8 +243,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span>Tamanhos do P ao G6</span>
               </div>
               <div className="flex items-center gap-2 font-semibold text-[#553954]">
-                <Scissors className="w-4 h-4 text-[#60315F]" />
-                <span>Ajustes finos sem custo na loja física</span>
+                <Sparkles className="w-4 h-4 text-[#60315F]" />
+                <span>Modelagens que valorizam sua beleza</span>
               </div>
             </div>
             <div className="pt-2 flex flex-col gap-2">

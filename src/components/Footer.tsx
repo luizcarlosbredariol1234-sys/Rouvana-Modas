@@ -1,6 +1,6 @@
 import React from 'react';
 import { COMPANY_INFO } from '../data/products';
-import { MapPin, Phone, MessageCircle, Heart, ShieldCheck, Leaf, Instagram, Ruler, Scissors } from 'lucide-react';
+import { MapPin, Phone, MessageCircle, Heart, ShieldCheck, Leaf, Instagram, Ruler, Sparkles } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const handleScrollTo = (id: string) => {
@@ -24,21 +24,21 @@ export const Footer: React.FC = () => {
               />
             </div>
             <p className="text-xs sm:text-sm text-[#D8C7D6] leading-relaxed max-w-sm mb-4">
-              Roupas femininas contemporâneas e elegantes em Chavantes - SP. Peças cuidadosamente selecionadas com modelagem impecável, tecidos nobres e toque natural.
+              Roupas femininas elegantes em Chavantes - SP. Peças cuidadosamente selecionadas com modelagem impecável e caimento elegante.
             </p>
             <div className="flex flex-wrap items-center gap-2 mb-4">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 text-xs font-semibold text-[#DFB77C]">
                 <Ruler className="w-3.5 h-3.5" />
-                Tamanhos do P ao G6
+                Tamanhos P ao G6 & Plus Size
               </span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 text-xs font-semibold text-[#FAF6EE]">
-                <Scissors className="w-3.5 h-3.5 text-[#DFB77C]" />
-                Ajustes sem custo
+                <Leaf className="w-3.5 h-3.5 text-emerald-400" />
+                Temos Peças 100% Algodão
               </span>
-            </div>
-            <div className="flex items-center gap-2 text-xs text-[#DFB77C]">
-              <Leaf className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>Conforto térmico, estilo atemporal e qualidade superior</span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 text-xs font-semibold text-[#FAF6EE]">
+                <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+                Estilo & Elegância
+              </span>
             </div>
           </div>
 
@@ -99,7 +99,7 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#92718B]" />
-                <span>Linho Nobre</span>
+                <span>Moda Mulher</span>
               </li>
               <li className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#92718B]" />

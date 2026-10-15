@@ -17,13 +17,23 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 }) => {
   const [query, setQuery] = useState('');
 
+  const isSizeQuery = ['plus', 'plus size', 'plussize', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'tamanho', 'tamanhos', 'medidas', 'p ao g6'].includes(query.trim().toLowerCase());
+
   const results = query.trim() === ''
     ? []
-    : PRODUCTS_DATA.filter((p) =>
-        p.name.toLowerCase().includes(query.toLowerCase()) ||
-        p.categoryLabel.toLowerCase().includes(query.toLowerCase()) ||
-        p.fiberHighlight.toLowerCase().includes(query.toLowerCase())
-      );
+    : PRODUCTS_DATA.filter((p) => {
+        const q = query.toLowerCase().trim();
+        if (isSizeQuery) return true; // Todas as peças possuem a grade completa P ao G6 e Plus Size
+        return (
+          p.name.toLowerCase().includes(q) ||
+          p.categoryLabel.toLowerCase().includes(q) ||
+          p.fiberHighlight.toLowerCase().includes(q) ||
+          p.composition.toLowerCase().includes(q) ||
+          p.sizes.some((s) => s.toLowerCase() === q)
+        );
+      });
+
+  const quickSearchTags = ['Plus Size (G1 ao G6)', '100% Algodão', 'Tamanhos P ao G6', 'Vestidos', 'Blusas', 'Camisas'];
 
   return (
     <AnimatePresence>
@@ -43,14 +53,14 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
             className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-[#60315F]/15 z-10 p-6 overflow-hidden"
           >
-            <div className="flex items-center gap-3 border-b border-[#60315F]/15 pb-4 mb-4">
+            <div className="flex items-center gap-3 border-b border-[#60315F]/15 pb-4 mb-3">
               <Search className="w-5 h-5 text-[#60315F]" />
               <input
                 type="text"
                 autoFocus
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="O que você está procurando hoje? (ex: vestido, camisa, jaqueta...)"
+                placeholder="Busque por peça, tecido ou tamanho (ex: Plus Size, G2, Vestido...)"
                 className="w-full text-base text-[#331632] placeholder-slate-400 focus:outline-none"
               />
               <button
@@ -59,6 +69,20 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               >
                 <X className="w-5 h-5" />
               </button>
+            </div>
+
+            {/* Quick search tags */}
+            <div className="flex items-center gap-1.5 flex-wrap mb-4 pb-2 border-b border-slate-100">
+              <span className="text-[10px] font-bold uppercase text-slate-400 mr-1">Sugestões:</span>
+              {quickSearchTags.map((tag) => (
+                <button
+                  key={tag}
+                  onClick={() => setQuery(tag)}
+                  className="text-xs px-2.5 py-1 rounded-full bg-[#F5EDF4] text-[#60315F] hover:bg-[#60315F] hover:text-[#FAF6EE] font-medium transition-colors cursor-pointer"
+                >
+                  {tag}
+                </button>
+              ))}
             </div>
 
             {/* Results */}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Plus, Minus, Trash2, ShoppingBag, MessageCircle, ArrowRight, Scissors } from 'lucide-react';
+import { X, Plus, Minus, Trash2, ShoppingBag, MessageCircle, ArrowRight } from 'lucide-react';
 import { CartItem } from '../types/catalog';
 import { COMPANY_INFO } from '../data/products';
 
@@ -164,10 +164,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <div className="text-[11px] text-[#60315F] bg-[#F5EDF4] border border-[#60315F]/20 p-2.5 rounded-xl space-y-1">
                   <div className="text-center font-medium">
                     ✨ 10% OFF no Pix • Siga no Instagram <strong>{COMPANY_INFO.instagram}</strong>
-                  </div>
-                  <div className="flex items-center justify-center gap-1.5 text-[10px] text-[#7A4B1A] font-semibold pt-1 border-t border-[#60315F]/10">
-                    <Scissors className="w-3 h-3 text-[#7A4B1A]" />
-                    <span>Diferencial Rouvana: Ajustes de caimento sem custo!</span>
                   </div>
                 </div>
                 <button

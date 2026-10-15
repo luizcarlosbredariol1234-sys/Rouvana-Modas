@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Product, ProductColor } from '../types/catalog';
-import { X, Check, Ruler, MessageCircle, ShoppingBag, Star, ShieldCheck, Feather, Info, Scissors, Sparkles } from 'lucide-react';
+import { X, Check, Ruler, MessageCircle, ShoppingBag, Star, ShieldCheck, Feather, Info, Sparkles } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 
 interface ProductModalProps {
@@ -166,49 +166,118 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-bold uppercase tracking-wider text-slate-600">
-                      Tamanho: <strong className="text-[#331632]">{selectedSize}</strong>
+                      Tamanho Selecionado: <strong className="text-[#331632] text-sm">{selectedSize}</strong>
                     </span>
-                    <span className="bg-[#FAF5F9] text-[#60315F] font-bold text-[10px] px-2 py-0.5 rounded-full border border-[#60315F]/20 flex items-center gap-1">
-                      <Sparkles className="w-2.5 h-2.5 text-[#DFB77C]" />
-                      Do P ao G6
-                    </span>
+                    {['G1', 'G2', 'G3', 'G4', 'G5', 'G6'].includes(selectedSize) && (
+                      <span className="bg-[#60315F] text-[#FAF6EE] font-bold text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
+                        <Sparkles className="w-2.5 h-2.5 text-[#DFB77C]" />
+                        Modelagem Plus Size
+                      </span>
+                    )}
                   </div>
                   <button
                     onClick={() => setActiveTab('medidas')}
                     className="text-xs font-bold text-[#60315F] hover:underline flex items-center gap-1 cursor-pointer"
                   >
-                    <Ruler className="w-3.5 h-3.5" />
+                    <Ruler className="w-3.5 h-3.5 text-[#DFB77C]" />
                     <span>Tabela de medidas</span>
                   </button>
                 </div>
-                <div className="flex flex-wrap gap-2 mb-3">
-                  {product.sizes.map((size) => {
-                    const isSelected = selectedSize === size;
-                    return (
-                      <button
-                        key={size}
-                        onClick={() => setSelectedSize(size)}
-                        className={`min-w-[42px] h-10 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                          isSelected
-                            ? 'bg-[#60315F] text-[#FAF6EE] shadow-xs'
-                            : 'bg-[#F5EDF4] text-[#553954] hover:bg-[#EBD8E9]'
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    );
-                  })}
+
+                {/* Grade Regular & Grade Plus Size agrupadas */}
+                <div className="space-y-2 mb-3">
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-500 block mb-1">
+                      Grade Regular:
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {product.sizes.filter(s => ['P', 'M', 'G', 'GG'].includes(s)).map((size) => {
+                        const isSelected = selectedSize === size;
+                        return (
+                          <button
+                            key={size}
+                            onClick={() => setSelectedSize(size)}
+                            className={`min-w-[42px] h-9 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                              isSelected
+                                ? 'bg-[#60315F] text-[#FAF6EE] shadow-xs'
+                                : 'bg-[#F5EDF4] text-[#553954] hover:bg-[#EBD8E9]'
+                            }`}
+                          >
+                            {size}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <span className="text-[10px] uppercase font-bold text-[#60315F]">
+                        Grade Plus Size Especial:
+                      </span>
+                      <span className="text-[9px] bg-[#FAF4EB] text-[#7A4B1A] border border-[#DEC295]/50 px-1.5 py-0.2 rounded font-extrabold">
+                        Diferencial da Loja
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {product.sizes.filter(s => ['G1', 'G2', 'G3', 'G4', 'G5', 'G6'].includes(s)).map((size) => {
+                        const isSelected = selectedSize === size;
+                        return (
+                          <button
+                            key={size}
+                            onClick={() => setSelectedSize(size)}
+                            className={`min-w-[44px] h-9 px-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                              isSelected
+                                ? 'bg-[#60315F] text-[#FAF6EE] ring-2 ring-[#DFB77C] shadow-sm'
+                                : 'bg-[#FAF4EB] text-[#7A4B1A] border border-[#DEC295]/40 hover:bg-[#F3E7D5]'
+                            }`}
+                          >
+                            {size}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
 
-                {/* Diferencial: Ajustes sem Custo */}
-                <div className="p-2.5 rounded-xl bg-[#FAF4EB] border border-[#DEC295]/40 flex items-start gap-2 text-xs">
-                  <Scissors className="w-4 h-4 text-[#7A4B1A] shrink-0 mt-0.5" />
+                {/* Live measurement preview for chosen size */}
+                {(() => {
+                  const m = product.measurements.find((item) => item.size === selectedSize);
+                  if (!m) return null;
+                  return (
+                    <div className="p-2.5 rounded-xl bg-[#FAF5F9] border border-[#60315F]/20 text-xs text-[#553954] mb-3">
+                      <div className="flex items-center justify-between text-[11px] font-bold text-[#60315F] mb-1">
+                        <span className="flex items-center gap-1">
+                          <Ruler className="w-3.5 h-3.5 text-[#DFB77C]" />
+                          Medidas do Tamanho {selectedSize}:
+                        </span>
+                        {['G1', 'G2', 'G3', 'G4', 'G5', 'G6'].includes(selectedSize) && (
+                          <span className="text-[10px] text-[#60315F] font-bold">
+                            Caimento Amplo & Confortável
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
+                        <span>Busto: <strong className="text-[#331632]">{m.busto}</strong></span>
+                        <span>Cintura: <strong className="text-[#331632]">{m.cintura}</strong></span>
+                        {m.quadril && m.quadril !== '—' && (
+                          <span>Quadril: <strong className="text-[#331632]">{m.quadril}</strong></span>
+                        )}
+                        <span>Comprimento: <strong className="text-[#331632]">{m.comprimento}</strong></span>
+                      </div>
+                    </div>
+                  );
+                })()}
+
+                {/* Diferencial: Modelagem & Caimento Exclusivo */}
+                <div className="p-2.5 rounded-xl bg-white border border-[#60315F]/15 flex items-start gap-2 text-xs">
+                  <Sparkles className="w-4 h-4 text-[#DFB77C] shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-bold text-[#7A4B1A] block">
-                      Diferencial Rouvana Modas: Ajustes Sem Custo
+                    <span className="font-bold text-[#60315F] block">
+                      Diferencial Rouvana Modas: Grade do P ao G6
                     </span>
                     <p className="text-[11px] text-[#553954] mt-0.5 leading-snug">
-                      Precisa de bainha, ajuste de manga ou caimento sob medida? Fazemos os ajustes sem custo adicional para garantir o caimento perfeito no seu corpo.
+                      Peças pensadas para valorizar seu corpo e estilo com extremo conforto. Dúvidas no tamanho? Nossa equipe auxilia você pelo WhatsApp.
                     </p>
                   </div>
                 </div>
@@ -279,7 +348,14 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                             key={m.size}
                             className={m.size === selectedSize ? 'bg-[#F5EDF4] font-bold text-[#60315F]' : ''}
                           >
-                            <td className="p-2">{m.size}</td>
+                            <td className="p-2">
+                              <span className="font-bold">{m.size}</span>
+                              {['G1', 'G2', 'G3', 'G4', 'G5', 'G6'].includes(m.size) && (
+                                <span className="text-[9px] bg-[#60315F] text-[#FAF6EE] px-1.5 py-0.5 rounded ml-1.5 font-bold">
+                                  Plus Size
+                                </span>
+                              )}
+                            </td>
                             <td className="p-2">{m.busto}</td>
                             <td className="p-2">{m.cintura}</td>
                             <td className="p-2">{m.quadril}</td>
@@ -293,9 +369,9 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                         <Ruler className="w-3.5 h-3.5 text-[#DFB77C]" />
                         Grade ampla do P ao G6
                       </span>
-                      <span className="text-[#7A4B1A] font-semibold flex items-center gap-1">
-                        <Scissors className="w-3.5 h-3.5" />
-                        Ajustes finos sem custo
+                      <span className="text-[#60315F] font-semibold flex items-center gap-1">
+                        <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+                        Caimento Impecável
                       </span>
                     </div>
                   </div>

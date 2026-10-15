@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ProductCatalog } from './components/ProductCatalog';
@@ -19,6 +19,10 @@ import { Product, CartItem, ProductColor } from './types/catalog';
 import { PRODUCTS_DATA } from './data/products';
 
 export default function App() {
+  useEffect(() => {
+    document.title = 'Rouvana Modas - Moda Feminina';
+  }, []);
+
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [wishlistIds, setWishlistIds] = useState<string[]>([

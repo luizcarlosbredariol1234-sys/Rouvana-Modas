@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { MapPin, Phone, MessageCircle, Clock, Send, ChevronDown, CheckCircle2, Sparkles, Navigation, Instagram, Ruler, Scissors } from 'lucide-react';
+import { MapPin, Phone, MessageCircle, Clock, Send, ChevronDown, CheckCircle2, Sparkles, Navigation, Instagram, Ruler } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 
 export const ContactSection: React.FC = () => {
@@ -29,16 +29,20 @@ ${message ? `Mensagem: ${message}` : ''}`;
       a: 'Um dos nossos grandes diferenciais é a grade de tamanhos ampla, vestindo com elegância do tamanho P até o G6! Queremos que você se sinta linda, confiante e confortável em qualquer modelagem.',
     },
     {
-      q: 'Como funcionam os ajustes sem custo?',
-      a: 'Nosso compromisso é com o seu caimento impecável! Oferecemos ajustes finos totalmente sem custo adicional (bainhas, pequenos acertos em mangas e cintura), para que sua peça fique perfeita no seu corpo.',
+      q: 'Como aproveitar o desconto de 10% no primeiro pedido?',
+      a: 'Ao realizar seu primeiro pedido ou efetuar o pagamento via Pix, você garante até 10% OFF em peças selecionadas da nossa coleção exclusiva!',
     },
     {
       q: 'Como acompanhar as novidades e lançamentos da Rouvana Modas?',
       a: 'Siga o nosso Instagram oficial @rouvana.modas! Por lá publicamos diariamente as novidades da coleção, combinações de looks, detalhes dos tecidos e avisos de reposição.',
     },
     {
-      q: 'Como sei o meu tamanho correto em linho e algodão natural?',
+      q: 'Como sei o meu tamanho correto nas peças da loja?',
       a: 'Nossas peças acompanham tabela completa em centímetros (busto, cintura, quadril e comprimento). Caso tenha dúvidas entre dois tamanhos, envie suas medidas pelo WhatsApp que nossa equipe orientará a modelagem ideal.',
+    },
+    {
+      q: 'Vocês têm peças 100% algodão?',
+      a: 'Sim! Temos peças 100% algodão. São roupas respiráveis, de toque macio e excelente durabilidade para o seu dia a dia.',
     },
     {
       q: 'Quais são as formas de pagamento disponíveis?',
@@ -192,10 +196,10 @@ ${message ? `Mensagem: ${message}` : ''}`;
                   </div>
                 </div>
                 <div className="flex items-start gap-2 text-[#331632] pt-1 border-t border-[#60315F]/10">
-                  <Scissors className="w-4 h-4 text-[#7A4B1A] shrink-0 mt-0.5" />
+                  <Sparkles className="w-4 h-4 text-[#60315F] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="font-bold">Ajustes Sem Custo</strong>
-                    <p className="text-[#553954] text-[11px]">Ajustes de bainha e caimento fino cortesia no espaço físico.</p>
+                    <strong className="font-bold">Caimento & Elegância</strong>
+                    <p className="text-[#553954] text-[11px]">Peças selecionadas com corte refinado e acabamento impecável.</p>
                   </div>
                 </div>
               </div>
@@ -255,9 +259,9 @@ ${message ? `Mensagem: ${message}` : ''}`;
                   className="w-full px-4 py-3 bg-[#FAF6EE] border border-[#60315F]/15 rounded-xl text-sm text-[#331632] focus:outline-none focus:ring-2 focus:ring-[#60315F] focus:bg-white transition-all cursor-pointer"
                 >
                   <option value="Consultoria de Tamanho & Medidas (P ao G6)">Consultoria de Tamanhos P ao G6</option>
-                  <option value="Dúvidas sobre Ajustes sem Custo">Ajustes sem Custo Sob Medida</option>
+                  <option value="Dúvidas sobre 10% OFF no Primeiro Pedido">10% OFF no Primeiro Pedido</option>
                   <option value="Disponibilidade de Peça Específica">Disponibilidade de Peça Específica</option>
-                  <option value="Conhecer Peças em Linho Nobre">Conhecer Peças em Linho Nobre</option>
+                  <option value="Conhecer Peças 100% Algodão">Conhecer Peças 100% Algodão</option>
                   <option value="Visita à Loja em Chavantes">Visita à Loja em Chavantes</option>
                   <option value="Outras Dúvidas">Outras Dúvidas</option>
                 </select>

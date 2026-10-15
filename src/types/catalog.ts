@@ -1,4 +1,4 @@
-export type ProductCategory = 'todos' | 'vestidos' | 'blusas' | 'camisas' | 'calcas' | 'jaquetas';
+export type ProductCategory = 'todos' | 'plus_size' | 'vestidos' | 'blusas' | 'camisas' | 'calcas' | 'jaquetas';
 
 export interface ProductColor {
   name: string;

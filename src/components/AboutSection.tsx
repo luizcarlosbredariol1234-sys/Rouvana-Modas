@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { ShieldCheck, Heart, Leaf, Award, Sparkles, Check, X as CloseIcon, MessageCircle, Ruler, Scissors } from 'lucide-react';
+import { ShieldCheck, Heart, Leaf, Award, Sparkles, Check, X as CloseIcon, MessageCircle, Ruler } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 
 interface AboutSectionProps {
@@ -13,12 +13,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
   const comparisonData = [
     {
       criterio: 'Respiração e Circulação de Ar',
-      natural: 'Fibras nobres que dissipam o calor e evitam acúmulo de suor.',
+      natural: 'Temos peças 100% algodão que deixam a pele respirar e evitam acúmulo de suor.',
       sintetico: 'Plástico derivado de petróleo que retém o calor e bloqueia a pele.',
     },
     {
       criterio: 'Proliferação de Odores',
-      natural: 'Propriedades antibacterianas naturais. A peça permanece fresca.',
+      natural: 'Propriedades antibacterianas que mantêm a peça fresca.',
       sintetico: 'Favorece o crescimento bacteriano (efeito cheiro impregnado crônico).',
     },
     {
@@ -28,7 +28,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
     },
     {
       criterio: 'Durabilidade Real',
-      natural: 'Fibras de linho e algodão nobre ganham maciez e duram anos.',
+      natural: 'Nossas peças de algodão ganham maciez e duram anos.',
       sintetico: 'Degenera com facilidade, forma bolinhas (peeling) e perde a forma.',
     },
     {
@@ -44,7 +44,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="flex items-center justify-center gap-2 text-xs font-bold text-[#60315F] uppercase tracking-widest mb-3">
-            <span>Atelier & Boutique em Chavantes - SP</span>
+            <span>Rouvana Modas em Chavantes - SP</span>
           </div>
 
           <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#331632] tracking-tight mb-4">
@@ -52,7 +52,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
           </h2>
 
           <p className="text-base sm:text-lg text-[#553954] leading-relaxed">
-            Na Rouvana Modas, cada peça é escolhida a dedo para proporcionar o equilíbrio perfeito entre sofisticação, caimento impecável e conforto térmico.
+            Na Rouvana Modas, cada peça é escolhida a dedo para proporcionar o equilíbrio perfeito entre sofisticação e caimento impecável.
           </p>
         </div>
 
@@ -68,27 +68,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
                 Diferencial
               </div>
               <h3 className="font-display text-lg sm:text-xl font-bold text-[#331632] mb-2">
-                Tamanhos do P ao G6
+                Tamanhos P ao G6 & Plus Size
               </h3>
               <p className="text-xs sm:text-sm text-[#553954] leading-relaxed">
-                Grade verdadeiramente inclusiva. Modelagens desenvolvidas para valorizar a beleza e a essência de todos os corpos com conforto absoluto.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-3xl p-6 sm:p-7 border border-[#60315F]/15 shadow-sm hover:shadow-lg hover:border-[#60315F]/30 transition-all flex flex-col justify-between">
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-[#FAF4EB] flex items-center justify-center text-[#7A4B1A] mb-5">
-                <Scissors className="w-6 h-6" />
-              </div>
-              <div className="inline-flex items-center gap-1 text-[10px] uppercase font-bold text-[#7A4B1A] bg-[#FFF9F0] px-2 py-0.5 rounded-full mb-2">
-                Cortesia Exclusiva
-              </div>
-              <h3 className="font-display text-lg sm:text-xl font-bold text-[#331632] mb-2">
-                Ajustes sem Custo
-              </h3>
-              <p className="text-xs sm:text-sm text-[#553954] leading-relaxed">
-                Ajustes finos de comprimento, barra e mangas sem custo adicional para assegurar um caimento feito sob medida especialmente para você.
+                Grade verdadeiramente inclusiva do P ao G6 (Regular e Plus Size Especial). Modelagens que valorizam as curvas reais com caimento impecável e extremo conforto.
               </p>
             </div>
           </div>
@@ -96,13 +79,33 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
           <div className="bg-white rounded-3xl p-6 sm:p-7 border border-[#60315F]/15 shadow-sm hover:shadow-lg hover:border-[#60315F]/30 transition-all flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-2xl bg-[#F5EDF4] flex items-center justify-center text-[#60315F] mb-5">
-                <Leaf className="w-6 h-6" />
+                <Sparkles className="w-6 h-6 text-[#60315F]" />
+              </div>
+              <div className="inline-flex items-center gap-1 text-[10px] uppercase font-bold text-[#60315F] bg-[#FAF5F9] px-2 py-0.5 rounded-full mb-2">
+                Diferencial
               </div>
               <h3 className="font-display text-lg sm:text-xl font-bold text-[#331632] mb-2">
-                Fibras Nobres
+                Caimento Impecável
               </h3>
               <p className="text-xs sm:text-sm text-[#553954] leading-relaxed">
-                Linho europeu e algodão puro de alta densidade. Roupas respiráveis e hipoalergênicas que respeitam a pele em qualquer clima.
+                Modelagens sofisticadas pensadas para valorizar o corpo feminino com elegância, fluidez e conforto em qualquer ocasião.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl p-6 sm:p-7 border border-[#60315F]/15 shadow-sm hover:shadow-lg hover:border-[#60315F]/30 transition-all flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-[#F5EDF4] flex items-center justify-center text-[#60315F] mb-5">
+                <Leaf className="w-6 h-6 text-[#60315F]" />
+              </div>
+              <div className="inline-flex items-center gap-1 text-[10px] uppercase font-bold text-[#60315F] bg-[#FAF5F9] px-2 py-0.5 rounded-full mb-2">
+                100% Algodão
+              </div>
+              <h3 className="font-display text-lg sm:text-xl font-bold text-[#331632] mb-2">
+                Temos Peças 100% Algodão
+              </h3>
+              <p className="text-xs sm:text-sm text-[#553954] leading-relaxed">
+                Temos peças 100% algodão puro de alta densidade. Roupas respiráveis, macias e hipoalergênicas que respeitam a sua pele com caimento impecável.
               </p>
             </div>
           </div>
@@ -130,7 +133,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
                 Critérios de Qualidade Rouvana Modas
               </span>
               <h3 className="font-display text-2xl font-bold text-[#331632]">
-                Por que escolher tecidos nobres e naturais?
+                Por que escolher as peças da Rouvana Modas?
               </h3>
             </div>
             <div className="flex items-center gap-2">
@@ -198,7 +201,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div className="space-y-4 text-[#553954] leading-relaxed text-sm sm:text-base">
                 <p>
-                  A <strong className="text-[#331632] font-semibold">Rouvana Modas</strong> tem como propósito oferecer a você uma experiência de moda acolhedora, com roupas femininas e peças de linho que combinam beleza clássica e conforto moderno.
+                  A <strong className="text-[#331632] font-semibold">Rouvana Modas</strong> tem como propósito oferecer a você uma experiência de moda acolhedora, com roupas femininas que combinam beleza clássica, modelagem impecável e conforto moderno.
                 </p>
                 <p>
                   Acreditamos que se vestir bem é uma forma diária de autocuidado. Por isso, prestamos atenção aos acabamentos, às cores elegantes e aos tecidos que deixam a pele respirar livremente.
@@ -213,7 +216,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
                   </blockquote>
                 </div>
                 <div className="pt-4 border-t border-white/15 text-xs text-[#E5D5E3]">
-                  <span className="font-bold text-[#FAF6EE] block">Atelier Rouvana Modas</span>
+                  <span className="font-bold text-[#FAF6EE] block">Rouvana Modas</span>
                   <span>Rua Altino Arantes 209, Centro · Chavantes - SP</span>
                 </div>
               </div>
