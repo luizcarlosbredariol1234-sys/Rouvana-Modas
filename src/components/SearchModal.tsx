@@ -17,7 +17,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 }) => {
   const [query, setQuery] = useState('');
 
-  const isSizeQuery = ['plus', 'plus size', 'plussize', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'tamanho', 'tamanhos', 'medidas', 'p ao g6'].includes(query.trim().toLowerCase());
+  const isSizeQuery = ['plus', 'plus size', 'plussize', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'tamanho', 'tamanhos', 'medidas', 'p ao g6', '54', 'p ao 54'].includes(query.trim().toLowerCase());
 
   const results = query.trim() === ''
     ? []
@@ -33,7 +33,18 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         );
       });
 
-  const quickSearchTags = ['Plus Size (G1 ao G6)', '100% Algodão', 'Tamanhos P ao G6', 'Vestidos', 'Blusas', 'Camisas'];
+  const quickSearchTags = [
+    'Pijamas (P ao 54)',
+    'Vestidos',
+    'Saias',
+    'Regatas',
+    'Camisas e Blusas',
+    'Pantalonas e Calças',
+    'Bermudas',
+    'Lingerie',
+    'Do P ao 54',
+    'Plus Size (P ao G6)',
+  ];
 
   return (
     <AnimatePresence>

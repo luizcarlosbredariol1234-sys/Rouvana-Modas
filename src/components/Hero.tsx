@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Sparkles, Ruler, Leaf } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { CATEGORY_CARDS, COMPANY_INFO } from '../data/products';
+import { ProductCategory } from '../types/catalog';
 
 interface HeroProps {
   onExploreProducts: () => void;
   onContactClick: () => void;
+  onSelectCategory?: (category: ProductCategory) => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick }) => {
+export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, onSelectCategory }) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
   const heroSlides = [
     {
-      kicker: 'Coleção Exclusiva Rouvana',
+      kicker: '⭐ Destaque Especial · Rouvana Modas',
+      titlePart1: 'Pijamas Conforto',
+      titlePart2: 'Do P ao 54',
+      subtitle: 'Modelagens exclusivas que abraçam suas noites com malhas macias, toque suave e caimento aconchegante.',
+      modelImg: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80',
+    },
+    {
+      kicker: 'Coleção Exclusiva Rouvana Modas',
       titlePart1: 'Elegância Pura',
       titlePart2: 'Feita a Você',
-      subtitle: 'Descubra peças atemporais com elegância e estilo.',
+      subtitle: 'Descubra peças femininas sofisticadas com modelagem impecável, do P ao G6.',
       modelImg: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80',
     },
     {
@@ -27,20 +36,27 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick })
       modelImg: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
     },
     {
-      kicker: 'Coleção Especial & Conforto',
-      titlePart1: 'Peças Selecionadas',
-      titlePart2: '100% Algodão',
-      subtitle: 'Temos peças 100% algodão com caimento primoroso, maciez incomparável e elegância para o seu dia a dia.',
-      modelImg: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+      kicker: 'Coleção Exclusiva Rouvana Modas',
+      titlePart1: 'Moda Feminina',
+      titlePart2: 'Beleza & Conforto',
+      subtitle: 'Peças com corte impecável para acompanhar todos os seus momentos com requinte, estilo e bem-estar.',
+      modelImg: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80',
     },
   ];
 
   const currentSlide = heroSlides[activeSlide];
 
+  const handleCardClick = (catId: ProductCategory) => {
+    if (onSelectCategory) {
+      onSelectCategory(catId);
+    }
+    onExploreProducts();
+  };
+
   return (
     <section id="inicio" className="pt-3 pb-12 bg-[#FAF6EE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* 1. HERO MAIN BANNER (Chronics layout styled with Rouvana Logo Palette) */}
+        {/* 1. HERO MAIN BANNER */}
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FAF5F9] via-[#F4E8F2] to-[#EBD5E7] min-h-[440px] sm:min-h-[500px] flex items-center px-6 sm:px-14 py-10 border border-[#60315F]/15 shadow-xs">
           {/* Subtle decorative dot grid background */}
           <div className="absolute top-8 right-12 w-48 h-48 opacity-20 pointer-events-none hidden md:block">
@@ -73,24 +89,13 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick })
                 {currentSlide.subtitle}
               </p>
 
-              {/* Diferenciais Rouvana Modas com super destaque aos tamanhos P ao G6, Plus Size e 100% Algodão */}
-              <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2.5 mb-8">
-                <div className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#60315F] text-[#FAF6EE] text-xs font-bold shadow-sm border border-[#4D254C]">
-                  <Ruler className="w-4 h-4 text-[#DFB77C] shrink-0" />
-                  <span>DIFERENCIAL DA LOJA: TAMANHOS DO P AO G6</span>
-                </div>
-                <div className="flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/95 border border-[#60315F]/20 text-[#60315F] text-xs font-bold shadow-xs">
-                  <span className="w-2 h-2 rounded-full bg-[#DFB77C]" />
-                  <span>Plus Size Especial (G1 ao G6)</span>
-                </div>
-                <div className="flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-[#F5EDF4] border border-[#60315F]/25 text-[#60315F] text-xs font-bold shadow-xs">
-                  <Leaf className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Temos peças 100% algodão</span>
-                </div>
-                <div className="flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-[#FAF4EB] border border-[#DEC295]/40 text-[#7A4B1A] text-xs font-bold shadow-xs">
+              {/* Diferenciais Rouvana Modas: Pijamas do P ao 54, Horário, Pequenos Ajustes, P ao G6 */}
+              {/* Destaque Curadoria Rouvana Modas */}
+              <div className="flex items-center gap-2 mb-8">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 text-xs font-semibold text-[#60315F] border border-[#60315F]/15 shadow-xs">
                   <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
-                  <span>10% OFF no 1º Pedido</span>
-                </div>
+                  Moda Feminina em Chavantes - SP
+                </span>
               </div>
 
               {/* Action Buttons */}
@@ -104,10 +109,10 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick })
                 </button>
 
                 <button
-                  onClick={onExploreProducts}
-                  className="px-6 py-3.5 rounded-full bg-white/95 hover:bg-white text-[#60315F] font-bold text-sm border border-[#60315F]/25 shadow-xs transition-colors cursor-pointer"
+                  onClick={onContactClick}
+                  className="px-6 py-3.5 rounded-full bg-white/95 hover:bg-white text-[#60315F] font-bold text-sm border border-[#60315F]/25 shadow-xs transition-transform hover:scale-105 cursor-pointer flex items-center gap-1.5"
                 >
-                  Explorar Coleção
+                  <span>Fale Conosco</span>
                 </button>
               </div>
 
@@ -131,7 +136,6 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick })
             {/* Right model image column */}
             <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
               <div className="relative">
-                {/* Glow ring in logo wine plum */}
                 <div className="absolute inset-0 bg-[#60315F]/15 rounded-full blur-2xl transform scale-90" />
                 <img
                   src={currentSlide.modelImg}
@@ -143,37 +147,71 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick })
           </div>
         </div>
 
-        {/* 2. FIVE CATEGORY CARDS (Harmonized with Logo Palette) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 mt-8">
-          {CATEGORY_CARDS.map((card) => (
-            <div
-              key={card.id}
-              onClick={onExploreProducts}
-              className={`rounded-2xl p-4 flex flex-col justify-between overflow-hidden cursor-pointer group transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${card.bgClass}`}
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl object-cover shrink-0 shadow-xs group-hover:scale-105 transition-transform"
-                />
-                <div className="min-w-0">
-                  <span className="text-[10px] uppercase font-bold tracking-wider opacity-75 block truncate">
-                    {card.tag}
-                  </span>
-                  <h3 className="font-display font-bold text-xs sm:text-sm tracking-tight truncate">
-                    {card.title}
-                  </h3>
-                </div>
-              </div>
 
-              <div className="flex items-center justify-between pt-2 border-t border-black/5 text-[11px] font-bold">
-                <span className="group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                  {card.linkText}
-                </span>
-              </div>
+
+        {/* 2. AS 8 CATEGORIAS DA LOJA (Vestidos, Pijamas, Saias, Regatas, Camisas e Blusas, Pantalonas e Calças, Bermudas, Lingerie) */}
+        <div className="mt-8">
+          <div className="flex items-center justify-between mb-4 px-1">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#60315F] block">
+                Navegue por Categoria
+              </span>
+              <h2 className="text-xl sm:text-2xl font-display font-bold text-[#331632]">
+                Categorias em Destaque
+              </h2>
             </div>
-          ))}
+            <button
+              onClick={onExploreProducts}
+              className="text-xs font-bold text-[#60315F] hover:underline flex items-center gap-1 cursor-pointer"
+            >
+              <span>Ver todas as peças</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3.5 sm:gap-4">
+            {CATEGORY_CARDS.map((card) => {
+              const isPajamas = card.id === 'pijamas';
+              return (
+                <div
+                  key={card.id}
+                  onClick={() => handleCardClick(card.id)}
+                  className={`relative rounded-2xl p-4 flex flex-col justify-between overflow-hidden cursor-pointer group transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${card.bgClass} ${
+                    isPajamas ? 'ring-2 ring-[#60315F] scale-[1.02]' : ''
+                  }`}
+                >
+                  {isPajamas && (
+                    <div className="absolute top-2 right-2 bg-[#60315F] text-[#FAF6EE] text-[9px] font-black px-2 py-0.5 rounded-full shadow-xs flex items-center gap-1 border border-[#DFB77C]/60 z-10">
+                      <Sparkles className="w-2.5 h-2.5 text-[#DFB77C]" />
+                      <span>DO P AO 54</span>
+                    </div>
+                  )}
+
+                  <div className="flex items-center gap-3 mb-3">
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl object-cover shrink-0 shadow-xs group-hover:scale-105 transition-transform"
+                    />
+                    <div className="min-w-0 pr-6">
+                      <span className="text-[10px] uppercase font-bold tracking-wider opacity-75 block truncate">
+                        {card.tag}
+                      </span>
+                      <h3 className="font-display font-bold text-xs sm:text-sm tracking-tight truncate">
+                        {card.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-2 border-t border-black/5 text-[11px] font-bold">
+                    <span className="group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                      {card.linkText}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { MapPin, Phone, MessageCircle, Clock, Send, ChevronDown, CheckCircle2, Sparkles, Navigation, Instagram, Ruler } from 'lucide-react';
+import { MapPin, Phone, MessageCircle, Clock, Send, ChevronDown, CheckCircle2, Sparkles, Navigation, Instagram, Ruler, Scissors } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 
 export const ContactSection: React.FC = () => {
@@ -25,28 +25,28 @@ ${message ? `Mensagem: ${message}` : ''}`;
 
   const faqs = [
     {
+      q: 'Qual é o horário de atendimento da Rouvana Modas?',
+      a: 'Nosso horário de atendimento é de Segunda a Sexta das 09:00 às 18:00, e aos Domingos das 08:30 às 12:00. Aos sábados a loja física permanece fechada.',
+    },
+    {
+      q: 'Vocês fazem pequenos ajustes nas peças?',
+      a: 'Sim! Fazemos pequenos ajustes com muito carinho nas roupas (como barras, ajustes de cintura ou mangas) para garantir o caimento perfeito no seu corpo.',
+    },
+    {
       q: 'Quais tamanhos vocês atendem na Rouvana Modas?',
       a: 'Um dos nossos grandes diferenciais é a grade de tamanhos ampla, vestindo com elegância do tamanho P até o G6! Queremos que você se sinta linda, confiante e confortável em qualquer modelagem.',
+    },
+    {
+      q: 'Quais são as categorias de roupas disponíveis?',
+      a: 'Temos uma coleção completa com: Vestidos, Pijamas, Saias, Regatas, Camisas e Blusas, Pantalonas e Calças, Bermudas e Lingerie.',
     },
     {
       q: 'Como aproveitar o desconto de 10% no primeiro pedido?',
       a: 'Ao realizar seu primeiro pedido ou efetuar o pagamento via Pix, você garante até 10% OFF em peças selecionadas da nossa coleção exclusiva!',
     },
     {
-      q: 'Como acompanhar as novidades e lançamentos da Rouvana Modas?',
-      a: 'Siga o nosso Instagram oficial @rouvana.modas! Por lá publicamos diariamente as novidades da coleção, combinações de looks, detalhes dos tecidos e avisos de reposição.',
-    },
-    {
-      q: 'Como sei o meu tamanho correto nas peças da loja?',
-      a: 'Nossas peças acompanham tabela completa em centímetros (busto, cintura, quadril e comprimento). Caso tenha dúvidas entre dois tamanhos, envie suas medidas pelo WhatsApp que nossa equipe orientará a modelagem ideal.',
-    },
-    {
-      q: 'Vocês têm peças 100% algodão?',
-      a: 'Sim! Temos peças 100% algodão. São roupas respiráveis, de toque macio e excelente durabilidade para o seu dia a dia.',
-    },
-    {
-      q: 'Quais são as formas de pagamento disponíveis?',
-      a: 'Aceitamos Pix (com confirmação instantânea e 10% OFF), cartões de crédito em até 3x sem juros, além de pagamento direto no espaço físico em Chavantes.',
+      q: 'Como saber meu tamanho correto nas peças?',
+      a: 'Nossas peças acompanham tabela completa em centímetros (busto, cintura, quadril e comprimento). Se tiver dúvidas, envie suas medidas pelo WhatsApp que orientamos você e realizamos pequenos ajustes se necessário.',
     },
   ];
 
@@ -97,6 +97,40 @@ ${message ? `Mensagem: ${message}` : ''}`;
                     <Navigation className="w-3.5 h-3.5 text-[#DFB77C]" />
                     <span>Abrir no Google Maps</span>
                   </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Schedule Card with User Requested Hours */}
+            <div className="bg-[#FAF6EE] p-6 sm:p-7 rounded-3xl border border-[#60315F]/15 shadow-xs">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#F5EDF4] flex items-center justify-center text-[#60315F] shrink-0 border border-[#60315F]/15">
+                  <Clock className="w-6 h-6 text-[#60315F]" />
+                </div>
+                <div className="flex-1">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#92718B] block mb-1">
+                    Horário de Atendimento
+                  </span>
+                  <h3 className="font-display font-bold text-[#331632] text-lg mb-2">
+                    Horário da Loja em Chavantes
+                  </h3>
+                  <div className="space-y-1.5 text-xs text-[#331632] bg-white p-3 rounded-xl border border-[#60315F]/15">
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-[#553954]">Segunda a Sexta:</span>
+                      <strong className="text-[#60315F] font-bold">09:00 às 18:00</strong>
+                    </div>
+                    <div className="flex items-center justify-between border-t border-slate-100 pt-1.5">
+                      <span className="font-semibold text-[#553954]">Domingos:</span>
+                      <strong className="text-[#60315F] font-bold">08:30 às 12:00</strong>
+                    </div>
+                    <div className="flex items-center justify-between border-t border-slate-100 pt-1.5">
+                      <span className="font-semibold text-rose-700">Sábados:</span>
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-md bg-rose-50 text-rose-700">Fechado</span>
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-[#553954] mt-2.5">
+                    Atendemos no espaço físico e pelo WhatsApp para sua total comodidade.
+                  </p>
                 </div>
               </div>
             </div>
@@ -159,51 +193,6 @@ ${message ? `Mensagem: ${message}` : ''}`;
               </div>
             </div>
 
-            {/* Schedule & Consultation note */}
-            <div className="bg-[#FAF6EE] p-6 rounded-3xl border border-[#60315F]/15">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#F5EDF4] flex items-center justify-center text-[#60315F] shrink-0 border border-[#60315F]/15">
-                  <Clock className="w-6 h-6" />
-                </div>
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#92718B] block mb-1">
-                    Horário de Atendimento
-                  </span>
-                  <p className="text-sm font-semibold text-[#331632] mb-1">
-                    Atendimento Personalizado & Sob Consulta
-                  </p>
-                  <p className="text-xs text-[#553954]">
-                    Atendemos no espaço físico e via WhatsApp para proporcionar orientação atenciosa a cada cliente.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Differential banner card */}
-            <div className="bg-gradient-to-br from-[#F5EDF4] to-[#FAF6EE] p-6 rounded-3xl border border-[#60315F]/20 shadow-xs">
-              <div className="flex items-center gap-2 mb-2 text-[#60315F]">
-                <Sparkles className="w-4 h-4 text-[#DFB77C]" />
-                <span className="text-xs font-bold uppercase tracking-wider">
-                  Diferenciais Exclusivos
-                </span>
-              </div>
-              <div className="space-y-2 text-xs">
-                <div className="flex items-start gap-2 text-[#331632]">
-                  <Ruler className="w-4 h-4 text-[#60315F] shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="font-bold">Grade Completa: P ao G6</strong>
-                    <p className="text-[#553954] text-[11px]">Modelagens desenvolvidas para vestir todos os corpos com conforto.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-2 text-[#331632] pt-1 border-t border-[#60315F]/10">
-                  <Sparkles className="w-4 h-4 text-[#60315F] shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="font-bold">Caimento & Elegância</strong>
-                    <p className="text-[#553954] text-[11px]">Peças selecionadas com corte refinado e acabamento impecável.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Right Column: Interactive Consultation Form */}
@@ -259,10 +248,11 @@ ${message ? `Mensagem: ${message}` : ''}`;
                   className="w-full px-4 py-3 bg-[#FAF6EE] border border-[#60315F]/15 rounded-xl text-sm text-[#331632] focus:outline-none focus:ring-2 focus:ring-[#60315F] focus:bg-white transition-all cursor-pointer"
                 >
                   <option value="Consultoria de Tamanho & Medidas (P ao G6)">Consultoria de Tamanhos P ao G6</option>
+                  <option value="Fazemos Pequenos Ajustes (Consultar Ajuste)">Fazemos Pequenos Ajustes (Consultar Ajuste)</option>
                   <option value="Dúvidas sobre 10% OFF no Primeiro Pedido">10% OFF no Primeiro Pedido</option>
                   <option value="Disponibilidade de Peça Específica">Disponibilidade de Peça Específica</option>
-                  <option value="Conhecer Peças 100% Algodão">Conhecer Peças 100% Algodão</option>
-                  <option value="Visita à Loja em Chavantes">Visita à Loja em Chavantes</option>
+                  <option value="Conhecer Categorias: Vestidos, Pijamas, Saias, etc.">Conhecer Categorias da Loja</option>
+                  <option value="Visita à Loja em Chavantes (Horários)">Visita à Loja em Chavantes</option>
                   <option value="Outras Dúvidas">Outras Dúvidas</option>
                 </select>
               </div>
@@ -275,18 +265,18 @@ ${message ? `Mensagem: ${message}` : ''}`;
                   rows={3}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Conte-nos qual modelo chamou sua atenção ou suas medidas aproximadas..."
+                  placeholder="Conte-nos qual categoria ou modelo chamou sua atenção, medidas ou ajuste desejado..."
                   className="w-full px-4 py-3 bg-[#FAF6EE] border border-[#60315F]/15 rounded-xl text-sm text-[#331632] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#60315F] focus:bg-white transition-all resize-none"
                 />
               </div>
 
-              {/* Mandatory main CTA: Entrar em contato */}
+              {/* Main CTA */}
               <button
                 type="submit"
                 className="w-full py-4 px-6 rounded-2xl bg-[#60315F] hover:bg-[#4D254C] text-[#FAF6EE] font-semibold text-base shadow-lg shadow-[#60315F]/20 hover:shadow-xl transition-all flex items-center justify-center gap-2.5 cursor-pointer"
               >
                 <MessageCircle className="w-5 h-5 text-[#DFB77C]" />
-                <span>Entrar em contato</span>
+                <span>Entrar em contato via WhatsApp</span>
               </button>
 
               {sentSuccess && (
@@ -306,7 +296,7 @@ ${message ? `Mensagem: ${message}` : ''}`;
               Esclarecimentos Frequentes
             </span>
             <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#331632]">
-              Dúvidas sobre Nossas Peças & Cuidados
+              Dúvidas sobre Atendimento & Serviços
             </h3>
           </div>
 

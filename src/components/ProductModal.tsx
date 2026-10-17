@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Product, ProductColor } from '../types/catalog';
-import { X, Check, Ruler, MessageCircle, ShoppingBag, Star, ShieldCheck, Feather, Info, Sparkles } from 'lucide-react';
+import { X, Check, Ruler, MessageCircle, ShoppingBag, Star, ShieldCheck, Feather, Info, Sparkles, Moon } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 
 interface ProductModalProps {
@@ -104,6 +104,18 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               <h2 className="text-2xl sm:text-3xl font-display font-bold text-[#331632] mb-2">
                 {product.name}
               </h2>
+
+              {product.category === 'pijamas' && (
+                <div className="mb-3 p-3 bg-gradient-to-r from-[#FAF5F9] to-[#F5EDF4] rounded-2xl border border-[#60315F]/30 flex items-center gap-2.5 text-xs">
+                  <div className="w-8 h-8 rounded-full bg-[#60315F] text-[#FAF6EE] flex items-center justify-center shrink-0 shadow-xs">
+                    <Moon className="w-4 h-4 text-[#DFB77C]" />
+                  </div>
+                  <div>
+                    <span className="font-black text-[#60315F] block">🌙 Destaque Especial: Pijamas do P ao 54</span>
+                    <span className="text-[11px] text-[#553954]">Modelagem acolhedora e confortável do P ao tamanho 54.</span>
+                  </div>
+                </div>
+              )}
 
               {/* Rating */}
               <div className="flex items-center gap-1.5 mb-3">
@@ -278,6 +290,19 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                     </span>
                     <p className="text-[11px] text-[#553954] mt-0.5 leading-snug">
                       Peças pensadas para valorizar seu corpo e estilo com extremo conforto. Dúvidas no tamanho? Nossa equipe auxilia você pelo WhatsApp.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Diferencial: Fazemos Pequenos Ajustes */}
+                <div className="p-2.5 rounded-xl bg-[#F5EDF4] border border-[#60315F]/20 flex items-start gap-2 text-xs mt-2">
+                  <Scissors className="w-4 h-4 text-[#60315F] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-[#60315F] block">
+                      Fazemos Pequenos Ajustes
+                    </span>
+                    <p className="text-[11px] text-[#553954] mt-0.5 leading-snug">
+                      Ajustamos a peça para que ela fique sob medida e perfeita para você!
                     </p>
                   </div>
                 </div>

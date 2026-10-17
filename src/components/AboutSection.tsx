@@ -61,17 +61,17 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
           <div className="bg-white rounded-3xl p-6 sm:p-7 border border-[#60315F]/15 shadow-sm hover:shadow-lg hover:border-[#60315F]/30 transition-all flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-2xl bg-[#F5EDF4] flex items-center justify-center text-[#60315F] mb-5">
-                <Ruler className="w-6 h-6" />
+                <Heart className="w-6 h-6 text-[#60315F]" />
               </div>
               <div className="inline-flex items-center gap-1 text-[10px] uppercase font-bold text-[#60315F] bg-[#FAF5F9] px-2 py-0.5 rounded-full mb-2">
                 <Sparkles className="w-2.5 h-2.5 text-[#DFB77C]" />
-                Diferencial
+                Essência
               </div>
               <h3 className="font-display text-lg sm:text-xl font-bold text-[#331632] mb-2">
-                Tamanhos P ao G6 & Plus Size
+                Elegância Feminina
               </h3>
               <p className="text-xs sm:text-sm text-[#553954] leading-relaxed">
-                Grade verdadeiramente inclusiva do P ao G6 (Regular e Plus Size Especial). Modelagens que valorizam as curvas reais com caimento impecável e extremo conforto.
+                Modelagens atemporais feitas com delicadeza para valorizar o seu estilo natural e garantir bem-estar em todos os momentos.
               </p>
             </div>
           </div>
@@ -79,16 +79,17 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
           <div className="bg-white rounded-3xl p-6 sm:p-7 border border-[#60315F]/15 shadow-sm hover:shadow-lg hover:border-[#60315F]/30 transition-all flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-2xl bg-[#F5EDF4] flex items-center justify-center text-[#60315F] mb-5">
-                <Sparkles className="w-6 h-6 text-[#60315F]" />
+                <Ruler className="w-6 h-6" />
               </div>
               <div className="inline-flex items-center gap-1 text-[10px] uppercase font-bold text-[#60315F] bg-[#FAF5F9] px-2 py-0.5 rounded-full mb-2">
-                Diferencial
+                <Sparkles className="w-2.5 h-2.5 text-[#DFB77C]" />
+                Inclusivo
               </div>
               <h3 className="font-display text-lg sm:text-xl font-bold text-[#331632] mb-2">
-                Caimento Impecável
+                Tamanhos P ao G6 & Plus Size
               </h3>
               <p className="text-xs sm:text-sm text-[#553954] leading-relaxed">
-                Modelagens sofisticadas pensadas para valorizar o corpo feminino com elegância, fluidez e conforto em qualquer ocasião.
+                Grade ampla do P ao G6 (Regular e Plus Size Especial). Modelagens que valorizam as curvas reais com caimento impecável e extremo conforto.
               </p>
             </div>
           </div>
@@ -113,13 +114,16 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
           <div className="bg-white rounded-3xl p-6 sm:p-7 border border-[#60315F]/15 shadow-sm hover:shadow-lg hover:border-[#60315F]/30 transition-all flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-2xl bg-[#F5EDF4] flex items-center justify-center text-[#60315F] mb-5">
-                <Heart className="w-6 h-6" />
+                <Award className="w-6 h-6 text-[#60315F]" />
+              </div>
+              <div className="inline-flex items-center gap-1 text-[10px] uppercase font-bold text-[#60315F] bg-[#FAF5F9] px-2 py-0.5 rounded-full mb-2">
+                Qualidade
               </div>
               <h3 className="font-display text-lg sm:text-xl font-bold text-[#331632] mb-2">
-                Atendimento Próximo
+                Acabamento Primoroso
               </h3>
               <p className="text-xs sm:text-sm text-[#553954] leading-relaxed">
-                Na Rua Altino Arantes 209 (Chavantes - SP) ou pelo WhatsApp, oferecemos consultoria atenciosa e humanizada para suas escolhas.
+                Costuras reforçadas, acabamentos de alto padrão e matérias-primas selecionadas para peças duráveis que vestem com perfeição.
               </p>
             </div>
           </div>

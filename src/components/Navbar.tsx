@@ -5,16 +5,16 @@ import {
   Heart,
   ShoppingBag,
   Instagram,
-  Smartphone,
   Phone,
   Headphones,
   Menu,
   X,
-  ChevronDown,
   Ruler,
   Sparkles,
+  Moon,
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
+import { ProductCategory } from '../types/catalog';
 
 interface NavbarProps {
   cartCount: number;
@@ -23,6 +23,8 @@ interface NavbarProps {
   onOpenWishlist: () => void;
   onOpenSearch: () => void;
   onContactClick: () => void;
+  onSelectCategory?: (category: ProductCategory) => void;
+  selectedCategory?: ProductCategory;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -32,17 +34,20 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenWishlist,
   onOpenSearch,
   onContactClick,
+  onSelectCategory,
+  selectedCategory = 'todos',
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navMenuItems = [
-    { label: 'Início', href: '#inicio', active: true },
-    { label: 'Catálogo de Produtos', href: '#produtos' },
-    { label: 'Moda Mulher', href: '#produtos' },
-    { label: 'Plus Size (G1 ao G6)', href: '#produtos', highlight: true },
-    { label: '100% Algodão', href: '#produtos' },
-    { label: 'Sobre a Rouvana', href: '#sobre' },
-    { label: 'Localização & Contato', href: '#contato' },
+  const categoriesNav: { id: ProductCategory; label: string; badge?: string }[] = [
+    { id: 'vestidos', label: 'Vestidos' },
+    { id: 'pijamas', label: 'Pijamas', badge: 'P ao 54' },
+    { id: 'saias', label: 'Saias' },
+    { id: 'regatas', label: 'Regatas' },
+    { id: 'camisas_blusas', label: 'Camisas e Blusas' },
+    { id: 'pantalonas_calcas', label: 'Pantalonas e Calças' },
+    { id: 'bermudas', label: 'Bermudas' },
+    { id: 'lingerie', label: 'Lingerie' },
   ];
 
   const handleScrollTo = (e: React.MouseEvent, id: string) => {
@@ -54,20 +59,32 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
+  const handleCategoryClick = (e: React.MouseEvent, catId: ProductCategory) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    if (onSelectCategory) {
+      onSelectCategory(catId);
+    }
+    const el = document.getElementById('produtos');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className="sticky top-0 z-40 bg-white shadow-xs">
       {/* 1. TOP ANNOUNCEMENT BAR (Color matched to logo #60315F) */}
-      <div className="bg-[#60315F] text-[#FAF6EE] text-[11px] sm:text-xs py-2 px-4 sm:px-8 border-b border-[#4D254C]">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div className="bg-[#60315F] text-[#FAF6EE] text-[11px] sm:text-xs py-2 px-3 sm:px-8 border-b border-[#4D254C]">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2 text-center md:text-left">
           {/* Informações da Loja & Diferenciais */}
-          <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center sm:justify-start">
+          <div className="flex items-center gap-2 sm:gap-4 flex-wrap justify-center md:justify-start">
             <div className="flex items-center gap-1.5 font-medium">
+              <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+              <span>Aproveite até 10% OFF no seu primeiro pedido!</span>
+            </div>
+            <div className="hidden sm:flex items-center gap-1.5 font-medium">
               <Ruler className="w-3.5 h-3.5 text-[#DFB77C]" />
               <span>Tamanhos do P ao G6</span>
-            </div>
-            <div className="flex items-center gap-1.5 font-medium">
-              <Smartphone className="w-3.5 h-3.5 text-[#DFB77C]" />
-              <span>Compre também pelo WhatsApp</span>
             </div>
           </div>
 
@@ -94,10 +111,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* 2. MAIN HEADER: LOGO AMPLA, AUMENTADA E AJUSTADA ATÉ A LUPA */}
+      {/* 2. MAIN HEADER: LOGO AMPLA & AÇÕES */}
       <div className="border-b border-[#60315F]/15 py-2.5 sm:py-3.5 px-3 sm:px-6 bg-[#FAF6EE]">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 sm:gap-5">
-          {/* Brand Logo - Tamanho aumentado, esticada e perfeitamente ajustada */}
+          {/* Brand Logo */}
           <a
             href="#inicio"
             onClick={(e) => handleScrollTo(e, 'inicio')}
@@ -112,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Right Action Icons: Lupa de Pesquisa, Perfil, Favoritos, Sacola */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0 self-center">
-            {/* Lupa de Pesquisa posicionada diretamente ao lado da logo expandida */}
+            {/* Lupa de Pesquisa */}
             <button
               onClick={onOpenSearch}
               aria-label="Buscar produtos"
@@ -169,28 +186,71 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* 3. MENU DE NAVEGAÇÃO & CATEGORIAS (Abaixo da logo esticada) */}
-      <div className="bg-[#F5EDF4] border-b border-[#E8D8E5] py-2.5 px-4 sm:px-8 hidden lg:block">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          {/* Main Navigation Links */}
-          <nav className="flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-slate-700">
-            {navMenuItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => handleScrollTo(e, item.href.replace('#', ''))}
-                className={`transition-all whitespace-nowrap cursor-pointer ${
-                  item.highlight
-                    ? 'bg-[#60315F] text-[#FAF6EE] px-3 py-1 rounded-full text-[11px] font-black shadow-xs hover:bg-[#4D254C] hover:text-white flex items-center gap-1.5'
-                    : item.active
-                    ? 'text-[#60315F] font-extrabold border-b-2 border-[#60315F] pb-0.5'
-                    : 'hover:text-[#60315F]'
-                }`}
-              >
-                {item.highlight && <Sparkles className="w-3 h-3 text-[#DFB77C]" />}
-                <span>{item.label}</span>
-              </a>
-            ))}
+      {/* 3. MENU DE NAVEGAÇÃO & TODAS AS 8 CATEGORIAS */}
+      <div className="bg-[#F5EDF4] border-b border-[#E8D8E5] py-2.5 px-3 sm:px-6 hidden lg:block overflow-x-auto">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+          {/* Main Navigation & Category Links */}
+          <nav className="flex items-center gap-3 sm:gap-4 text-xs font-bold uppercase tracking-wider text-slate-700 overflow-x-auto no-scrollbar py-0.5">
+            <a
+              href="#inicio"
+              onClick={(e) => handleScrollTo(e, 'inicio')}
+              className="hover:text-[#60315F] transition-all whitespace-nowrap cursor-pointer shrink-0"
+            >
+              Início
+            </a>
+
+            <span className="text-slate-300 shrink-0">|</span>
+
+            {categoriesNav.map((cat) => {
+              const isActive = selectedCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={(e) => handleCategoryClick(e, cat.id)}
+                  className={`transition-all whitespace-nowrap cursor-pointer shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 ${
+                    isActive
+                      ? 'bg-[#60315F] text-[#FAF6EE] shadow-xs'
+                      : cat.badge
+                      ? 'bg-white text-[#60315F] border border-[#60315F]/30 hover:bg-[#60315F] hover:text-[#FAF6EE]'
+                      : 'hover:text-[#60315F] hover:bg-white/60'
+                  }`}
+                >
+                  {cat.id === 'pijamas' && <Moon className="w-3 h-3 text-[#DFB77C]" />}
+                  <span>{cat.label}</span>
+                  {cat.badge && (
+                    <span className="text-[9px] bg-[#DFB77C] text-[#331632] px-1.5 py-0.2 rounded-full font-black">
+                      {cat.badge}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+
+            <span className="text-slate-300 shrink-0">|</span>
+
+            <button
+              onClick={(e) => handleCategoryClick(e, 'plus_size')}
+              className="bg-[#60315F] text-[#FAF6EE] px-3 py-1 rounded-full text-[11px] font-black shadow-xs hover:bg-[#4D254C] hover:text-white flex items-center gap-1.5 shrink-0 cursor-pointer"
+            >
+              <Sparkles className="w-3 h-3 text-[#DFB77C]" />
+              <span>Plus Size (G1 ao G6)</span>
+            </button>
+
+            <a
+              href="#sobre"
+              onClick={(e) => handleScrollTo(e, 'sobre')}
+              className="hover:text-[#60315F] transition-all whitespace-nowrap cursor-pointer shrink-0"
+            >
+              Sobre
+            </a>
+
+            <a
+              href="#contato"
+              onClick={(e) => handleScrollTo(e, 'contato')}
+              className="hover:text-[#60315F] transition-all whitespace-nowrap cursor-pointer shrink-0"
+            >
+              Contato
+            </a>
           </nav>
 
           {/* Right highlighted button: "Precisa de ajuda? WhatsApp" */}
@@ -198,17 +258,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             href={COMPANY_INFO.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#60315F] to-[#7A3D76] hover:opacity-95 text-[#FAF6EE] text-xs font-bold tracking-wide shadow-xs whitespace-nowrap cursor-pointer shrink-0"
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#60315F] to-[#7A3D76] hover:opacity-95 text-[#FAF6EE] text-xs font-bold tracking-wide shadow-xs whitespace-nowrap cursor-pointer shrink-0"
           >
             <Headphones className="w-3.5 h-3.5 text-[#DFB77C]" />
-            <span>PRECISA DE AJUDA? WHATSAPP</span>
+            <span>WHATSAPP</span>
           </a>
         </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 px-6 py-5 shadow-xl animate-in slide-in-from-top">
+        <div className="lg:hidden bg-white border-b border-slate-200 px-6 py-5 shadow-xl animate-in slide-in-from-top max-h-[80vh] overflow-y-auto">
           <div className="flex flex-col gap-3 font-semibold text-sm text-slate-800">
             <div className="pb-3 border-b border-slate-100 flex items-center justify-start">
               <img
@@ -217,36 +277,65 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="w-full h-28 sm:h-36 object-fill rounded-xl shadow-xs border border-[#60315F]/20"
               />
             </div>
-            {navMenuItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => handleScrollTo(e, item.href.replace('#', ''))}
-                className={`py-2 border-b border-slate-100 flex items-center justify-between ${
-                  item.highlight
-                    ? 'text-[#60315F] font-bold bg-[#FAF5F9] px-2.5 rounded-lg'
-                    : 'hover:text-[#60315F]'
-                }`}
-              >
-                <span>{item.label}</span>
-                {item.highlight && (
-                  <span className="text-[10px] bg-[#60315F] text-[#FAF6EE] px-2 py-0.5 rounded-full font-bold">
-                    Diferencial
-                  </span>
-                )}
-              </a>
-            ))}
-            {/* Diferencial em destaque */}
-            <div className="p-3 bg-[#FAF6EE] rounded-xl border border-[#60315F]/20 text-xs text-[#331632] space-y-1">
-              <div className="flex items-center gap-2 font-bold text-[#60315F]">
-                <Ruler className="w-4 h-4 text-[#DFB77C]" />
-                <span>Tamanhos do P ao G6</span>
-              </div>
-              <div className="flex items-center gap-2 font-semibold text-[#553954]">
-                <Sparkles className="w-4 h-4 text-[#60315F]" />
-                <span>Modelagens que valorizam sua beleza</span>
-              </div>
+
+            <div className="flex items-center gap-2 text-xs text-[#60315F] bg-[#FAF6EE] p-2.5 rounded-xl border border-[#60315F]/20 font-medium">
+              <Ruler className="w-4 h-4 text-[#DFB77C]" />
+              <span>Tamanhos do P ao G6</span>
             </div>
+
+            <div className="font-bold text-xs uppercase tracking-wider text-[#60315F] pt-2">
+              Categorias:
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {categoriesNav.map((cat) => {
+                const isPajamas = cat.id === 'pijamas';
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={(e) => handleCategoryClick(e, cat.id)}
+                    className={`p-2.5 text-left rounded-xl text-xs font-bold transition-colors flex items-center justify-between ${
+                      isPajamas
+                        ? 'bg-[#60315F] text-[#FAF6EE] shadow-xs'
+                        : 'bg-[#F5EDF4] hover:bg-[#60315F] hover:text-white text-[#331632]'
+                    }`}
+                  >
+                    <span className="flex items-center gap-1.5">
+                      {isPajamas && <Moon className="w-3.5 h-3.5 text-[#DFB77C]" />}
+                      <span>{cat.label}</span>
+                    </span>
+                    {cat.badge && (
+                      <span className="text-[9px] bg-[#DFB77C] text-[#331632] px-1.5 py-0.2 rounded-full font-black">
+                        {cat.badge}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            <button
+              onClick={(e) => handleCategoryClick(e, 'plus_size')}
+              className="py-2.5 px-3 rounded-xl bg-[#60315F] text-[#FAF6EE] text-xs font-bold flex items-center justify-between"
+            >
+              <span>Plus Size (G1 ao G6)</span>
+              <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+            </button>
+
+            <a
+              href="#sobre"
+              onClick={(e) => handleScrollTo(e, 'sobre')}
+              className="py-2 border-b border-slate-100 hover:text-[#60315F]"
+            >
+              Sobre a Rouvana Modas
+            </a>
+            <a
+              href="#contato"
+              onClick={(e) => handleScrollTo(e, 'contato')}
+              className="py-2 border-b border-slate-100 hover:text-[#60315F]"
+            >
+              Localização & Contato
+            </a>
+
             <div className="pt-2 flex flex-col gap-2">
               <a
                 href={COMPANY_INFO.instagramUrl}

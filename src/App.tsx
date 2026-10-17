@@ -15,7 +15,7 @@ import { ProductModal } from './components/ProductModal';
 import { CartDrawer } from './components/CartDrawer';
 import { WishlistDrawer } from './components/WishlistDrawer';
 import { SearchModal } from './components/SearchModal';
-import { Product, CartItem, ProductColor } from './types/catalog';
+import { Product, CartItem, ProductColor, ProductCategory } from './types/catalog';
 import { PRODUCTS_DATA } from './data/products';
 
 export default function App() {
@@ -24,10 +24,11 @@ export default function App() {
   }, []);
 
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('todos');
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [wishlistIds, setWishlistIds] = useState<string[]>([
     'vestido-verao-decote-v-lilas',
-    'camisa-listrada-casual-multicolor',
+    'pijama-americano-soft-confort',
   ]);
 
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -115,7 +116,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF6EE] selection:bg-[#60315F] selection:text-[#FAF6EE]">
-      {/* 3-Tier Navbar from Chronics design */}
+      {/* 3-Tier Navbar */}
       <Navbar
         cartCount={totalCartCount}
         wishlistCount={wishlistIds.length}
@@ -123,34 +124,39 @@ export default function App() {
         onOpenWishlist={() => setIsWishlistOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
         onContactClick={scrollToContact}
+        selectedCategory={selectedCategory}
+        onSelectCategory={setSelectedCategory}
       />
 
       {/* Main Content */}
       <main className="flex-1">
-        {/* 1. Hero Banner + 5 Pastel Category Cards */}
+        {/* 1. Hero Banner + 8 Category Cards */}
         <Hero
           onExploreProducts={scrollToProducts}
           onContactClick={scrollToContact}
+          onSelectCategory={setSelectedCategory}
         />
 
-        {/* 2. Trending Products + 4 Trust Badges + Secondary Pink Promo Banner + Brand Strip */}
+        {/* 2. Trending Products + 8 Categories Filter + Trust Badges */}
         <ProductCatalog
           onSelectProduct={(product) => setSelectedProduct(product)}
           onAddToCart={(product) => handleAddToCart(product)}
           onToggleWishlist={handleToggleWishlist}
           wishlistIds={wishlistIds}
           onContactClick={scrollToContact}
+          selectedCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
         />
 
         {/* 3. Sobre a Rouvana Modas */}
         <AboutSection onContactClick={scrollToContact} />
 
-        {/* 4. Contato & Localização em Chavantes - SP */}
+        {/* 4. Contato, Horário de Atendimento & Localização em Chavantes - SP */}
         <ContactSection />
       </main>
 
       {/* Footer */}
-      <Footer />
+      <Footer onSelectCategory={setSelectedCategory} />
 
       {/* Floating WhatsApp Action Button */}
       <WhatsAppFloat />
