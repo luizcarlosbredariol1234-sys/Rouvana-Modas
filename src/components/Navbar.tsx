@@ -11,7 +11,6 @@ import {
   X,
   Ruler,
   Sparkles,
-  Moon,
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 import { ProductCategory } from '../types/catalog';
@@ -39,9 +38,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const categoriesNav: { id: ProductCategory; label: string; badge?: string }[] = [
+  const categoriesNav: { id: ProductCategory; label: string }[] = [
     { id: 'vestidos', label: 'Vestidos' },
-    { id: 'pijamas', label: 'Pijamas', badge: 'P ao 54' },
+    { id: 'pijamas', label: 'Pijamas' },
     { id: 'saias', label: 'Saias' },
     { id: 'regatas', label: 'Regatas' },
     { id: 'camisas_blusas', label: 'Camisas e Blusas' },
@@ -186,7 +185,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* 3. MENU DE NAVEGAÇÃO & TODAS AS 8 CATEGORIAS */}
+      {/* 3. MENU DE NAVEGAÇÃO & CATEGORIAS */}
       <div className="bg-[#F5EDF4] border-b border-[#E8D8E5] py-2.5 px-3 sm:px-6 hidden lg:block overflow-x-auto">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
           {/* Main Navigation & Category Links */}
@@ -210,31 +209,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className={`transition-all whitespace-nowrap cursor-pointer shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 ${
                     isActive
                       ? 'bg-[#60315F] text-[#FAF6EE] shadow-xs'
-                      : cat.badge
-                      ? 'bg-white text-[#60315F] border border-[#60315F]/30 hover:bg-[#60315F] hover:text-[#FAF6EE]'
                       : 'hover:text-[#60315F] hover:bg-white/60'
                   }`}
                 >
-                  {cat.id === 'pijamas' && <Moon className="w-3 h-3 text-[#DFB77C]" />}
                   <span>{cat.label}</span>
-                  {cat.badge && (
-                    <span className="text-[9px] bg-[#DFB77C] text-[#331632] px-1.5 py-0.2 rounded-full font-black">
-                      {cat.badge}
-                    </span>
-                  )}
                 </button>
               );
             })}
-
-            <span className="text-slate-300 shrink-0">|</span>
-
-            <button
-              onClick={(e) => handleCategoryClick(e, 'plus_size')}
-              className="bg-[#60315F] text-[#FAF6EE] px-3 py-1 rounded-full text-[11px] font-black shadow-xs hover:bg-[#4D254C] hover:text-white flex items-center gap-1.5 shrink-0 cursor-pointer"
-            >
-              <Sparkles className="w-3 h-3 text-[#DFB77C]" />
-              <span>Plus Size (G1 ao G6)</span>
-            </button>
 
             <a
               href="#sobre"
@@ -287,39 +268,16 @@ export const Navbar: React.FC<NavbarProps> = ({
               Categorias:
             </div>
             <div className="grid grid-cols-2 gap-2">
-              {categoriesNav.map((cat) => {
-                const isPajamas = cat.id === 'pijamas';
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={(e) => handleCategoryClick(e, cat.id)}
-                    className={`p-2.5 text-left rounded-xl text-xs font-bold transition-colors flex items-center justify-between ${
-                      isPajamas
-                        ? 'bg-[#60315F] text-[#FAF6EE] shadow-xs'
-                        : 'bg-[#F5EDF4] hover:bg-[#60315F] hover:text-white text-[#331632]'
-                    }`}
-                  >
-                    <span className="flex items-center gap-1.5">
-                      {isPajamas && <Moon className="w-3.5 h-3.5 text-[#DFB77C]" />}
-                      <span>{cat.label}</span>
-                    </span>
-                    {cat.badge && (
-                      <span className="text-[9px] bg-[#DFB77C] text-[#331632] px-1.5 py-0.2 rounded-full font-black">
-                        {cat.badge}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
+              {categoriesNav.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={(e) => handleCategoryClick(e, cat.id)}
+                  className="p-2.5 text-left rounded-xl text-xs font-bold transition-colors bg-[#F5EDF4] hover:bg-[#60315F] hover:text-white text-[#331632]"
+                >
+                  {cat.label}
+                </button>
+              ))}
             </div>
-
-            <button
-              onClick={(e) => handleCategoryClick(e, 'plus_size')}
-              className="py-2.5 px-3 rounded-xl bg-[#60315F] text-[#FAF6EE] text-xs font-bold flex items-center justify-between"
-            >
-              <span>Plus Size (G1 ao G6)</span>
-              <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
-            </button>
 
             <a
               href="#sobre"

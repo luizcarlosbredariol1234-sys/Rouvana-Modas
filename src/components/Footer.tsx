@@ -24,7 +24,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
 
   const categories = [
     { id: 'vestidos' as ProductCategory, label: 'Vestidos' },
-    { id: 'pijamas' as ProductCategory, label: 'Pijamas (Do P ao 54)' },
+    { id: 'pijamas' as ProductCategory, label: 'Pijamas' },
     { id: 'saias' as ProductCategory, label: 'Saias' },
     { id: 'regatas' as ProductCategory, label: 'Regatas' },
     { id: 'camisas_blusas' as ProductCategory, label: 'Camisas e Blusas' },
@@ -124,7 +124,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
             </ul>
           </div>
 
-          {/* As 8 Categorias da Loja */}
+          {/* Categorias da Loja */}
           <div className="lg:col-span-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#FAF6EE] mb-4">
               Categorias

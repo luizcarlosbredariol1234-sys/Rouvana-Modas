@@ -6,7 +6,7 @@ import { COMPANY_INFO } from '../data/products';
 export const ContactSection: React.FC = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [interest, setInterest] = useState('Consultoria de Tamanho & Medidas');
+  const [interest, setInterest] = useState('Atendimento Geral & Dúvidas');
   const [message, setMessage] = useState('');
   const [sentSuccess, setSentSuccess] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -37,16 +37,12 @@ ${message ? `Mensagem: ${message}` : ''}`;
       a: 'Um dos nossos grandes diferenciais é a grade de tamanhos ampla, vestindo com elegância do tamanho P até o G6! Queremos que você se sinta linda, confiante e confortável em qualquer modelagem.',
     },
     {
-      q: 'Quais são as categorias de roupas disponíveis?',
-      a: 'Temos uma coleção completa com: Vestidos, Pijamas, Saias, Regatas, Camisas e Blusas, Pantalonas e Calças, Bermudas e Lingerie.',
+      q: 'Quais tipos de roupas estão disponíveis na loja?',
+      a: 'Trabalhamos com uma coleção ampla e diversificada de moda feminina, incluindo vestidos, pijamas, saias, regatas, camisas, blusas, pantalonas, calças, bermudas, lingerie e novidades constantes para todas as ocasiões.',
     },
     {
       q: 'Como aproveitar o desconto de 10% no primeiro pedido?',
       a: 'Ao realizar seu primeiro pedido ou efetuar o pagamento via Pix, você garante até 10% OFF em peças selecionadas da nossa coleção exclusiva!',
-    },
-    {
-      q: 'Como saber meu tamanho correto nas peças?',
-      a: 'Nossas peças acompanham tabela completa em centímetros (busto, cintura, quadril e comprimento). Se tiver dúvidas, envie suas medidas pelo WhatsApp que orientamos você e realizamos pequenos ajustes se necessário.',
     },
   ];
 
@@ -86,7 +82,7 @@ ${message ? `Mensagem: ${message}` : ''}`;
                     {COMPANY_INFO.address}
                   </h3>
                   <p className="text-xs text-[#553954] mb-3">
-                    Centro, Chavantes - SP · CEP 18970-970
+                    Centro, Chavantes - SP · CEP 18970-007
                   </p>
                   <a
                     href={`https://maps.google.com/?q=${encodeURIComponent(COMPANY_INFO.address)}`}
@@ -202,7 +198,7 @@ ${message ? `Mensagem: ${message}` : ''}`;
                 Fale Conosco em Segundos
               </span>
               <h3 className="font-display text-2xl font-bold text-[#331632] mb-1">
-                Solicitar Atendimento & Consultoria
+                Solicitar Atendimento
               </h3>
               <p className="text-xs sm:text-sm text-[#553954]">
                 Preencha os campos abaixo para abrir uma conversa direta com as informações já organizadas no WhatsApp da loja.
@@ -247,7 +243,7 @@ ${message ? `Mensagem: ${message}` : ''}`;
                   onChange={(e) => setInterest(e.target.value)}
                   className="w-full px-4 py-3 bg-[#FAF6EE] border border-[#60315F]/15 rounded-xl text-sm text-[#331632] focus:outline-none focus:ring-2 focus:ring-[#60315F] focus:bg-white transition-all cursor-pointer"
                 >
-                  <option value="Consultoria de Tamanho & Medidas (P ao G6)">Consultoria de Tamanhos P ao G6</option>
+                  <option value="Atendimento Geral & Dúvidas">Atendimento Geral & Dúvidas</option>
                   <option value="Fazemos Pequenos Ajustes (Consultar Ajuste)">Fazemos Pequenos Ajustes (Consultar Ajuste)</option>
                   <option value="Dúvidas sobre 10% OFF no Primeiro Pedido">10% OFF no Primeiro Pedido</option>
                   <option value="Disponibilidade de Peça Específica">Disponibilidade de Peça Específica</option>

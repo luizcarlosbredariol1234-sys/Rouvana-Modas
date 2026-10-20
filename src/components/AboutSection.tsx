@@ -48,11 +48,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
           </div>
 
           <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#331632] tracking-tight mb-4">
-            Moda que Respeita a Sua Pele e o Seu Estilo
+            Elegância, Bem-Estar e Estilo Autêntico
           </h2>
 
           <p className="text-base sm:text-lg text-[#553954] leading-relaxed">
-            Na Rouvana Modas, cada peça é escolhida a dedo para proporcionar o equilíbrio perfeito entre sofisticação e caimento impecável.
+            Na Rouvana Modas, cada peça é escolhida a dedo para proporcionar o equilíbrio perfeito entre sofisticação, suavidade e caimento impecável.
           </p>
         </div>
 

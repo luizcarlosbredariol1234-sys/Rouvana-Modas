@@ -4,10 +4,7 @@ import {
   Heart,
   ShoppingBag,
   Star,
-  ChevronLeft,
-  ChevronRight,
   Instagram,
-  RotateCcw,
   ShieldCheck,
   Headphones,
   ArrowRight,
@@ -15,7 +12,6 @@ import {
   Ruler,
   Sparkles,
   Leaf,
-  Moon,
 } from 'lucide-react';
 import { PRODUCTS_DATA, COMPANY_INFO, CATEGORIES_LIST } from '../data/products';
 import { Product, ProductCategory } from '../types/catalog';
@@ -61,10 +57,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
   const filteredProducts = useMemo(() => {
     return PRODUCTS_DATA.filter((p) => {
       // 1. Category filter
-      if (currentCategory === 'plus_size') {
-        const hasPlus = p.sizes.some((s) => ['G1', 'G2', 'G3', 'G4', 'G5', 'G6'].includes(s));
-        if (!hasPlus) return false;
-      } else if (currentCategory !== 'todos') {
+      if (currentCategory !== 'todos') {
         if (p.category !== currentCategory) return false;
       }
 
@@ -91,13 +84,13 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
             Catálogo Exclusivo · Chavantes - SP
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#331632] mb-3">
-            Coleção Feminina & Moda Plus Size
+            Coleção Feminina
           </h2>
           <p className="text-xs sm:text-sm text-[#553954] max-w-2xl mx-auto mb-6">
             Peças femininas selecionadas com caimento harmonioso, tecidos confortáveis e acabamentos delicados para todas as ocasiões.
           </p>
 
-          {/* 🌟 8 CATEGORIAS OFICIAIS SOLICITADAS + PLUS SIZE 🌟 */}
+          {/* Categorias da Loja */}
           <div className="mb-4">
             <span className="text-[11px] uppercase font-bold text-slate-500 tracking-wider block mb-2">
               Selecione uma Categoria:
@@ -105,7 +98,6 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
             <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 justify-start sm:justify-center flex-wrap">
               {CATEGORIES_LIST.map((cat) => {
                 const isActive = currentCategory === cat.id;
-                const isPajamas = cat.id === 'pijamas';
                 return (
                   <button
                     key={cat.id}
@@ -113,19 +105,10 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                     className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
                       isActive
                         ? 'bg-[#60315F] text-[#FAF6EE] shadow-md ring-2 ring-[#DFB77C]/60 scale-105'
-                        : isPajamas
-                        ? 'bg-gradient-to-r from-[#FAF5F9] to-[#F5EDF4] text-[#60315F] border-2 border-[#60315F]/40 hover:bg-[#60315F] hover:text-[#FAF6EE] shadow-xs'
                         : 'bg-white text-[#331632] hover:bg-[#F5EDF4] hover:text-[#60315F] border border-[#60315F]/15'
                     }`}
                   >
-                    {isPajamas && <Moon className="w-3.5 h-3.5 text-[#DFB77C]" />}
-                    {cat.id === 'plus_size' && <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />}
                     <span>{cat.label}</span>
-                    {cat.highlightBadge && (
-                      <span className="text-[9px] bg-[#DFB77C] text-[#331632] px-1.5 py-0.2 rounded-full font-black">
-                        {cat.highlightBadge}
-                      </span>
-                    )}
                   </button>
                 );
               })}
@@ -178,42 +161,6 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
           </div>
 
         </div>
-
-        {/* 🌙 BANNER ESPECIAL DE DESTAQUE QUANDO CATEGORIA PIJAMAS ESTÁ ATIVA 🌙 */}
-        {currentCategory === 'pijamas' && (
-          <div className="mb-8 p-6 sm:p-7 rounded-3xl bg-gradient-to-r from-[#331632] via-[#4D254C] to-[#60315F] text-[#FAF6EE] shadow-lg border-2 border-[#DFB77C]/60 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4 sm:gap-5">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shrink-0 border-2 border-[#DFB77C] shadow-md bg-white">
-                <img
-                  src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=400&q=80"
-                  alt="Pijamas do P ao 54"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div>
-                <div className="inline-flex items-center gap-1.5 bg-[#DFB77C]/25 text-[#DFB77C] text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-1 border border-[#DFB77C]/40">
-                  <Sparkles className="w-3 h-3 text-[#DFB77C]" />
-                  <span>Coleção Especial Noite & Conforto</span>
-                </div>
-                <h3 className="font-display font-black text-2xl sm:text-3xl tracking-tight text-[#FAF6EE] flex items-center gap-2">
-                  <span>PIJAMAS DO P AO 54</span>
-                  <Moon className="w-5 h-5 text-[#DFB77C] shrink-0" />
-                </h3>
-                <p className="text-xs sm:text-sm text-[#F5EDF4]/90 mt-1 max-w-xl leading-relaxed">
-                  Conforto sem igual para suas noites. Malhas antialérgicas, macias e toque aveludado com modelagem pensada do <strong className="text-[#DFB77C]">tamanho P até o 54 (G4/G6)</strong> com caimento aconchegante e acolhedor.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row items-center gap-2 shrink-0">
-              <span className="text-xs font-bold text-[#DFB77C] bg-white/10 px-3.5 py-2 rounded-xl border border-white/15">
-                ⭐ Conforto & Aconchego
-              </span>
-              <span className="text-xs font-bold text-[#FAF6EE] bg-white/10 px-3.5 py-2 rounded-xl border border-white/15">
-                📏 Grade: P ao 54
-              </span>
-            </div>
-          </div>
-        )}
 
         {/* 2. PRODUCT CARDS GRID */}
         {filteredProducts.length === 0 ? (
@@ -269,11 +216,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                   >
                     {product.badge && (
                       <div className="absolute top-2 left-2 z-10 bg-[#60315F] text-[#FAF6EE] text-[9px] font-black px-2 py-0.5 rounded-full shadow-md border border-[#DFB77C]/60 flex items-center gap-1">
-                        {product.category === 'pijamas' ? (
-                          <Moon className="w-2.5 h-2.5 text-[#DFB77C]" />
-                        ) : (
-                          <Sparkles className="w-2.5 h-2.5 text-[#DFB77C]" />
-                        )}
+                        <Sparkles className="w-2.5 h-2.5 text-[#DFB77C]" />
                         <span>{product.badge}</span>
                       </div>
                     )}
@@ -329,49 +272,9 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                     {product.name}
                   </h3>
 
-                  {/* Sizing differential tags */}
-                  {product.category === 'pijamas' ? (
-                    <div className="my-1.5 p-2 bg-gradient-to-r from-[#FAF5F9] to-[#F5EDF4] rounded-xl border border-[#60315F]/30 shadow-2xs">
-                      <div className="flex items-center justify-between text-[10px] font-black text-[#60315F] mb-1">
-                        <span className="flex items-center gap-1">
-                          <Moon className="w-3 h-3 text-[#DFB77C]" />
-                          PIJAMAS DO P AO 54
-                        </span>
-                        <span className="text-[9px] bg-[#60315F] text-[#FAF6EE] px-1.5 py-0.5 rounded-full font-black flex items-center gap-0.5">
-                          <Sparkles className="w-2 h-2 text-[#DFB77C]" />
-                          P ao 54
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between text-[9px] text-[#553954] font-semibold">
-                        <span>Grade P ao 54 (G4)</span>
-                        <span className="text-[#60315F] font-bold flex items-center gap-0.5">
-                          <Moon className="w-2.5 h-2.5 text-[#DFB77C]" />
-                          Conforto Total
-                        </span>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="my-1.5 p-2 bg-[#FAF5F9] rounded-xl border border-[#60315F]/15">
-                      <div className="flex items-center justify-between text-[10px] font-bold text-[#60315F] mb-1">
-                        <span className="flex items-center gap-1">
-                          <Ruler className="w-3 h-3 text-[#DFB77C]" />
-                          Grade P ao G6
-                        </span>
-                        <span className="text-[9px] bg-[#60315F] text-[#FAF6EE] px-1.5 py-0.5 rounded-full font-extrabold flex items-center gap-0.5">
-                          <Sparkles className="w-2 h-2 text-[#DFB77C]" />
-                          Plus Size
-                        </span>
-                      </div>
-
-                      <div className="flex items-center justify-between text-[9px] text-slate-500 font-medium">
-                        <span>{product.sizes.length} tamanhos</span>
-                        <span className="text-[#60315F] font-semibold flex items-center gap-0.5">
-                          <Sparkles className="w-2.5 h-2.5 text-[#DFB77C]" />
-                          Caimento Impecável
-                        </span>
-                      </div>
-                    </div>
-                  )}
+                  <p className="text-[11px] text-[#553954] line-clamp-1 mb-2">
+                    {product.shortDescription}
+                  </p>
 
                   {/* Prices */}
                   <div className="mt-auto flex items-baseline gap-2 pt-2">
@@ -399,79 +302,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
           </div>
         )}
 
-        {/* 🌟 BANNER EXCLUSIVO DE DESTAQUE: DIFERENCIAIS DA LOJA 🌟 */}
-        <div className="mb-14 rounded-3xl bg-gradient-to-br from-[#FAF5F9] via-[#FFFFFF] to-[#F5EDF4] p-6 sm:p-10 border-2 border-[#60315F]/25 shadow-sm">
-          <div className="flex flex-col lg:flex-row items-center gap-8 justify-between">
-            <div className="max-w-2xl text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#60315F] text-[#FAF6EE] text-xs font-bold mb-3 shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
-                <span>COLEÇÃO EXCLUSIVA ROUVANA MODAS</span>
-              </div>
-              <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#331632] mb-3">
-                Grade Inclusiva do P ao G6: <br className="hidden sm:inline" />
-                <span className="text-[#60315F]">Elegância e Modelagem Impecável</span>
-              </h3>
-              <p className="text-xs sm:text-sm text-[#553954] leading-relaxed mb-6">
-                Aqui na Rouvana Modas você encontra todas as categorias de roupas femininas (vestidos, pijamas, saias, regatas, camisas e blusas, pantalonas e calças, bermudas e lingerie) com extremo bom gosto, acabamento primoroso e modelagens que abraçam todos os biotipos.
-              </p>
 
-              {/* 3 cards de diferenciais */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-                <div className="p-3.5 rounded-2xl bg-white border border-[#60315F]/15 shadow-xs">
-                  <div className="flex items-center gap-1.5 font-bold text-xs text-[#60315F] mb-1">
-                    <Ruler className="w-3.5 h-3.5 text-[#DFB77C]" />
-                    <span>Grade P ao G6</span>
-                  </div>
-                  <p className="text-[11px] text-slate-600 leading-snug">
-                    Do regular ao plus size real sem diferença de valor. Modelagens inclusivas.
-                  </p>
-                </div>
-
-                <div className="p-3.5 rounded-2xl bg-white border border-[#60315F]/15 shadow-xs">
-                  <div className="flex items-center gap-1.5 font-bold text-xs text-[#60315F] mb-1">
-                    <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
-                    <span>8 Categorias</span>
-                  </div>
-                  <p className="text-[11px] text-slate-600 leading-snug">
-                    Coleções completas do casual à alfaiataria e moda noite.
-                  </p>
-                </div>
-
-                <div className="p-3.5 rounded-2xl bg-white border border-[#60315F]/15 shadow-xs">
-                  <div className="flex items-center gap-1.5 font-bold text-xs text-[#60315F] mb-1">
-                    <Heart className="w-3.5 h-3.5 text-[#DFB77C]" />
-                    <span>Atendimento Próximo</span>
-                  </div>
-                  <p className="text-[11px] text-slate-600 leading-snug">
-                    Orientamos você sobre medidas e modelos pelo WhatsApp da loja.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3">
-                <button
-                  onClick={onContactClick}
-                  className="px-6 py-3 rounded-full bg-[#60315F] hover:bg-[#4D254C] text-[#FAF6EE] font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer"
-                >
-                  <span>Falar Conosco no WhatsApp</span>
-                  <ArrowRight className="w-4 h-4 text-[#DFB77C]" />
-                </button>
-              </div>
-            </div>
-
-            {/* Imagem */}
-            <div className="relative shrink-0 w-64 sm:w-72">
-              <img
-                src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&q=80"
-                alt="Rouvana Modas"
-                className="w-full h-80 object-cover object-top rounded-3xl shadow-xl border-4 border-white"
-              />
-              <div className="absolute -bottom-3 -left-3 bg-white/95 backdrop-blur-xs px-3.5 py-2 rounded-2xl border border-[#60315F]/20 shadow-lg text-[11px] font-bold text-[#60315F]">
-                ✨ Grade Completa P ao G6
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* 3. FIVE TRUST & DIFFERENTIAL FEATURE BADGES */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 p-6 sm:p-8 rounded-2xl bg-[#FAF6EE] border border-[#60315F]/15 shadow-xs mb-16">
@@ -489,7 +320,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                 Atendimento Próximo
               </h4>
               <p className="text-[11px] text-[#553954] mt-0.5">
-                Consultoria e carinho
+                Atenção e carinho
               </p>
             </div>
           </div>

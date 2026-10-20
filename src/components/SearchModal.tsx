@@ -34,16 +34,14 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       });
 
   const quickSearchTags = [
-    'Pijamas (P ao 54)',
     'Vestidos',
+    'Pijamas',
     'Saias',
     'Regatas',
     'Camisas e Blusas',
     'Pantalonas e Calças',
     'Bermudas',
     'Lingerie',
-    'Do P ao 54',
-    'Plus Size (P ao G6)',
   ];
 
   return (

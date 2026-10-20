@@ -15,32 +15,32 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
 
   const heroSlides = [
     {
-      kicker: '⭐ Destaque Especial · Rouvana Modas',
-      titlePart1: 'Pijamas Conforto',
-      titlePart2: 'Do P ao 54',
-      subtitle: 'Modelagens exclusivas que abraçam suas noites com malhas macias, toque suave e caimento aconchegante.',
-      modelImg: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80',
+      kicker: 'Nova Coleção · Rouvana Modas',
+      titlePart1: 'Moda que Respeita',
+      titlePart2: 'o Seu Estilo',
+      subtitle: 'Descubra peças femininas pensadas para valorizar a sua essência, com caimento impecável e modelagens que respeitam o seu estilo.',
+      modelImg: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80',
     },
     {
       kicker: 'Coleção Exclusiva Rouvana Modas',
       titlePart1: 'Elegância Pura',
       titlePart2: 'Feita a Você',
       subtitle: 'Descubra peças femininas sofisticadas com modelagem impecável, do P ao G6.',
-      modelImg: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80',
-    },
-    {
-      kicker: 'Diferencial da Loja · Grade Inclusiva',
-      titlePart1: 'Plus Size & Moda Mulher',
-      titlePart2: 'Do P ao G6 Real',
-      subtitle: 'Modelagens exclusivas que abraçam e valorizam suas curvas com caimento impecável e elegância pura.',
       modelImg: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
     },
     {
-      kicker: 'Coleção Exclusiva Rouvana Modas',
-      titlePart1: 'Moda Feminina',
-      titlePart2: 'Beleza & Conforto',
-      subtitle: 'Peças com corte impecável para acompanhar todos os seus momentos com requinte, estilo e bem-estar.',
+      kicker: 'Diferencial da Loja · Grade Inclusiva',
+      titlePart1: 'Grade do P ao G6,',
+      titlePart2: 'Voltado para Moda Mulher',
+      subtitle: 'Modelagens exclusivas que abraçam e valorizam suas curvas com caimento impecável e elegância pura.',
       modelImg: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80',
+    },
+    {
+      kicker: 'Coleção Exclusiva Rouvana Modas',
+      titlePart1: 'Moda Noite & Casual',
+      titlePart2: 'Beleza & Conforto',
+      subtitle: 'Peças com corte impecável para acompanhar todos os seus momentos com estilo e bem-estar.',
+      modelImg: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80',
     },
   ];
 
@@ -89,12 +89,11 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
                 {currentSlide.subtitle}
               </p>
 
-              {/* Diferenciais Rouvana Modas: Pijamas do P ao 54, Horário, Pequenos Ajustes, P ao G6 */}
               {/* Destaque Curadoria Rouvana Modas */}
               <div className="flex items-center gap-2 mb-8">
                 <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 text-xs font-semibold text-[#60315F] border border-[#60315F]/15 shadow-xs">
                   <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
-                  Moda Feminina em Chavantes - SP
+                  Moda que Respeita o Seu Estilo · Chavantes - SP
                 </span>
               </div>
 
@@ -147,9 +146,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
           </div>
         </div>
 
-
-
-        {/* 2. AS 8 CATEGORIAS DA LOJA (Vestidos, Pijamas, Saias, Regatas, Camisas e Blusas, Pantalonas e Calças, Bermudas, Lingerie) */}
+        {/* 2. CATEGORIAS EM DESTAQUE */}
         <div className="mt-8">
           <div className="flex items-center justify-between mb-4 px-1">
             <div>
@@ -164,29 +161,19 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
               onClick={onExploreProducts}
               className="text-xs font-bold text-[#60315F] hover:underline flex items-center gap-1 cursor-pointer"
             >
-              <span>Ver todas as peças</span>
+              <span>Ver Catálogo</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3.5 sm:gap-4">
             {CATEGORY_CARDS.map((card) => {
-              const isPajamas = card.id === 'pijamas';
               return (
                 <div
                   key={card.id}
                   onClick={() => handleCardClick(card.id)}
-                  className={`relative rounded-2xl p-4 flex flex-col justify-between overflow-hidden cursor-pointer group transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${card.bgClass} ${
-                    isPajamas ? 'ring-2 ring-[#60315F] scale-[1.02]' : ''
-                  }`}
+                  className={`relative rounded-2xl p-4 flex flex-col justify-between overflow-hidden cursor-pointer group transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${card.bgClass}`}
                 >
-                  {isPajamas && (
-                    <div className="absolute top-2 right-2 bg-[#60315F] text-[#FAF6EE] text-[9px] font-black px-2 py-0.5 rounded-full shadow-xs flex items-center gap-1 border border-[#DFB77C]/60 z-10">
-                      <Sparkles className="w-2.5 h-2.5 text-[#DFB77C]" />
-                      <span>DO P AO 54</span>
-                    </div>
-                  )}
-
                   <div className="flex items-center gap-3 mb-3">
                     <img
                       src={card.image}

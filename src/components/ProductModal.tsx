@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Product, ProductColor } from '../types/catalog';
-import { X, Check, Ruler, MessageCircle, ShoppingBag, Star, ShieldCheck, Feather, Info, Sparkles, Moon } from 'lucide-react';
+import { X, Check, Ruler, MessageCircle, ShoppingBag, Star, ShieldCheck, Feather, Info, Sparkles } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 
 interface ProductModalProps {
@@ -105,18 +105,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 {product.name}
               </h2>
 
-              {product.category === 'pijamas' && (
-                <div className="mb-3 p-3 bg-gradient-to-r from-[#FAF5F9] to-[#F5EDF4] rounded-2xl border border-[#60315F]/30 flex items-center gap-2.5 text-xs">
-                  <div className="w-8 h-8 rounded-full bg-[#60315F] text-[#FAF6EE] flex items-center justify-center shrink-0 shadow-xs">
-                    <Moon className="w-4 h-4 text-[#DFB77C]" />
-                  </div>
-                  <div>
-                    <span className="font-black text-[#60315F] block">🌙 Destaque Especial: Pijamas do P ao 54</span>
-                    <span className="text-[11px] text-[#553954]">Modelagem acolhedora e confortável do P ao tamanho 54.</span>
-                  </div>
-                </div>
-              )}
-
               {/* Rating */}
               <div className="flex items-center gap-1.5 mb-3">
                 <div className="flex text-[#DFB77C]">
@@ -196,60 +184,24 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   </button>
                 </div>
 
-                {/* Grade Regular & Grade Plus Size agrupadas */}
-                <div className="space-y-2 mb-3">
-                  <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-500 block mb-1">
-                      Grade Regular:
-                    </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {product.sizes.filter(s => ['P', 'M', 'G', 'GG'].includes(s)).map((size) => {
-                        const isSelected = selectedSize === size;
-                        return (
-                          <button
-                            key={size}
-                            onClick={() => setSelectedSize(size)}
-                            className={`min-w-[42px] h-9 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                              isSelected
-                                ? 'bg-[#60315F] text-[#FAF6EE] shadow-xs'
-                                : 'bg-[#F5EDF4] text-[#553954] hover:bg-[#EBD8E9]'
-                            }`}
-                          >
-                            {size}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="flex items-center gap-1.5 mb-1">
-                      <span className="text-[10px] uppercase font-bold text-[#60315F]">
-                        Grade Plus Size Especial:
-                      </span>
-                      <span className="text-[9px] bg-[#FAF4EB] text-[#7A4B1A] border border-[#DEC295]/50 px-1.5 py-0.2 rounded font-extrabold">
-                        Diferencial da Loja
-                      </span>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {product.sizes.filter(s => ['G1', 'G2', 'G3', 'G4', 'G5', 'G6'].includes(s)).map((size) => {
-                        const isSelected = selectedSize === size;
-                        return (
-                          <button
-                            key={size}
-                            onClick={() => setSelectedSize(size)}
-                            className={`min-w-[44px] h-9 px-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
-                              isSelected
-                                ? 'bg-[#60315F] text-[#FAF6EE] ring-2 ring-[#DFB77C] shadow-sm'
-                                : 'bg-[#FAF4EB] text-[#7A4B1A] border border-[#DEC295]/40 hover:bg-[#F3E7D5]'
-                            }`}
-                          >
-                            {size}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
+                {/* Grade Completa de Tamanhos */}
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {product.sizes.map((size) => {
+                    const isSelected = selectedSize === size;
+                    return (
+                      <button
+                        key={size}
+                        onClick={() => setSelectedSize(size)}
+                        className={`min-w-[42px] h-9 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                          isSelected
+                            ? 'bg-[#60315F] text-[#FAF6EE] shadow-xs'
+                            : 'bg-[#F5EDF4] text-[#553954] hover:bg-[#EBD8E9]'
+                        }`}
+                      >
+                        {size}
+                      </button>
+                    );
+                  })}
                 </div>
 
                 {/* Live measurement preview for chosen size */}
@@ -294,18 +246,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   </div>
                 </div>
 
-                {/* Diferencial: Fazemos Pequenos Ajustes */}
-                <div className="p-2.5 rounded-xl bg-[#F5EDF4] border border-[#60315F]/20 flex items-start gap-2 text-xs mt-2">
-                  <Scissors className="w-4 h-4 text-[#60315F] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-[#60315F] block">
-                      Fazemos Pequenos Ajustes
-                    </span>
-                    <p className="text-[11px] text-[#553954] mt-0.5 leading-snug">
-                      Ajustamos a peça para que ela fique sob medida e perfeita para você!
-                    </p>
-                  </div>
-                </div>
               </div>
 
               {/* Tabs */}
