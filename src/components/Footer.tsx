@@ -70,12 +70,20 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#4D254C]/70">
           {/* Brand & Logo */}
           <div className="lg:col-span-4 flex flex-col">
-            <div className="mb-5">
+            <div className="mb-5 flex items-center gap-4">
               <img
                 src="/logo.jpg"
-                alt="Rouvana Modas"
-                className="h-20 sm:h-24 w-auto rounded-2xl border border-white/20 shadow-md object-contain"
+                alt="Rouvana Modas - Moda Feminina"
+                className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-white/30 ring-2 ring-[#DFB77C]/40 shadow-md object-cover shrink-0"
               />
+              <div className="flex flex-col">
+                <span className="font-display font-bold text-xl sm:text-2xl text-[#FAF6EE]">
+                  Rouvana Modas
+                </span>
+                <span className="text-xs sm:text-sm text-[#DFB77C] font-semibold">
+                  Moda Feminina
+                </span>
+              </div>
             </div>
             <p className="text-xs sm:text-sm text-[#D8C7D6] leading-relaxed max-w-sm mb-4">
               Roupas femininas com elegância e caimento impecável em Chavantes - SP. Do tamanho P ao G6 com atendimento acolhedor.

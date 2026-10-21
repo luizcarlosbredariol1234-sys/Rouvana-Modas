@@ -113,17 +113,25 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* 2. MAIN HEADER: LOGO AMPLA & AÇÕES */}
       <div className="border-b border-[#60315F]/15 py-2.5 sm:py-3.5 px-3 sm:px-6 bg-[#FAF6EE]">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 sm:gap-5">
-          {/* Brand Logo */}
+          {/* Brand Logo Circular */}
           <a
             href="#inicio"
             onClick={(e) => handleScrollTo(e, 'inicio')}
-            className="flex-1 flex items-center group cursor-pointer min-w-0 pr-2 sm:pr-4"
+            className="flex items-center gap-3.5 sm:gap-5 group cursor-pointer shrink-0"
           >
             <img
               src="/logo.jpg"
-              alt="Rouvana Modas"
-              className="w-full h-28 sm:h-36 md:h-44 lg:h-52 object-fill rounded-2xl shadow-md border border-[#60315F]/25 group-hover:scale-[1.005] transition-all duration-300"
+              alt="Rouvana Modas - Moda Feminina"
+              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full object-cover shadow-lg border-2 border-[#60315F]/30 ring-2 ring-[#DFB77C]/40 group-hover:scale-105 transition-all duration-300 shrink-0"
             />
+            <div className="flex flex-col">
+              <span className="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-[#331632] group-hover:text-[#60315F] transition-colors leading-tight">
+                Rouvana Modas
+              </span>
+              <span className="text-xs sm:text-sm text-[#60315F] font-bold tracking-wider uppercase mt-0.5">
+                Moda Feminina
+              </span>
+            </div>
           </a>
 
           {/* Right Action Icons: Lupa de Pesquisa, Perfil, Favoritos, Sacola */}
@@ -251,12 +259,20 @@ export const Navbar: React.FC<NavbarProps> = ({
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-b border-slate-200 px-6 py-5 shadow-xl animate-in slide-in-from-top max-h-[80vh] overflow-y-auto">
           <div className="flex flex-col gap-3 font-semibold text-sm text-slate-800">
-            <div className="pb-3 border-b border-slate-100 flex items-center justify-start">
+            <div className="pb-3 border-b border-slate-100 flex items-center gap-3.5">
               <img
                 src="/logo.jpg"
-                alt="Rouvana Modas"
-                className="w-full h-28 sm:h-36 object-fill rounded-xl shadow-xs border border-[#60315F]/20"
+                alt="Rouvana Modas - Moda Feminina"
+                className="w-16 h-16 rounded-full object-cover shadow-sm border-2 border-[#60315F]/30 ring-2 ring-[#DFB77C]/40 shrink-0"
               />
+              <div className="flex flex-col">
+                <span className="font-display font-bold text-lg text-[#331632]">
+                  Rouvana Modas
+                </span>
+                <span className="text-xs text-[#60315F] font-semibold">
+                  Moda Feminina
+                </span>
+              </div>
             </div>
 
             <div className="flex items-center gap-2 text-xs text-[#60315F] bg-[#FAF6EE] p-2.5 rounded-xl border border-[#60315F]/20 font-medium">

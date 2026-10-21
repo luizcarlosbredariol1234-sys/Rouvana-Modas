@@ -123,7 +123,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
 
             <div className="bg-[#60315F] text-[#FAF6EE] rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-md border border-[#4D254C]">
               <div className="mb-6">
-                <img src="/logo.jpg" alt="Rouvana Modas" className="h-16 sm:h-20 w-auto rounded-xl mb-5 border border-white/25 shadow-sm object-contain" />
+                <img src="/logo.jpg" alt="Rouvana Modas - Moda Feminina" className="w-20 h-20 sm:w-24 sm:h-24 rounded-full mb-5 border-2 border-white/30 ring-2 ring-[#DFB77C]/40 shadow-sm object-cover" />
                 <blockquote className="font-display text-lg sm:text-xl font-medium leading-snug text-[#FAF6EE]">
                   &ldquo;Roupas com caimento primoroso que valorizam a sua essência e acompanham os seus melhores momentos.&rdquo;
                 </blockquote>
