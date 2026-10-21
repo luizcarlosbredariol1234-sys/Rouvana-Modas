@@ -57,10 +57,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
                 Inclusivo
               </div>
               <h3 className="font-display text-lg sm:text-xl font-bold text-[#331632] mb-2">
-                Tamanhos P ao G6 & Plus Size
+                Tamanhos do P ao G6
               </h3>
               <p className="text-xs sm:text-sm text-[#553954] leading-relaxed">
-                Grade ampla do P ao G6 (Regular e Plus Size Especial). Modelagens que valorizam as curvas reais com caimento impecável e extremo conforto.
+                Grade ampla do P ao G6. Modelagens que valorizam as curvas reais com caimento impecável e extremo conforto.
               </p>
             </div>
           </div>

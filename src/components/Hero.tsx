@@ -18,7 +18,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
       kicker: 'Rouvana Modas',
       titlePart1: 'Moda que Respeita',
       titlePart2: 'o Seu Estilo',
-      subtitle: 'Descubra peças femininas pensadas para valorizar a sua essência, com caimento impecável e modelagens que respeitam o seu estilo.',
+      subtitle: 'Descubra peças femininas pensadas para valorizar a sua essência.',
       modelImg: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80',
     },
     {
@@ -108,17 +108,9 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
                 </span>
               </h1>
 
-              <p className="text-sm sm:text-base text-[#553954] max-w-lg mb-6 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-[#553954] max-w-lg mb-8 leading-relaxed font-normal">
                 {currentSlide.subtitle}
               </p>
-
-              {/* Destaque Curadoria Rouvana Modas */}
-              <div className="flex items-center gap-2 mb-8">
-                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 text-xs font-semibold text-[#60315F] border border-[#60315F]/15 shadow-xs">
-                  <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
-                  Moda que Respeita o Seu Estilo
-                </span>
-              </div>
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8">
