@@ -127,8 +127,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                         {product.categoryLabel} · {product.fiberHighlight}
                       </p>
                     </div>
-                    <span className="text-sm font-bold text-[#60315F]">
-                      R$ {product.price.toFixed(2).replace('.', ',')}
+                    <span className="text-xs font-semibold text-[#60315F] bg-[#FAF5F9] px-2.5 py-1 rounded-lg border border-[#60315F]/15 shrink-0">
+                      Ver Peça
                     </span>
                   </div>
                 ))

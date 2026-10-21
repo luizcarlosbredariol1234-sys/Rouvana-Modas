@@ -101,9 +101,6 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                       <p className="text-[11px] text-slate-500 mt-0.5">
                         {product.categoryLabel}
                       </p>
-                      <span className="text-xs font-bold text-[#60315F] block mt-1">
-                        R$ {product.price.toFixed(2).replace('.', ',')}
-                      </span>
                     </div>
                     <div className="flex items-center gap-1.5">
                       <button

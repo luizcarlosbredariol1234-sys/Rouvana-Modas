@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
-import { ShieldCheck, Heart, Leaf, Award, Sparkles, Check, X as CloseIcon, MessageCircle, Ruler } from 'lucide-react';
+import { Heart, Leaf, Award, Sparkles, MessageCircle, Ruler } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 
 interface AboutSectionProps {
@@ -8,35 +8,6 @@ interface AboutSectionProps {
 }
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) => {
-  const [activeTab, setActiveTab] = useState<'filosofia' | 'comparativo'>('filosofia');
-
-  const comparisonData = [
-    {
-      criterio: 'Respiração e Circulação de Ar',
-      natural: 'Temos peças 100% algodão que deixam a pele respirar e evitam acúmulo de suor.',
-      sintetico: 'Plástico derivado de petróleo que retém o calor e bloqueia a pele.',
-    },
-    {
-      criterio: 'Proliferação de Odores',
-      natural: 'Propriedades antibacterianas que mantêm a peça fresca.',
-      sintetico: 'Favorece o crescimento bacteriano (efeito cheiro impregnado crônico).',
-    },
-    {
-      criterio: 'Sensibilidade & Alergias',
-      natural: 'Hipoalergênico, livre de resinas e químicos tóxicos pesados.',
-      sintetico: 'Causa frequente de dermatite de contato e irritação cutânea.',
-    },
-    {
-      criterio: 'Durabilidade Real',
-      natural: 'Nossas peças de algodão ganham maciez e duram anos.',
-      sintetico: 'Degenera com facilidade, forma bolinhas (peeling) e perde a forma.',
-    },
-    {
-      criterio: 'Impacto no Planeta',
-      natural: '100% Biodegradável. Volta à terra sem gerar microplásticos.',
-      sintetico: 'Leva até 500 anos para se decompor, liberando microplásticos no oceano.',
-    },
-  ];
 
   return (
     <section id="sobre" className="py-20 bg-[#FAF6EE] relative overflow-hidden">
@@ -44,7 +15,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="flex items-center justify-center gap-2 text-xs font-bold text-[#60315F] uppercase tracking-widest mb-3">
-            <span>Rouvana Modas em Chavantes - SP</span>
+            <span>Rouvana Modas</span>
           </div>
 
           <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#331632] tracking-tight mb-4">
@@ -131,101 +102,38 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
 
         {/* Comparison card */}
         <div className="bg-white rounded-3xl border border-[#60315F]/15 shadow-md p-6 sm:p-10 mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#60315F]/10 mb-6 gap-4">
-            <div>
-              <span className="text-xs uppercase font-bold tracking-wider text-[#92718B] block mb-0.5">
-                Critérios de Qualidade Rouvana Modas
-              </span>
-              <h3 className="font-display text-2xl font-bold text-[#331632]">
-                Por que escolher as peças da Rouvana Modas?
-              </h3>
-            </div>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setActiveTab('filosofia')}
-                className={`px-4 py-2 text-xs font-semibold rounded-xl transition-colors cursor-pointer ${
-                  activeTab === 'filosofia'
-                    ? 'bg-[#60315F] text-[#FAF6EE]'
-                    : 'bg-[#F5EDF4] text-[#553954] hover:text-[#60315F]'
-                }`}
-              >
-                Nossa Filosofia
-              </button>
-              <button
-                onClick={() => setActiveTab('comparativo')}
-                className={`px-4 py-2 text-xs font-semibold rounded-xl transition-colors cursor-pointer ${
-                  activeTab === 'comparativo'
-                    ? 'bg-[#60315F] text-[#FAF6EE]'
-                    : 'bg-[#F5EDF4] text-[#553954] hover:text-[#60315F]'
-                }`}
-              >
-                Tabela Técnica
-              </button>
-            </div>
+          <div className="pb-6 border-b border-[#60315F]/10 mb-6">
+            <span className="text-xs uppercase font-bold tracking-wider text-[#92718B] block mb-0.5">
+              Nossa Filosofia & Cuidado
+            </span>
+            <h3 className="font-display text-2xl font-bold text-[#331632]">
+              Por que escolher as peças da Rouvana Modas?
+            </h3>
           </div>
 
-          {activeTab === 'comparativo' ? (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm border-collapse">
-                <thead>
-                  <tr className="border-b border-[#60315F]/15 text-[#553954] font-bold text-xs uppercase tracking-wider">
-                    <th className="py-3 px-4">Critério</th>
-                    <th className="py-3 px-4 text-[#60315F] bg-[#F5EDF4] rounded-t-xl font-bold">
-                      Peças Rouvana Modas
-                    </th>
-                    <th className="py-3 px-4 text-slate-600">
-                      Vestuário Sintético Comum
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {comparisonData.map((item, idx) => (
-                    <tr key={idx} className="hover:bg-slate-50/60">
-                      <td className="py-4 px-4 font-semibold text-[#331632] text-xs sm:text-sm">
-                        {item.criterio}
-                      </td>
-                      <td className="py-4 px-4 bg-[#F5EDF4]/60 text-[#60315F] font-medium text-xs sm:text-sm">
-                        <div className="flex items-start gap-2">
-                          <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                          <span>{item.natural}</span>
-                        </div>
-                      </td>
-                      <td className="py-4 px-4 text-slate-500 text-xs sm:text-sm">
-                        <div className="flex items-start gap-2">
-                          <CloseIcon className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
-                          <span>{item.sintetico}</span>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="space-y-4 text-[#553954] leading-relaxed text-sm sm:text-base">
+              <p>
+                A <strong className="text-[#331632] font-semibold">Rouvana Modas</strong> tem como propósito oferecer a você uma experiência de moda acolhedora, com roupas femininas que combinam beleza clássica, modelagem impecável e conforto moderno.
+              </p>
+              <p>
+                Acreditamos que se vestir bem é uma forma diária de autocuidado. Por isso, prestamos atenção aos acabamentos, às cores elegantes e aos tecidos que deixam a pele respirar livremente.
+              </p>
             </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-4 text-[#553954] leading-relaxed text-sm sm:text-base">
-                <p>
-                  A <strong className="text-[#331632] font-semibold">Rouvana Modas</strong> tem como propósito oferecer a você uma experiência de moda acolhedora, com roupas femininas que combinam beleza clássica, modelagem impecável e conforto moderno.
-                </p>
-                <p>
-                  Acreditamos que se vestir bem é uma forma diária de autocuidado. Por isso, prestamos atenção aos acabamentos, às cores elegantes e aos tecidos que deixam a pele respirar livremente.
-                </p>
-              </div>
 
-              <div className="bg-[#60315F] text-[#FAF6EE] rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-md border border-[#4D254C]">
-                <div className="mb-6">
-                  <img src="/logo.jpg" alt="Rouvana Modas" className="h-16 sm:h-20 w-auto rounded-xl mb-5 border border-white/25 shadow-sm object-contain" />
-                  <blockquote className="font-display text-lg sm:text-xl font-medium leading-snug text-[#FAF6EE]">
-                    &ldquo;Roupas com caimento primoroso que valorizam a sua essência e acompanham os seus melhores momentos.&rdquo;
-                  </blockquote>
-                </div>
-                <div className="pt-4 border-t border-white/15 text-xs text-[#E5D5E3]">
-                  <span className="font-bold text-[#FAF6EE] block">Rouvana Modas</span>
-                  <span>Rua Altino Arantes 209, Centro · Chavantes - SP</span>
-                </div>
+            <div className="bg-[#60315F] text-[#FAF6EE] rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-md border border-[#4D254C]">
+              <div className="mb-6">
+                <img src="/logo.jpg" alt="Rouvana Modas" className="h-16 sm:h-20 w-auto rounded-xl mb-5 border border-white/25 shadow-sm object-contain" />
+                <blockquote className="font-display text-lg sm:text-xl font-medium leading-snug text-[#FAF6EE]">
+                  &ldquo;Roupas com caimento primoroso que valorizam a sua essência e acompanham os seus melhores momentos.&rdquo;
+                </blockquote>
+              </div>
+              <div className="pt-4 border-t border-white/15 text-xs text-[#E5D5E3]">
+                <span className="font-bold text-[#FAF6EE] block">Rouvana Modas</span>
+                <span>Rua Altino Arantes 209, Centro · Chavantes - SP</span>
               </div>
             </div>
-          )}
+          </div>
 
           {/* CTA */}
           <div className="mt-8 pt-6 border-t border-[#60315F]/10 flex flex-col sm:flex-row items-center justify-between gap-4">

@@ -81,7 +81,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
         {/* 1. SECTION TITLE */}
         <div className="text-center mb-6">
           <span className="text-xs font-bold uppercase tracking-widest text-[#60315F] block mb-2">
-            Catálogo Exclusivo · Chavantes - SP
+            Catálogo Exclusivo
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#331632] mb-3">
             Coleção Feminina
@@ -276,26 +276,16 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                     {product.shortDescription}
                   </p>
 
-                  {/* Prices */}
-                  <div className="mt-auto flex items-baseline gap-2 pt-2">
-                    <span className="font-bold text-sm text-[#60315F]">
-                      R$ {product.price.toFixed(2).replace('.', ',')}
-                    </span>
-                    {product.originalPrice && (
-                      <span className="text-[11px] text-slate-400 line-through">
-                        R$ {product.originalPrice.toFixed(2).replace('.', ',')}
-                      </span>
-                    )}
-                  </div>
-
                   {/* Add to bag button */}
-                  <button
-                    onClick={() => onAddToCart(product)}
-                    className="mt-2.5 w-full py-2 px-2 rounded-xl bg-[#F5EDF4] hover:bg-[#60315F] hover:text-[#FAF6EE] text-[#60315F] text-[11px] font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer border border-[#60315F]/20"
-                  >
-                    <ShoppingBag className="w-3.5 h-3.5" />
-                    <span>Adicionar à Sacola</span>
-                  </button>
+                  <div className="mt-auto pt-2">
+                    <button
+                      onClick={() => onAddToCart(product)}
+                      className="w-full py-2.5 px-3 rounded-xl bg-[#F5EDF4] hover:bg-[#60315F] hover:text-[#FAF6EE] text-[#60315F] text-[11px] font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border border-[#60315F]/20 shadow-2xs hover:shadow-xs"
+                    >
+                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <span>Adicionar à Sacola</span>
+                    </button>
+                  </div>
                 </div>
               );
             })}

@@ -15,28 +15,28 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
 
   const heroSlides = [
     {
-      kicker: 'Nova Coleção · Rouvana Modas',
+      kicker: 'Rouvana Modas',
       titlePart1: 'Moda que Respeita',
       titlePart2: 'o Seu Estilo',
       subtitle: 'Descubra peças femininas pensadas para valorizar a sua essência, com caimento impecável e modelagens que respeitam o seu estilo.',
       modelImg: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80',
     },
     {
-      kicker: 'Coleção Exclusiva Rouvana Modas',
+      kicker: 'Rouvana Modas',
       titlePart1: 'Elegância Pura',
       titlePart2: 'Feita a Você',
       subtitle: 'Descubra peças femininas sofisticadas com modelagem impecável, do P ao G6.',
       modelImg: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
     },
     {
-      kicker: 'Diferencial da Loja · Grade Inclusiva',
+      kicker: 'Rouvana Modas',
       titlePart1: 'Grade do P ao G6,',
       titlePart2: 'Voltado para Moda Mulher',
       subtitle: 'Modelagens exclusivas que abraçam e valorizam suas curvas com caimento impecável e elegância pura.',
       modelImg: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80',
     },
     {
-      kicker: 'Coleção Exclusiva Rouvana Modas',
+      kicker: 'Rouvana Modas',
       titlePart1: 'Moda Noite & Casual',
       titlePart2: 'Beleza & Conforto',
       subtitle: 'Peças com corte impecável para acompanhar todos os seus momentos com estilo e bem-estar.',
@@ -56,6 +56,29 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
   return (
     <section id="inicio" className="pt-3 pb-12 bg-[#FAF6EE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* APRESENTAÇÃO DA ROUVANA MODAS (Logo abaixo da Logo no Início da Página) */}
+        <div className="mb-6 rounded-3xl bg-gradient-to-br from-[#FAF5F9] via-[#FFFFFF] to-[#F5EDF4] p-6 sm:p-8 md:p-10 border border-[#60315F]/20 shadow-xs relative overflow-hidden">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white text-xs font-bold text-[#60315F] border border-[#60315F]/20 mb-3 shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+              <span>Rouvana Modas</span>
+            </div>
+
+            <h1 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-[#331632] tracking-tight mb-4">
+              Seja muito bem-vinda à Rouvana Modas! ✨
+            </h1>
+
+            <div className="space-y-3.5 text-sm sm:text-base text-[#553954] leading-relaxed max-w-3xl mx-auto font-normal">
+              <p>
+                Aqui, acreditamos que a moda não foi feita para moldar você, mas sim para acompanhar, celebrar e destacar quem você já é. A Rouvana Modas nasceu com um propósito claro: vestir a mulher real com elegância, conforto e muita personalidade.
+              </p>
+              <p>
+                Sabemos que a beleza feminina é diversa, única e plural. Por isso, nosso compromisso vai do P ao Plus Size, garantindo que cada peça seja desenhada e pensada para valorizar todos os biotipos, curvas e estilos — sem abrir mão do caimento perfeito e do bem-estar.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* 1. HERO MAIN BANNER */}
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FAF5F9] via-[#F4E8F2] to-[#EBD5E7] min-h-[440px] sm:min-h-[500px] flex items-center px-6 sm:px-14 py-10 border border-[#60315F]/15 shadow-xs">
           {/* Subtle decorative dot grid background */}
@@ -93,7 +116,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
               <div className="flex items-center gap-2 mb-8">
                 <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 text-xs font-semibold text-[#60315F] border border-[#60315F]/15 shadow-xs">
                   <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
-                  Moda que Respeita o Seu Estilo · Chavantes - SP
+                  Moda que Respeita o Seu Estilo
                 </span>
               </div>
 
@@ -198,6 +221,29 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
                 </div>
               );
             })}
+          </div>
+        </div>
+
+        {/* 3. MENSAGEM INSPIRACIONAL: AUTOESTIMA & CONEXÃO (Abaixo das Categorias em Destaque e Acima do Catálogo Exclusivo) */}
+        <div className="mt-12 rounded-3xl bg-gradient-to-r from-[#FAF5F9] via-[#FFFFFF] to-[#F5EDF4] p-6 sm:p-8 md:p-10 border border-[#60315F]/20 shadow-xs relative overflow-hidden text-center">
+          <div className="max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white text-xs font-bold text-[#60315F] border border-[#60315F]/20 mb-3.5 shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+              <span>Autoestima & Conexão</span>
+            </div>
+
+            <h3 className="font-display font-bold text-xl sm:text-2xl lg:text-3xl text-[#331632] tracking-tight mb-4">
+              ✨ Sabe aquela roupa que faz você se olhar no espelho e sorrir na hora?
+            </h3>
+
+            <div className="space-y-3.5 text-sm sm:text-base text-[#553954] leading-relaxed max-w-3xl mx-auto font-normal">
+              <p>
+                É exatamente para isso que a gente existe! Aqui na Rouvana Modas, a gente não acredita em regras chatas de moda ou em &quot;corpo ideal&quot;. A gente acredita em você.
+              </p>
+              <p>
+                Nosso compromisso é fazer você se sentir linda, leve e super confiante — seja vestindo P, G ou Plus Size. Aqui, todas as curvas, estilos e biotipos têm lugar garantido, com peças pensadas com carinho para abraçar o seu corpo do jeito que ele é.
+              </p>
+            </div>
           </div>
         </div>
       </div>

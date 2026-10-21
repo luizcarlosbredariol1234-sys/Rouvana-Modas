@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Product, ProductColor } from '../types/catalog';
-import { X, Check, Ruler, MessageCircle, ShoppingBag, Star, ShieldCheck, Feather, Info, Sparkles } from 'lucide-react';
+import { X, Check, MessageCircle, ShoppingBag, Star, ShieldCheck, Feather, Info, Sparkles } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 
 interface ProductModalProps {
@@ -19,11 +19,11 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
   const [selectedColor, setSelectedColor] = useState<ProductColor>(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0]);
-  const [activeTab, setActiveTab] = useState<'detalhes' | 'medidas' | 'cuidados'>('detalhes');
+  const [activeTab, setActiveTab] = useState<'detalhes' | 'cuidados'>('detalhes');
   const [addedNotice, setAddedNotice] = useState(false);
 
   const handleWhatsAppInquiry = () => {
-    const text = `Olá, Rouvana Modas! Gostaria de consultar ou encomendar a peça "${product.name}", tamanho ${selectedSize} e cor ${selectedColor.name}. Preço: R$ ${product.price.toFixed(2).replace('.', ',')}.`;
+    const text = `Olá, Rouvana Modas! Gostaria de solicitar um orçamento para a peça "${product.name}", tamanho ${selectedSize} e cor ${selectedColor.name}.`;
     const url = `https://wa.me/${COMPANY_INFO.phoneClean}?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
   };
@@ -117,18 +117,11 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 </span>
               </div>
 
-              {/* Prices */}
-              <div className="flex items-baseline gap-3 mb-4 pb-4 border-b border-[#60315F]/15">
-                <span className="text-3xl font-display font-bold text-[#60315F]">
-                  R$ {product.price.toFixed(2).replace('.', ',')}
-                </span>
-                {product.originalPrice && (
-                  <span className="text-base text-slate-400 line-through">
-                    R$ {product.originalPrice.toFixed(2).replace('.', ',')}
-                  </span>
-                )}
-                <span className="text-xs text-slate-500 ml-auto">
-                  {product.installments}
+              {/* Product Subtitle / Badge */}
+              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-[#60315F]/15">
+                <span className="text-xs font-semibold text-[#60315F] bg-[#FAF5F9] px-3 py-1.5 rounded-xl border border-[#60315F]/20 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+                  Orçamento sob consulta · Atendimento exclusivo
                 </span>
               </div>
 
@@ -175,13 +168,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                       </span>
                     )}
                   </div>
-                  <button
-                    onClick={() => setActiveTab('medidas')}
-                    className="text-xs font-bold text-[#60315F] hover:underline flex items-center gap-1 cursor-pointer"
-                  >
-                    <Ruler className="w-3.5 h-3.5 text-[#DFB77C]" />
-                    <span>Tabela de medidas</span>
-                  </button>
                 </div>
 
                 {/* Grade Completa de Tamanhos */}
@@ -203,35 +189,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                     );
                   })}
                 </div>
-
-                {/* Live measurement preview for chosen size */}
-                {(() => {
-                  const m = product.measurements.find((item) => item.size === selectedSize);
-                  if (!m) return null;
-                  return (
-                    <div className="p-2.5 rounded-xl bg-[#FAF5F9] border border-[#60315F]/20 text-xs text-[#553954] mb-3">
-                      <div className="flex items-center justify-between text-[11px] font-bold text-[#60315F] mb-1">
-                        <span className="flex items-center gap-1">
-                          <Ruler className="w-3.5 h-3.5 text-[#DFB77C]" />
-                          Medidas do Tamanho {selectedSize}:
-                        </span>
-                        {['G1', 'G2', 'G3', 'G4', 'G5', 'G6'].includes(selectedSize) && (
-                          <span className="text-[10px] text-[#60315F] font-bold">
-                            Caimento Amplo & Confortável
-                          </span>
-                        )}
-                      </div>
-                      <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
-                        <span>Busto: <strong className="text-[#331632]">{m.busto}</strong></span>
-                        <span>Cintura: <strong className="text-[#331632]">{m.cintura}</strong></span>
-                        {m.quadril && m.quadril !== '—' && (
-                          <span>Quadril: <strong className="text-[#331632]">{m.quadril}</strong></span>
-                        )}
-                        <span>Comprimento: <strong className="text-[#331632]">{m.comprimento}</strong></span>
-                      </div>
-                    </div>
-                  );
-                })()}
 
                 {/* Diferencial: Modelagem & Caimento Exclusivo */}
                 <div className="p-2.5 rounded-xl bg-white border border-[#60315F]/15 flex items-start gap-2 text-xs">
@@ -261,16 +218,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   Descrição & Tecido
                 </button>
                 <button
-                  onClick={() => setActiveTab('medidas')}
-                  className={`pb-2.5 transition-colors cursor-pointer ${
-                    activeTab === 'medidas'
-                      ? 'text-[#60315F] border-b-2 border-[#60315F]'
-                      : 'text-slate-500 hover:text-[#60315F]'
-                  }`}
-                >
-                  Medidas (cm)
-                </button>
-                <button
                   onClick={() => setActiveTab('cuidados')}
                   className={`pb-2.5 transition-colors cursor-pointer ${
                     activeTab === 'cuidados'
@@ -292,53 +239,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                     <p className="font-semibold text-[#331632]">
                       Composição: {product.composition}
                     </p>
-                  </div>
-                )}
-
-                {activeTab === 'medidas' && (
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-xs text-left border-collapse">
-                      <thead>
-                        <tr className="bg-[#F5EDF4] text-[#331632]">
-                          <th className="p-2">Tamanho</th>
-                          <th className="p-2">Busto</th>
-                          <th className="p-2">Cintura</th>
-                          <th className="p-2">Quadril</th>
-                          <th className="p-2">Comprimento</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-100">
-                        {product.measurements.map((m) => (
-                          <tr
-                            key={m.size}
-                            className={m.size === selectedSize ? 'bg-[#F5EDF4] font-bold text-[#60315F]' : ''}
-                          >
-                            <td className="p-2">
-                              <span className="font-bold">{m.size}</span>
-                              {['G1', 'G2', 'G3', 'G4', 'G5', 'G6'].includes(m.size) && (
-                                <span className="text-[9px] bg-[#60315F] text-[#FAF6EE] px-1.5 py-0.5 rounded ml-1.5 font-bold">
-                                  Plus Size
-                                </span>
-                              )}
-                            </td>
-                            <td className="p-2">{m.busto}</td>
-                            <td className="p-2">{m.cintura}</td>
-                            <td className="p-2">{m.quadril}</td>
-                            <td className="p-2">{m.comprimento}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    <div className="mt-3 p-2 rounded-lg bg-[#FAF5F9] border border-[#60315F]/15 text-[11px] text-[#553954] flex items-center justify-between gap-2 flex-wrap">
-                      <span className="font-semibold text-[#60315F] flex items-center gap-1">
-                        <Ruler className="w-3.5 h-3.5 text-[#DFB77C]" />
-                        Grade ampla do P ao G6
-                      </span>
-                      <span className="text-[#60315F] font-semibold flex items-center gap-1">
-                        <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
-                        Caimento Impecável
-                      </span>
-                    </div>
                   </div>
                 )}
 
@@ -369,7 +269,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   className="py-3.5 px-5 rounded-2xl bg-[#60315F] hover:bg-[#4D254C] text-[#FAF6EE] font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer transition-colors"
                 >
                   <MessageCircle className="w-4 h-4 text-emerald-400" />
-                  <span>Comprar no WhatsApp</span>
+                  <span>Solicitar Orçamento no WhatsApp</span>
                 </button>
               </div>
             </div>

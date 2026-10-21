@@ -21,11 +21,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   onRemoveItem,
   onCheckout,
 }) => {
-  const total = items.reduce(
-    (sum, item) => sum + item.product.price * item.quantity,
-    0
-  );
-
   const totalItemsCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleWhatsAppCheckout = () => {
@@ -33,11 +28,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     const itemsList = items
       .map(
         (it) =>
-          `• ${it.quantity}x ${it.product.name} (Tam: ${it.selectedSize}, Cor: ${it.selectedColor.name}) - R$ ${(it.product.price * it.quantity).toFixed(2).replace('.', ',')}`
+          `• ${it.quantity}x ${it.product.name} (Tamanho: ${it.selectedSize}, Cor: ${it.selectedColor.name})`
       )
       .join('\n');
 
-    const msg = `Olá, Rouvana Modas! Gostaria de finalizar o meu pedido com os seguintes itens:\n\n${itemsList}\n\n*Total: R$ ${total.toFixed(2).replace('.', ',')}*\n\nComo posso prosseguir com a entrega para o meu endereço?`;
+    const msg = `Olá, Rouvana Modas! Gostaria de solicitar um orçamento para as seguintes peças da minha sacola:\n\n${itemsList}\n\n*Total de itens: ${totalItemsCount}*\n\nComo posso prosseguir com o orçamento e disponibilidade para o meu endereço?`;
     const url = `https://wa.me/${COMPANY_INFO.phoneClean}?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
   };
@@ -119,8 +114,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         Tamanho: <strong className="text-[#331632]">{item.selectedSize}</strong> · Cor: <strong className="text-[#331632]">{item.selectedColor.name}</strong>
                       </p>
                       <div className="flex items-center justify-between mt-2">
-                        <span className="text-xs font-bold text-[#60315F]">
-                          R$ {(item.product.price * item.quantity).toFixed(2).replace('.', ',')}
+                        <span className="text-[11px] font-semibold text-[#60315F] bg-[#FAF5F9] px-2 py-0.5 rounded-md border border-[#60315F]/15">
+                          {item.quantity} {item.quantity === 1 ? 'unidade' : 'unidades'}
                         </span>
                         <div className="flex items-center border border-slate-200 rounded-lg">
                           <button
@@ -152,18 +147,18 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               )}
             </div>
 
-            {/* Footer / Checkout */}
+            {/* Footer / Quote Request */}
             {items.length > 0 && (
               <div className="p-5 border-t border-[#60315F]/15 bg-[#FAF6EE] space-y-3">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-[#553954]">Subtotal</span>
-                  <span className="font-bold text-[#60315F] text-lg">
-                    R$ {total.toFixed(2).replace('.', ',')}
+                  <span className="text-[#553954] font-medium">Total de Peças na Sacola</span>
+                  <span className="font-bold text-[#60315F] text-base">
+                    {totalItemsCount} {totalItemsCount === 1 ? 'peça selecionada' : 'peças selecionadas'}
                   </span>
                 </div>
-                <div className="text-[11px] text-[#60315F] bg-[#F5EDF4] border border-[#60315F]/20 p-2.5 rounded-xl space-y-1">
+                <div className="text-[11px] text-[#60315F] bg-[#F5EDF4] border border-[#60315F]/20 p-2.5 rounded-xl">
                   <div className="text-center font-medium">
-                    ✨ 10% OFF no Pix • Siga no Instagram <strong>{COMPANY_INFO.instagram}</strong>
+                    ✨ Atendimento exclusivo • Consultamos disponibilidade e valores para você!
                   </div>
                 </div>
                 <button
@@ -171,13 +166,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   className="w-full py-3.5 px-4 rounded-xl bg-[#60315F] hover:bg-[#4D254C] text-[#FAF6EE] font-semibold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4 text-[#DFB77C]" />
-                  <span>Finalizar Pedido pelo WhatsApp</span>
+                  <span>Solicitar Orçamento</span>
                 </button>
                 <button
                   onClick={onClose}
                   className="w-full py-2.5 text-xs text-[#553954] hover:text-[#60315F] text-center font-semibold cursor-pointer"
                 >
-                  Continuar Comprando
+                  Continuar Escolhendo Peças
                 </button>
               </div>
             )}
