@@ -117,12 +117,17 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 </span>
               </div>
 
-              {/* Product Subtitle / Badge */}
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-[#60315F]/15">
-                <span className="text-xs font-semibold text-[#60315F] bg-[#FAF5F9] px-3 py-1.5 rounded-xl border border-[#60315F]/20 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
-                  Orçamento sob consulta · Atendimento exclusivo
-                </span>
+              {/* Product Description Highlight */}
+              <div className="mb-4 pb-4 border-b border-[#60315F]/15 space-y-2.5">
+                <p className="text-xs sm:text-sm text-[#553954] font-medium leading-relaxed bg-[#FAF5F9] p-3 rounded-xl border border-[#60315F]/15">
+                  {product.shortDescription}
+                </p>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-semibold text-[#60315F] flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+                    Orçamento sob consulta · Atendimento exclusivo
+                  </span>
+                </div>
               </div>
 
               {/* Color swatches */}
