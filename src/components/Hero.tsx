@@ -19,28 +19,28 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
       titlePart1: 'Moda que Respeita',
       titlePart2: 'o Seu Estilo',
       subtitle: 'Descubra peças femininas pensadas para valorizar a sua essência.',
-      modelImg: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80',
+      modelImg: '/products/vestido-viscolycra-9394.jpg',
     },
     {
       kicker: 'Rouvana Modas',
       titlePart1: 'Elegância Pura',
       titlePart2: 'Feita a Você',
       subtitle: 'Descubra peças femininas sofisticadas com modelagem impecável, do P ao G6.',
-      modelImg: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+      modelImg: '/products/vestido-viscolycra-9401.jpg',
     },
     {
       kicker: 'Rouvana Modas',
       titlePart1: 'Grade do P ao G6,',
       titlePart2: 'Voltado para Moda Mulher',
       subtitle: 'Modelagens exclusivas que abraçam e valorizam suas curvas com caimento impecável e elegância pura.',
-      modelImg: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80',
+      modelImg: '/products/vestido-viscolycra-9402.jpg',
     },
     {
       kicker: 'Rouvana Modas',
       titlePart1: 'Moda Noite & Casual',
       titlePart2: 'Beleza & Conforto',
       subtitle: 'Peças com corte impecável para acompanhar todos os seus momentos com estilo e bem-estar.',
-      modelImg: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80',
+      modelImg: '/products/pijama-canelado-101156.jpg',
     },
   ];
 

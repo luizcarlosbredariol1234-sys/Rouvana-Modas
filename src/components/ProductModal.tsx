@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Product, ProductColor } from '../types/catalog';
-import { X, Check, MessageCircle, ShoppingBag, Star, ShieldCheck, Feather, Info, Sparkles } from 'lucide-react';
+import { X, Check, MessageCircle, ShoppingBag, Star, ShieldCheck, Feather, Info, Sparkles, ArrowLeft } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 
 interface ProductModalProps {
@@ -22,6 +22,24 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   const [activeTab, setActiveTab] = useState<'detalhes' | 'cuidados'>('detalhes');
   const [addedNotice, setAddedNotice] = useState(false);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Prevent background scrolling while modal is open
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [onClose]);
+
   const handleWhatsAppInquiry = () => {
     const text = `Olá, Rouvana Modas! Gostaria de solicitar um orçamento para a peça "${product.name}", tamanho ${selectedSize} e cor ${selectedColor.name}.`;
     const url = `https://wa.me/${COMPANY_INFO.phoneClean}?text=${encodeURIComponent(text)}`;
@@ -36,14 +54,14 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs"
+          className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs cursor-pointer"
         />
 
         {/* Modal Window */}
@@ -52,16 +70,29 @@ export const ProductModal: React.FC<ProductModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.25, ease: 'easeOut' }}
-          className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-slate-100 z-10 p-6 sm:p-8"
+          className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-slate-100 z-10 p-5 sm:p-8"
         >
-          {/* Close button */}
-          <button
-            onClick={onClose}
-            aria-label="Fechar"
-            className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
-          >
-            <X className="w-6 h-6" />
-          </button>
+          {/* Top Sticky Bar: Botão Voltar & Fechar em Destaque */}
+          <div className="sticky -top-5 sm:-top-8 -mx-5 sm:-mx-8 px-5 sm:px-8 py-3 bg-white/95 backdrop-blur-md border-b border-slate-100 z-30 flex items-center justify-between mb-5 rounded-t-3xl shadow-2xs">
+            <button
+              type="button"
+              onClick={onClose}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF5F9] hover:bg-[#F5EDF4] text-[#60315F] font-bold text-xs sm:text-sm border border-[#60315F]/20 transition-all cursor-pointer shadow-xs active:scale-95"
+            >
+              <ArrowLeft className="w-4 h-4 text-[#60315F]" />
+              <span>← Voltar ao Catálogo</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Fechar"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs sm:text-sm transition-colors cursor-pointer"
+            >
+              <span>Fechar</span>
+              <X className="w-4 h-4 text-slate-700" />
+            </button>
+          </div>
 
           {/* Grid: Image on left + Details on right */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
@@ -260,21 +291,33 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               </div>
 
               {/* Action Buttons */}
-              <div className="mt-auto flex flex-col sm:flex-row gap-3 pt-3 border-t border-slate-100">
-                <button
-                  onClick={handleAdd}
-                  className="flex-1 py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#60315F] to-[#7A3D76] hover:from-[#4D254C] hover:to-[#60315F] text-[#FAF6EE] font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer transition-transform hover:scale-102"
-                >
-                  <ShoppingBag className="w-4 h-4 text-[#DFB77C]" />
-                  <span>{addedNotice ? 'Adicionado com Sucesso!' : 'Adicionar à Sacola'}</span>
-                </button>
+              <div className="mt-auto flex flex-col gap-3 pt-4 border-t border-slate-100">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <button
+                    onClick={handleAdd}
+                    className="flex-1 py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#60315F] to-[#7A3D76] hover:from-[#4D254C] hover:to-[#60315F] text-[#FAF6EE] font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer transition-transform hover:scale-102"
+                  >
+                    <ShoppingBag className="w-4 h-4 text-[#DFB77C]" />
+                    <span>{addedNotice ? 'Adicionado com Sucesso!' : 'Adicionar à Sacola'}</span>
+                  </button>
 
+                  <button
+                    onClick={handleWhatsAppInquiry}
+                    className="py-3.5 px-5 rounded-2xl bg-[#60315F] hover:bg-[#4D254C] text-[#FAF6EE] font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer transition-colors"
+                  >
+                    <MessageCircle className="w-4 h-4 text-emerald-400" />
+                    <span>Solicitar Orçamento no WhatsApp</span>
+                  </button>
+                </div>
+
+                {/* Botão Voltar Inferior */}
                 <button
-                  onClick={handleWhatsAppInquiry}
-                  className="py-3.5 px-5 rounded-2xl bg-[#60315F] hover:bg-[#4D254C] text-[#FAF6EE] font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer transition-colors"
+                  type="button"
+                  onClick={onClose}
+                  className="w-full py-3 px-5 rounded-2xl bg-[#FAF5F9] hover:bg-[#F5EDF4] text-[#60315F] border border-[#60315F]/20 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer transition-colors shadow-2xs active:scale-98"
                 >
-                  <MessageCircle className="w-4 h-4 text-emerald-400" />
-                  <span>Solicitar Orçamento no WhatsApp</span>
+                  <ArrowLeft className="w-4 h-4 text-[#60315F]" />
+                  <span>← Voltar e Continuar Vendo as Peças</span>
                 </button>
               </div>
             </div>
