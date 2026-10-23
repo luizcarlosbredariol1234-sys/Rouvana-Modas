@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { AnimatePresence } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ProductCatalog } from './components/ProductCatalog';
@@ -27,8 +28,8 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('todos');
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [wishlistIds, setWishlistIds] = useState<string[]>([
-    'vestido-verao-decote-v-lilas',
-    'pijama-americano-soft-confort',
+    'vestido-viscolycra-ref-9394',
+    'pijama-canelado-ref-101156',
   ]);
 
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -178,22 +179,35 @@ export default function App() {
         wishlistProducts={wishlistProducts}
         onRemoveFromWishlist={handleToggleWishlist}
         onAddToCart={(p) => handleAddToCart(p)}
-        onSelectProduct={(p) => setSelectedProduct(p)}
+        onSelectProduct={(p) => {
+          setIsWishlistOpen(false);
+          setSelectedProduct(p);
+        }}
       />
 
       {/* Search Modal */}
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
-        onSelectProduct={(p) => setSelectedProduct(p)}
+        onSelectProduct={(p) => {
+          setIsSearchOpen(false);
+          setSelectedProduct(p);
+        }}
       />
 
       {/* Product Detail Modal */}
-      <ProductModal
-        product={selectedProduct}
-        onClose={() => setSelectedProduct(null)}
-        onAddToCart={handleAddToCart}
-      />
+      <AnimatePresence>
+        {selectedProduct && (
+          <ProductModal
+            product={selectedProduct}
+            onClose={() => {
+              document.body.style.overflow = '';
+              setSelectedProduct(null);
+            }}
+            onAddToCart={handleAddToCart}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

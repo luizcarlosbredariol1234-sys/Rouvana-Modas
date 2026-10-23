@@ -104,7 +104,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     <img
                       src={item.product.image}
                       alt={item.product.name}
-                      className="w-16 h-20 object-cover rounded-xl bg-slate-50 border border-[#60315F]/15 shrink-0"
+                      className={`w-16 h-20 ${
+                        item.product.isLandscape || item.product.imageFit === 'contain'
+                          ? 'object-contain p-1 bg-white'
+                          : 'object-cover bg-slate-50'
+                      } rounded-xl border border-[#60315F]/15 shrink-0`}
                     />
                     <div className="flex-1 min-w-0">
                       <h4 className="text-xs font-bold text-[#331632] truncate">

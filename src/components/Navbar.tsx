@@ -42,11 +42,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'vestidos', label: 'Vestidos' },
     { id: 'pijamas', label: 'Pijamas' },
     { id: 'saias', label: 'Saias' },
-    { id: 'regatas', label: 'Regatas' },
-    { id: 'camisas_blusas', label: 'Camisas e Blusas' },
-    { id: 'pantalonas_calcas', label: 'Pantalonas e Calças' },
-    { id: 'bermudas', label: 'Bermudas' },
-    { id: 'lingerie', label: 'Lingerie' },
+    { id: 'camisas_blusas', label: 'Conjuntos e Blusas' },
   ];
 
   const handleScrollTo = (e: React.MouseEvent, id: string) => {

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { Product, ProductColor } from '../types/catalog';
 import { X, Check, MessageCircle, ShoppingBag, Star, ShieldCheck, Feather, Info, Sparkles, ArrowLeft } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 
 interface ProductModalProps {
-  product: Product | null;
+  product: Product;
   onClose: () => void;
   onAddToCart: (product: Product, size: string, color: ProductColor) => void;
 }
@@ -15,30 +15,38 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   onClose,
   onAddToCart,
 }) => {
-  if (!product) return null;
-
   const [selectedColor, setSelectedColor] = useState<ProductColor>(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0]);
   const [activeTab, setActiveTab] = useState<'detalhes' | 'cuidados'>('detalhes');
   const [addedNotice, setAddedNotice] = useState(false);
 
+  // Sync state if product changes
+  useEffect(() => {
+    setSelectedColor(product.colors[0]);
+    setSelectedSize(product.sizes[0]);
+  }, [product]);
+
+  const handleClose = () => {
+    document.body.style.overflow = '';
+    onClose();
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        handleClose();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
 
     // Prevent background scrolling while modal is open
-    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = prevOverflow;
+      document.body.style.overflow = '';
     };
-  }, [onClose]);
+  }, []);
 
   const handleWhatsAppInquiry = () => {
     const text = `Olá, Rouvana Modas! Gostaria de solicitar um orçamento para a peça "${product.name}", tamanho ${selectedSize} e cor ${selectedColor.name}.`;
@@ -52,80 +60,93 @@ export const ProductModal: React.FC<ProductModalProps> = ({
     setTimeout(() => setAddedNotice(false), 2000);
   };
 
+  const isLandscape = product.isLandscape || product.imageFit === 'contain';
+
   return (
-    <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
-        {/* Backdrop */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-          className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs cursor-pointer"
-        />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+    >
+      {/* Backdrop */}
+      <div
+        onClick={handleClose}
+        className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs cursor-pointer"
+      />
 
-        {/* Modal Window */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ duration: 0.25, ease: 'easeOut' }}
-          className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-slate-100 z-10 p-5 sm:p-8"
-        >
-          {/* Top Sticky Bar: Botão Voltar & Fechar em Destaque */}
-          <div className="sticky -top-5 sm:-top-8 -mx-5 sm:-mx-8 px-5 sm:px-8 py-3 bg-white/95 backdrop-blur-md border-b border-slate-100 z-30 flex items-center justify-between mb-5 rounded-t-3xl shadow-2xs">
-            <button
-              type="button"
-              onClick={onClose}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF5F9] hover:bg-[#F5EDF4] text-[#60315F] font-bold text-xs sm:text-sm border border-[#60315F]/20 transition-all cursor-pointer shadow-xs active:scale-95"
-            >
-              <ArrowLeft className="w-4 h-4 text-[#60315F]" />
-              <span>← Voltar ao Catálogo</span>
-            </button>
+      {/* Modal Window */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ duration: 0.25, ease: 'easeOut' }}
+        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-slate-100 z-10 p-5 sm:p-8"
+      >
+        {/* Top Sticky Bar: Botão Voltar & Fechar em Destaque */}
+        <div className="sticky -top-5 sm:-top-8 -mx-5 sm:-mx-8 px-5 sm:px-8 py-3 bg-white/95 backdrop-blur-md border-b border-slate-100 z-30 flex items-center justify-between mb-5 rounded-t-3xl shadow-2xs">
+          <button
+            type="button"
+            onClick={handleClose}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF5F9] hover:bg-[#F5EDF4] text-[#60315F] font-bold text-xs sm:text-sm border border-[#60315F]/20 transition-all cursor-pointer shadow-xs active:scale-95"
+          >
+            <ArrowLeft className="w-4 h-4 text-[#60315F]" />
+            <span>← Voltar ao Catálogo</span>
+          </button>
 
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Fechar"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs sm:text-sm transition-colors cursor-pointer"
-            >
-              <span>Fechar</span>
-              <X className="w-4 h-4 text-slate-700" />
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={handleClose}
+            aria-label="Fechar"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs sm:text-sm transition-colors cursor-pointer"
+          >
+            <span>Fechar</span>
+            <X className="w-4 h-4 text-slate-700" />
+          </button>
+        </div>
 
-          {/* Grid: Image on left + Details on right */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-            {/* Left: Product Image */}
-            <div className="md:col-span-5 flex flex-col gap-3">
-              <div className="relative aspect-3/4 rounded-2xl overflow-hidden bg-slate-50 border border-[#60315F]/15 shadow-sm">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover object-top"
-                />
-                {product.discount && (
-                  <span className="absolute top-3 left-3 bg-[#60315F] text-[#FAF6EE] text-xs font-black px-2.5 py-1 rounded-full shadow-sm">
-                    {product.discount}
-                  </span>
-                )}
-              </div>
-
-              {/* Trust micro badges */}
-              <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-600">
-                <div className="flex items-center gap-1.5 p-2 rounded-xl bg-[#F5EDF4] text-[#60315F] font-medium border border-[#60315F]/15">
-                  <Feather className="w-3.5 h-3.5 text-[#60315F] shrink-0" />
-                  <span>100% Conforto</span>
-                </div>
-                <div className="flex items-center gap-1.5 p-2 rounded-xl bg-[#FAF4EB] text-[#7A4B1A] font-medium border border-[#DEC295]/30">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#7A4B1A] shrink-0" />
-                  <span>Troca em 30 Dias</span>
-                </div>
-              </div>
+        {/* Grid: Image on left + Details on right */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          {/* Left: Product Image */}
+          <div className={`${isLandscape ? 'md:col-span-6' : 'md:col-span-5'} flex flex-col gap-3`}>
+            <div className={`relative ${isLandscape ? 'aspect-4/3' : 'aspect-3/4'} rounded-2xl overflow-hidden ${isLandscape ? 'bg-[#F9F6F0]' : 'bg-slate-50'} border border-[#60315F]/15 shadow-sm flex items-center justify-center`}>
+              <img
+                src={product.image}
+                alt={product.name}
+                className={`w-full h-full ${isLandscape ? 'object-contain p-2' : 'object-cover object-top'}`}
+              />
+              {product.discount && (
+                <span className="absolute top-3 left-3 bg-[#60315F] text-[#FAF6EE] text-xs font-black px-2.5 py-1 rounded-full shadow-sm">
+                  {product.discount}
+                </span>
+              )}
             </div>
 
-            {/* Right: Info */}
-            <div className="md:col-span-7 flex flex-col">
+            {isLandscape && (
+              <div className="p-2.5 rounded-xl bg-[#FAF5F9] border border-[#60315F]/15 text-center">
+                <span className="text-[11px] font-semibold text-[#60315F] flex items-center justify-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+                  Enquadramento completo exibindo ambas as modelos
+                </span>
+              </div>
+            )}
+
+            {/* Trust micro badges */}
+            <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-600">
+              <div className="flex items-center gap-1.5 p-2 rounded-xl bg-[#F5EDF4] text-[#60315F] font-medium border border-[#60315F]/15">
+                <Feather className="w-3.5 h-3.5 text-[#60315F] shrink-0" />
+                <span>100% Conforto</span>
+              </div>
+              <div className="flex items-center gap-1.5 p-2 rounded-xl bg-[#FAF4EB] text-[#7A4B1A] font-medium border border-[#DEC295]/30">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#7A4B1A] shrink-0" />
+                <span>Troca em 30 Dias</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Info */}
+          <div className={`${isLandscape ? 'md:col-span-6' : 'md:col-span-7'} flex flex-col`}>
               <div className="flex items-center gap-2 text-xs font-bold text-[#60315F] uppercase mb-1">
                 <span>{product.categoryLabel}</span>
                 <span className="text-slate-300">·</span>
@@ -313,7 +334,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 {/* Botão Voltar Inferior */}
                 <button
                   type="button"
-                  onClick={onClose}
+                  onClick={handleClose}
                   className="w-full py-3 px-5 rounded-2xl bg-[#FAF5F9] hover:bg-[#F5EDF4] text-[#60315F] border border-[#60315F]/20 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer transition-colors shadow-2xs active:scale-98"
                 >
                   <ArrowLeft className="w-4 h-4 text-[#60315F]" />
@@ -323,7 +344,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             </div>
           </div>
         </motion.div>
-      </div>
-    </AnimatePresence>
+      </motion.div>
   );
 };

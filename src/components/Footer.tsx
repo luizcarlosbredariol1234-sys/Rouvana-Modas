@@ -26,11 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
     { id: 'vestidos' as ProductCategory, label: 'Vestidos' },
     { id: 'pijamas' as ProductCategory, label: 'Pijamas' },
     { id: 'saias' as ProductCategory, label: 'Saias' },
-    { id: 'regatas' as ProductCategory, label: 'Regatas' },
-    { id: 'camisas_blusas' as ProductCategory, label: 'Camisas e Blusas' },
-    { id: 'pantalonas_calcas' as ProductCategory, label: 'Pantalonas e Calças' },
-    { id: 'bermudas' as ProductCategory, label: 'Bermudas' },
-    { id: 'lingerie' as ProductCategory, label: 'Lingerie' },
+    { id: 'camisas_blusas' as ProductCategory, label: 'Conjuntos e Blusas' },
   ];
 
   return (

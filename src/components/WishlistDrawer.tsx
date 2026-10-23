@@ -86,7 +86,11 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                         onSelectProduct(product);
                         onClose();
                       }}
-                      className="w-16 h-20 object-cover rounded-xl bg-slate-50 border border-[#60315F]/15 shrink-0 cursor-pointer"
+                      className={`w-16 h-20 ${
+                        product.isLandscape || product.imageFit === 'contain'
+                          ? 'object-contain p-1 bg-white'
+                          : 'object-cover bg-slate-50'
+                      } rounded-xl border border-[#60315F]/15 shrink-0 cursor-pointer`}
                     />
                     <div className="flex-1 min-w-0">
                       <h4

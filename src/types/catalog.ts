@@ -37,6 +37,8 @@ export interface Product {
   fit?: string;
   touch?: string;
   image: string;
+  imageFit?: 'contain' | 'cover';
+  isLandscape?: boolean;
   price: number;
   originalPrice?: number;
   discount?: string;

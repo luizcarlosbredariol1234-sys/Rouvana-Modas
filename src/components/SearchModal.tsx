@@ -117,7 +117,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-12 h-14 object-cover rounded-xl bg-slate-100 shrink-0 border border-[#60315F]/15"
+                      className={`w-12 h-14 ${
+                        product.isLandscape || product.imageFit === 'contain'
+                          ? 'object-contain p-1 bg-white'
+                          : 'object-cover bg-slate-100'
+                      } rounded-xl shrink-0 border border-[#60315F]/15`}
                     />
                     <div className="flex-1 min-w-0">
                       <h4 className="text-sm font-bold text-[#331632] truncate">

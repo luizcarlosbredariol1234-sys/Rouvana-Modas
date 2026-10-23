@@ -212,7 +212,11 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                   {/* Product Image */}
                   <div
                     onClick={() => onSelectProduct(product)}
-                    className="relative aspect-3/4 mb-3 rounded-xl overflow-hidden bg-slate-50 flex items-center justify-center cursor-pointer border border-[#60315F]/10"
+                    className={`relative aspect-3/4 mb-3 rounded-xl overflow-hidden ${
+                      product.isLandscape || product.imageFit === 'contain'
+                        ? 'bg-[#F9F6F0]'
+                        : 'bg-slate-50'
+                    } flex items-center justify-center cursor-pointer border border-[#60315F]/10`}
                   >
                     {product.badge && (
                       <div className="absolute top-2 left-2 z-10 bg-[#60315F] text-[#FAF6EE] text-[9px] font-black px-2 py-0.5 rounded-full shadow-md border border-[#DFB77C]/60 flex items-center gap-1">
@@ -224,7 +228,11 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      className={`w-full h-full ${
+                        product.isLandscape || product.imageFit === 'contain'
+                          ? 'object-contain p-1.5'
+                          : 'object-cover object-top'
+                      } group-hover:scale-105 transition-transform duration-500`}
                     />
 
                     {/* Hover Quick Action Overlay */}
