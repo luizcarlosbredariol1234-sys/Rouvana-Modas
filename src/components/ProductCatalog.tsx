@@ -58,7 +58,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
     return PRODUCTS_DATA.filter((p) => {
       // 1. Category filter
       if (currentCategory !== 'todos') {
-        if (p.category !== currentCategory) return false;
+        if (p.category !== currentCategory && p.secondaryCategory !== currentCategory) return false;
       }
 
       // 2. Tab filter

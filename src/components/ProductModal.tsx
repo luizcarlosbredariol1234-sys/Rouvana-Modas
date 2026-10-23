@@ -171,7 +171,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
               {/* Product Description Highlight */}
               <div className="mb-4 pb-4 border-b border-[#60315F]/15 space-y-2.5">
-                <p className="text-xs sm:text-sm text-[#553954] font-medium leading-relaxed bg-[#FAF5F9] p-3 rounded-xl border border-[#60315F]/15">
+                <p className="text-xs sm:text-sm text-[#553954] font-medium leading-relaxed bg-[#FAF5F9] p-3 rounded-xl border border-[#60315F]/15 whitespace-pre-line">
                   {product.shortDescription}
                 </p>
                 <div className="flex items-center gap-2">
@@ -290,7 +290,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               <div className="mb-6 min-h-[100px] text-xs text-slate-600">
                 {activeTab === 'detalhes' && (
                   <div className="space-y-2">
-                    <p className="leading-relaxed text-[#553954]">
+                    <p className="leading-relaxed text-[#553954] whitespace-pre-line">
                       {product.fullDescription}
                     </p>
                     <p className="font-semibold text-[#331632]">

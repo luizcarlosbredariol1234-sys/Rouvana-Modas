@@ -29,6 +29,7 @@ export interface Product {
   id: string;
   name: string;
   category: ProductCategory;
+  secondaryCategory?: ProductCategory;
   categoryLabel: string;
   fiberHighlight: string;
   composition: string;
