@@ -123,14 +123,21 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               )}
             </div>
 
-            {isLandscape && (
+            {product.id.includes('pijama-regata-bolinhas') ? (
               <div className="p-2.5 rounded-xl bg-[#FAF5F9] border border-[#60315F]/15 text-center">
                 <span className="text-[11px] font-semibold text-[#60315F] flex items-center justify-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
                   Enquadramento completo exibindo ambas as modelos
                 </span>
               </div>
-            )}
+            ) : isLandscape ? (
+              <div className="p-2.5 rounded-xl bg-[#FAF5F9] border border-[#60315F]/15 text-center">
+                <span className="text-[11px] font-semibold text-[#60315F] flex items-center justify-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+                  Foto original completa e bem focada sem cortes
+                </span>
+              </div>
+            ) : null}
 
             {/* Trust micro badges */}
             <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-600">

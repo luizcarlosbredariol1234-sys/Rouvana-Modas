@@ -27,6 +27,8 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
     { id: 'pijamas' as ProductCategory, label: 'Pijamas' },
     { id: 'saias' as ProductCategory, label: 'Saias' },
     { id: 'camisas_blusas' as ProductCategory, label: 'Conjuntos e Blusas' },
+    { id: 'pantalonas_calcas' as ProductCategory, label: 'Calças' },
+    { id: 'bermudas' as ProductCategory, label: 'Bermudas' },
   ];
 
   return (
