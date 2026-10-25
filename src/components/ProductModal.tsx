@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Product, ProductColor } from '../types/catalog';
-import { X, MessageCircle, ShoppingBag, ShieldCheck, Feather, Info, Sparkles, ArrowLeft } from 'lucide-react';
+import {
+  X,
+  MessageCircle,
+  ShoppingBag,
+  ShieldCheck,
+  Feather,
+  Info,
+  Sparkles,
+  ArrowLeft,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
+} from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 
 interface ProductModalProps {
@@ -19,10 +31,24 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0]);
   const [addedNotice, setAddedNotice] = useState(false);
 
+  // Hover zoom lens state
+  const [isHoveringZoom, setIsHoveringZoom] = useState(false);
+  const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
+
+  // Fullscreen high-resolution zoom lightbox state
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxScale, setLightboxScale] = useState(1);
+  const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+
   // Sync state if product changes
   useEffect(() => {
     setSelectedColor(product.colors[0]);
     setSelectedSize(product.sizes[0]);
+    setIsLightboxOpen(false);
+    setLightboxScale(1);
+    setPanOffset({ x: 0, y: 0 });
   }, [product]);
 
   const handleClose = () => {
@@ -33,7 +59,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        handleClose();
+        if (isLightboxOpen) {
+          setIsLightboxOpen(false);
+          setLightboxScale(1);
+          setPanOffset({ x: 0, y: 0 });
+        } else {
+          handleClose();
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -45,7 +77,52 @@ export const ProductModal: React.FC<ProductModalProps> = ({
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
-  }, []);
+  }, [isLightboxOpen]);
+
+  const handleImageMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+    const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+    setZoomOrigin({ x, y });
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (lightboxScale > 1) {
+      e.preventDefault();
+      setIsDragging(true);
+      setDragStart({ x: e.clientX - panOffset.x, y: e.clientY - panOffset.y });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && lightboxScale > 1) {
+      e.preventDefault();
+      setPanOffset({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (lightboxScale > 1 && e.touches.length === 1) {
+      setIsDragging(true);
+      setDragStart({
+        x: e.touches[0].clientX - panOffset.x,
+        y: e.touches[0].clientY - panOffset.y,
+      });
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (isDragging && lightboxScale > 1 && e.touches.length === 1) {
+      setPanOffset({
+        x: e.touches[0].clientX - dragStart.x,
+        y: e.touches[0].clientY - dragStart.y,
+      });
+    }
+  };
 
   const handleWhatsAppInquiry = () => {
     const text = `Olá, Rouvana Modas! Gostaria de solicitar um orçamento para a peça "${product.name}", tamanho ${selectedSize} e cor ${selectedColor.name}.`;
@@ -109,17 +186,23 @@ export const ProductModal: React.FC<ProductModalProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           {/* Left: Product Image */}
           <div className={`${isLandscape ? 'md:col-span-6' : 'md:col-span-5'} flex flex-col gap-3`}>
-            <div className={`relative ${isLandscape ? 'aspect-4/3' : 'aspect-3/4'} rounded-2xl overflow-hidden ${isLandscape ? 'bg-[#F9F6F0]' : 'bg-slate-50'} border border-[#60315F]/15 shadow-sm flex items-center justify-center`}>
+            <div
+              onMouseEnter={() => setIsHoveringZoom(true)}
+              onMouseMove={handleImageMouseMove}
+              onMouseLeave={() => setIsHoveringZoom(false)}
+              onClick={() => setIsLightboxOpen(true)}
+              className={`relative ${isLandscape ? 'aspect-4/3' : 'aspect-3/4'} rounded-2xl overflow-hidden ${isLandscape ? 'bg-[#F9F6F0]' : 'bg-slate-50'} border border-[#60315F]/15 shadow-sm flex items-center justify-center cursor-zoom-in group select-none`}
+            >
               <img
                 src={product.image}
                 alt={product.name}
-                className={`w-full h-full ${isLandscape ? 'object-contain p-2' : 'object-cover object-top'}`}
+                style={{
+                  transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`,
+                  transform: isHoveringZoom ? 'scale(2.2)' : 'scale(1)',
+                  transition: isHoveringZoom ? 'transform 0.08s ease-out' : 'transform 0.3s ease-out',
+                }}
+                className={`w-full h-full ${isLandscape ? 'object-contain p-2' : 'object-cover object-top'} pointer-events-none`}
               />
-              {product.discount && (
-                <span className="absolute top-3 left-3 bg-[#60315F] text-[#FAF6EE] text-xs font-black px-2.5 py-1 rounded-full shadow-sm">
-                  {product.discount}
-                </span>
-              )}
             </div>
 
             {product.id.includes('pijama-regata-bolinhas') && (
@@ -295,6 +378,143 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             </div>
           </div>
         </motion.div>
+
+        {/* Full-Screen High-Resolution Zoom Lightbox */}
+        <AnimatePresence>
+          {isLightboxOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => {
+                setIsLightboxOpen(false);
+                setLightboxScale(1);
+                setPanOffset({ x: 0, y: 0 });
+              }}
+              className="fixed inset-0 z-60 bg-black/95 backdrop-blur-md flex flex-col p-3 sm:p-6 select-none"
+            >
+              {/* Top Control Bar */}
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="flex items-center justify-between gap-3 pb-3 border-b border-white/10 shrink-0 text-white"
+              >
+                <div className="min-w-0 pr-2">
+                  <span className="text-[11px] font-bold text-[#DFB77C] uppercase tracking-wider block">
+                    Modo Detalhes em Alta Definição
+                  </span>
+                  <h3 className="text-sm sm:text-base font-bold truncate text-white">
+                    {product.name}
+                  </h3>
+                </div>
+
+                {/* Zoom Controls */}
+                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                  <button
+                    type="button"
+                    disabled={lightboxScale <= 1}
+                    onClick={() => setLightboxScale((s) => Math.max(1, +(s - 0.5).toFixed(1)))}
+                    title="Diminuir Zoom"
+                    className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-40 disabled:hover:bg-white/10 flex items-center justify-center transition-colors cursor-pointer text-white"
+                  >
+                    <ZoomOut className="w-4 h-4" />
+                  </button>
+
+                  <span className="px-2.5 py-1 rounded-full bg-white/15 text-xs font-bold text-[#DFB77C] min-w-[52px] text-center">
+                    {Math.round(lightboxScale * 100)}%
+                  </span>
+
+                  <button
+                    type="button"
+                    disabled={lightboxScale >= 4}
+                    onClick={() => setLightboxScale((s) => Math.min(4, +(s + 0.5).toFixed(1)))}
+                    title="Aumentar Zoom"
+                    className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-40 disabled:hover:bg-white/10 flex items-center justify-center transition-colors cursor-pointer text-white"
+                  >
+                    <ZoomIn className="w-4 h-4" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLightboxScale(1);
+                      setPanOffset({ x: 0, y: 0 });
+                    }}
+                    title="Redefinir Zoom (100%)"
+                    className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors cursor-pointer text-white"
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsLightboxOpen(false);
+                      setLightboxScale(1);
+                      setPanOffset({ x: 0, y: 0 });
+                    }}
+                    title="Fechar Zoom"
+                    className="ml-2 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm transition-colors cursor-pointer active:scale-95"
+                  >
+                    <span>Fechar</span>
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Centered Zoom Canvas Area */}
+              <div
+                onClick={(e) => e.stopPropagation()}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={() => setIsDragging(false)}
+                onWheel={(e) => {
+                  e.preventDefault();
+                  const delta = e.deltaY < 0 ? 0.3 : -0.3;
+                  setLightboxScale((s) => Math.min(4, Math.max(1, +(s + delta).toFixed(1))));
+                }}
+                onDoubleClick={() => {
+                  if (lightboxScale > 1) {
+                    setLightboxScale(1);
+                    setPanOffset({ x: 0, y: 0 });
+                  } else {
+                    setLightboxScale(2.5);
+                  }
+                }}
+                className={`flex-1 overflow-hidden flex items-center justify-center relative ${
+                  lightboxScale > 1 ? (isDragging ? 'cursor-grabbing' : 'cursor-grab') : 'cursor-zoom-in'
+                }`}
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  draggable={false}
+                  style={{
+                    transform: `scale(${lightboxScale}) translate(${panOffset.x / lightboxScale}px, ${panOffset.y / lightboxScale}px)`,
+                    transition: isDragging ? 'none' : 'transform 0.15s ease-out',
+                    maxWidth: '85vw',
+                    maxHeight: '75vh',
+                    objectFit: 'contain',
+                  }}
+                  className="select-none pointer-events-auto rounded-xl shadow-2xl"
+                />
+              </div>
+
+              {/* Bottom Instruction Bar */}
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="pt-2 text-center text-xs text-white/70 shrink-0 flex items-center justify-center gap-2"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+                <span>Duplo clique ou use o scroll para aproximar/afastar · Arraste para inspecionar os detalhes do tecido e acabamento</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
   );
 };

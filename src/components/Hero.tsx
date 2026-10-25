@@ -10,38 +10,88 @@ interface HeroProps {
   onSelectCategory?: (category: ProductCategory) => void;
 }
 
+const ALL_HERO_PHOTOS = [
+  '/products/vestido-viscolycra-9394.jpg',
+  '/products/vestido-viscolycra-9401.jpg',
+  '/products/vestido-viscolycra-9402.jpg',
+  '/products/vestido-viscolycra-9405.jpg',
+  '/products/vestido-viscolycra-9406.jpg',
+  '/products/vestido-viscolycra-8655.jpg',
+  '/products/vestido-viscolycra-8679.jpg',
+  '/products/vestido-viscolycra-33525.jpg',
+  '/products/vestido-viscolycra-408.jpg',
+  '/products/vestido-malha-23279.jpg',
+  '/products/vestido-malha-486.jpg',
+  '/products/vestido-malha-133.jpg',
+  '/products/vestido-malha-150.jpg',
+  '/products/vestido-alca-malha-e15747.jpg',
+  '/products/vestido-malha-6170365-cores.jpg',
+  '/products/vestido-midi-malha-6170365.jpg',
+  '/products/vestido-malha-vicenza-8336.jpg',
+  '/products/vestido-malha-vicenza-8474.jpg',
+  '/products/vestido-malha-vicenza-8661.jpg',
+  '/products/vestido-malha-vicenza-8667.jpg',
+  '/products/vestido-malha-vicenza-9404.jpg',
+  '/products/look-calca-linho-12592-blusa-so1913.jpg',
+  '/products/look-bermuda-sarja-0400-blusa-6173705.jpg',
+  '/products/look-blusa-01527-calca-pantalona-01507.jpg',
+  '/products/look-blusa-3018-calca-moletinho-1090.jpg',
+  '/products/look-regata-3016-calca-jeans-1504.jpg',
+  '/products/conjunto-canelado-2626052.jpg',
+  '/products/conjunto-shorts-2915491.jpg',
+  '/products/dupla-conjunto-c159-vestido-150.jpg',
+  '/products/saia-midi-5028.jpg',
+  '/products/saia-midi-alfaiataria-7714.jpg',
+  '/products/calca-jeans-0351.jpg',
+  '/products/pijama-canelado-101156.jpg',
+  '/products/pijama-malha-canelada-101155.jpg',
+  '/products/pijama-regata-bolinhas-100052.jpg',
+  '/products/pijama-short-dow-101033.jpg',
+  '/products/blusa-liganete-20053.jpg',
+  '/products/blusa-tshirt-6177975.jpg',
+  '/products/regata-feminina-3016.jpg',
+  '/products/regata-viscolycra-3016.jpg',
+];
+
+function shuffleArray<T>(arr: T[]): T[] {
+  const result = [...arr];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
 export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, onSelectCategory }) => {
-  const modelImages = [
-    '/products/vestido-viscolycra-9394.jpg',
-    '/products/vestido-viscolycra-9401.jpg',
-    '/products/vestido-viscolycra-9402.jpg',
-    '/products/pijama-canelado-101156.jpg',
-    '/products/look-calca-linho-12592-blusa-so1913.jpg',
-    '/products/vestido-viscolycra-33525.jpg',
-    '/products/vestido-malha-23279.jpg',
-    '/products/vestido-malha-6170365-cores.jpg',
-  ];
+  // Randomized non-repeating queue so every photo plays before any repetition
+  const [playlist, setPlaylist] = useState<string[]>(() => shuffleArray(ALL_HERO_PHOTOS));
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const [activeImageIndex, setActiveImageIndex] = useState(() =>
-    Math.floor(Math.random() * modelImages.length)
-  );
-
-  // Random automatic rotation of ONLY the model photos in the top banner
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveImageIndex((prev) => {
-        const available = modelImages
-          .map((_, i) => i)
-          .filter((i) => i !== prev);
-        const randomIndex = available[Math.floor(Math.random() * available.length)];
-        return randomIndex;
+      setCurrentIndex((prevIndex) => {
+        const next = prevIndex + 1;
+        if (next >= playlist.length) {
+          // Reshuffle for the next cycle
+          setPlaylist((prevList) => {
+            const lastItem = prevList[prevList.length - 1];
+            const newList = shuffleArray(ALL_HERO_PHOTOS);
+            if (newList[0] === lastItem && newList.length > 1) {
+              const swapIdx = Math.floor(Math.random() * (newList.length - 1)) + 1;
+              [newList[0], newList[swapIdx]] = [newList[swapIdx], newList[0]];
+            }
+            return newList;
+          });
+          return 0;
+        }
+        return next;
       });
-    }, 4000); // changes photo every 4 seconds randomly
+    }, 3500); // rotates every 3.5 seconds
 
     return () => clearInterval(interval);
-  }, [modelImages.length]);
+  }, [playlist.length]);
 
-  const currentModelImg = modelImages[activeImageIndex];
+  const currentModelImg = playlist[currentIndex] || ALL_HERO_PHOTOS[0];
 
   const handleCardClick = (catId: ProductCategory) => {
     if (onSelectCategory) {
