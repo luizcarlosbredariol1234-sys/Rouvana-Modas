@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Product, ProductColor } from '../types/catalog';
-import { X, Check, MessageCircle, ShoppingBag, Star, ShieldCheck, Feather, Info, Sparkles, ArrowLeft } from 'lucide-react';
+import { X, MessageCircle, ShoppingBag, ShieldCheck, Feather, Info, Sparkles, ArrowLeft } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
 
 interface ProductModalProps {
@@ -17,7 +17,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 }) => {
   const [selectedColor, setSelectedColor] = useState<ProductColor>(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0]);
-  const [activeTab, setActiveTab] = useState<'detalhes' | 'cuidados'>('detalhes');
   const [addedNotice, setAddedNotice] = useState(false);
 
   // Sync state if product changes
@@ -123,21 +122,14 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               )}
             </div>
 
-            {product.id.includes('pijama-regata-bolinhas') ? (
+            {product.id.includes('pijama-regata-bolinhas') && (
               <div className="p-2.5 rounded-xl bg-[#FAF5F9] border border-[#60315F]/15 text-center">
                 <span className="text-[11px] font-semibold text-[#60315F] flex items-center justify-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
                   Enquadramento completo exibindo ambas as modelos
                 </span>
               </div>
-            ) : isLandscape ? (
-              <div className="p-2.5 rounded-xl bg-[#FAF5F9] border border-[#60315F]/15 text-center">
-                <span className="text-[11px] font-semibold text-[#60315F] flex items-center justify-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
-                  Foto original completa e bem focada sem cortes
-                </span>
-              </div>
-            ) : null}
+            )}
 
             {/* Trust micro badges */}
             <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-600">
@@ -160,21 +152,9 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 <span className="text-slate-500 font-normal">{product.fiberHighlight}</span>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-display font-bold text-[#331632] mb-2">
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-[#331632] mb-3">
                 {product.name}
               </h2>
-
-              {/* Rating */}
-              <div className="flex items-center gap-1.5 mb-3">
-                <div className="flex text-[#DFB77C]">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-[#DFB77C]" />
-                  ))}
-                </div>
-                <span className="text-xs text-slate-500 font-medium">
-                  ({product.reviewsCount} avaliações de clientes)
-                </span>
-              </div>
 
               {/* Product Description Highlight */}
               <div className="mb-4 pb-4 border-b border-[#60315F]/15 space-y-2.5">
@@ -269,53 +249,17 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
               </div>
 
-              {/* Tabs */}
-              <div className="flex border-b border-[#60315F]/15 mb-4 gap-4 text-xs font-bold">
-                <button
-                  onClick={() => setActiveTab('detalhes')}
-                  className={`pb-2.5 transition-colors cursor-pointer ${
-                    activeTab === 'detalhes'
-                      ? 'text-[#60315F] border-b-2 border-[#60315F]'
-                      : 'text-slate-500 hover:text-[#60315F]'
-                  }`}
-                >
-                  Descrição & Tecido
-                </button>
-                <button
-                  onClick={() => setActiveTab('cuidados')}
-                  className={`pb-2.5 transition-colors cursor-pointer ${
-                    activeTab === 'cuidados'
-                      ? 'text-[#60315F] border-b-2 border-[#60315F]'
-                      : 'text-slate-500 hover:text-[#60315F]'
-                  }`}
-                >
-                  Cuidados
-                </button>
-              </div>
-
-              {/* Tab Content */}
-              <div className="mb-6 min-h-[100px] text-xs text-slate-600">
-                {activeTab === 'detalhes' && (
-                  <div className="space-y-2">
-                    <p className="leading-relaxed text-[#553954] whitespace-pre-line">
-                      {product.fullDescription}
-                    </p>
-                    <p className="font-semibold text-[#331632]">
-                      Composição: {product.composition}
-                    </p>
-                  </div>
-                )}
-
-                {activeTab === 'cuidados' && (
-                  <ul className="space-y-1.5">
-                    {product.careGuide.map((c, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                        <span>{c}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+              {/* Product Details & Composition */}
+              <div className="mb-6 space-y-2 text-xs text-slate-600 border-t border-[#60315F]/15 pt-4">
+                <span className="block text-xs font-bold uppercase tracking-wider text-[#60315F]">
+                  Descrição & Detalhes da Peça
+                </span>
+                <p className="leading-relaxed text-[#553954] whitespace-pre-line text-xs sm:text-sm">
+                  {product.fullDescription}
+                </p>
+                <p className="font-semibold text-[#331632] pt-1">
+                  Composição: {product.composition}
+                </p>
               </div>
 
               {/* Action Buttons */}

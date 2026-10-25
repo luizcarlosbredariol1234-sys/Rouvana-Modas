@@ -40,7 +40,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G3', busto: '138 cm', cintura: '120 cm', quadril: '148 cm', comprimento: '137 cm' },
       { size: 'G4', busto: '146 cm', cintura: '128 cm', quadril: '156 cm', comprimento: '138 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -83,7 +82,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G5', busto: '154 cm', cintura: '136 cm', quadril: '164 cm', comprimento: '116 cm' },
       { size: 'G6', busto: '162 cm', cintura: '144 cm', quadril: '172 cm', comprimento: '118 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -126,7 +124,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G5', busto: '154 cm', cintura: '136 cm', quadril: '164 cm', comprimento: '116 cm' },
       { size: 'G6', busto: '162 cm', cintura: '144 cm', quadril: '172 cm', comprimento: '118 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -167,7 +164,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G3', busto: '138 cm', cintura: '120 cm', quadril: '148 cm', comprimento: '114 cm' },
       { size: 'G4', busto: '146 cm', cintura: '128 cm', quadril: '156 cm', comprimento: '116 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -207,7 +203,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '106 cm', cintura: '88 cm', quadril: '116 cm', comprimento: '100 cm' },
       { size: 'GG', busto: '114 cm', cintura: '96 cm', quadril: '124 cm', comprimento: '102 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -247,7 +242,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '106 cm', cintura: '88 cm', quadril: '116 cm', comprimento: '100 cm' },
       { size: 'GG', busto: '114 cm', cintura: '96 cm', quadril: '124 cm', comprimento: '102 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -286,7 +280,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G1', busto: '122 cm', cintura: '104 cm', quadril: '132 cm', comprimento: '106 cm' },
       { size: 'G2', busto: '130 cm', cintura: '112 cm', quadril: '140 cm', comprimento: '108 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -326,7 +319,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '106 cm', cintura: '88 cm', quadril: '116 cm', comprimento: '104 cm' },
       { size: 'GG', busto: '114 cm', cintura: '96 cm', quadril: '124 cm', comprimento: '106 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -366,7 +358,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '106 cm', cintura: '88 cm', quadril: '116 cm', comprimento: '108 cm' },
       { size: 'GG', busto: '114 cm', cintura: '96 cm', quadril: '124 cm', comprimento: '110 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -407,7 +398,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G3', busto: '138 cm', cintura: '120 cm', quadril: '148 cm', comprimento: '112 cm' },
       { size: 'G4', busto: '146 cm', cintura: '128 cm', quadril: '156 cm', comprimento: '114 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -447,7 +437,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'M', busto: '98 cm', cintura: '80 cm', quadril: '108 cm', comprimento: '98 cm' },
       { size: 'G', busto: '106 cm', cintura: '88 cm', quadril: '116 cm', comprimento: '100 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -487,7 +476,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'M', busto: '98 cm', cintura: '80 cm', quadril: '108 cm', comprimento: '96 cm' },
       { size: 'G', busto: '106 cm', cintura: '88 cm', quadril: '116 cm', comprimento: '98 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
 
@@ -531,7 +519,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'X1', busto: '124 cm', cintura: '106 cm', quadril: '134 cm', comprimento: '64 cm' },
       { size: 'X2', busto: '132 cm', cintura: '114 cm', quadril: '142 cm', comprimento: '66 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -573,7 +560,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G2', busto: '130 cm', cintura: '112 cm', quadril: '140 cm', comprimento: '66 cm' },
       { size: 'G3', busto: '138 cm', cintura: '120 cm', quadril: '148 cm', comprimento: '68 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -613,7 +599,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '106 cm', cintura: '88 cm', quadril: '116 cm', comprimento: '64 cm' },
       { size: 'GG', busto: '114 cm', cintura: '96 cm', quadril: '124 cm', comprimento: '66 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -653,7 +638,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '106 cm', cintura: '88 cm', quadril: '116 cm', comprimento: '64 cm' },
       { size: 'GG', busto: '114 cm', cintura: '96 cm', quadril: '124 cm', comprimento: '66 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -695,7 +679,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'X2', busto: '132 cm', cintura: '114 cm', quadril: '142 cm', comprimento: '66 cm' },
       { size: 'X3', busto: '140 cm', cintura: '122 cm', quadril: '150 cm', comprimento: '68 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -735,7 +718,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '106 cm', cintura: '88 cm', quadril: '116 cm', comprimento: '62 cm' },
       { size: 'GG', busto: '114 cm', cintura: '96 cm', quadril: '124 cm', comprimento: '64 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -775,7 +757,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'X2', busto: '132 cm', cintura: '114 cm', quadril: '142 cm', comprimento: '66 cm' },
       { size: 'X3', busto: '140 cm', cintura: '122 cm', quadril: '150 cm', comprimento: '68 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -818,7 +799,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'X2', busto: '132 cm', cintura: '114 cm', quadril: '142 cm', comprimento: '66 cm' },
       { size: 'X3', busto: '140 cm', cintura: '122 cm', quadril: '150 cm', comprimento: '68 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
 
@@ -861,7 +841,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '-', cintura: '88 cm', quadril: '116 cm', comprimento: '88 cm' },
       { size: 'GG', busto: '-', cintura: '96 cm', quadril: '124 cm', comprimento: '90 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -904,7 +883,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '—', cintura: '86 cm', quadril: '112 cm', comprimento: '84 cm' },
       { size: 'GG', busto: '—', cintura: '94 cm', quadril: '120 cm', comprimento: '85 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
 
@@ -950,7 +928,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G2', busto: '130 cm', cintura: '112 cm', quadril: '140 cm', comprimento: '64 cm' },
       { size: 'G3', busto: '138 cm', cintura: '120 cm', quadril: '148 cm', comprimento: '66 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -990,7 +967,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G2', busto: '132 cm', cintura: '114 cm', quadril: '142 cm', comprimento: '66 cm' },
       { size: 'G3', busto: '140 cm', cintura: '122 cm', quadril: '150 cm', comprimento: '68 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1030,7 +1006,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '106 cm', cintura: '90 cm', quadril: '120 cm', comprimento: '140 cm' },
       { size: 'GG', busto: '114 cm', cintura: '98 cm', quadril: '128 cm', comprimento: '142 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1071,7 +1046,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '104 cm', cintura: '88 cm', quadril: '114 cm', comprimento: '120 cm' },
       { size: 'GG', busto: '112 cm', cintura: '96 cm', quadril: '122 cm', comprimento: '122 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1111,7 +1085,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G2', busto: '130 cm', cintura: '118 cm', quadril: '142 cm', comprimento: '104 cm' },
       { size: 'G3', busto: '138 cm', cintura: '126 cm', quadril: '150 cm', comprimento: '106 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1157,7 +1130,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G2', busto: '130 cm', cintura: '112 cm', quadril: '138 cm', comprimento: '110 cm' },
       { size: 'G3', busto: '138 cm', cintura: '120 cm', quadril: '146 cm', comprimento: '112 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1200,7 +1172,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '106 cm', cintura: '100 cm', quadril: '112 cm', comprimento: '64 cm' },
       { size: 'GG', busto: '114 cm', cintura: '108 cm', quadril: '120 cm', comprimento: '66 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1247,7 +1218,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G3', busto: '138 cm', cintura: '132 cm', quadril: '144 cm', comprimento: '72 cm' },
       { size: 'G4', busto: '146 cm', cintura: '140 cm', quadril: '152 cm', comprimento: '74 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1291,7 +1261,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '104 cm', cintura: '90 cm', quadril: '108 cm', comprimento: '60 cm' },
       { size: 'GG', busto: '112 cm', cintura: '98 cm', quadril: '116 cm', comprimento: '62 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1336,7 +1305,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '104 cm', cintura: '90 cm', quadril: '108 cm', comprimento: '60 cm' },
       { size: 'GG', busto: '112 cm', cintura: '98 cm', quadril: '116 cm', comprimento: '62 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1385,7 +1353,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'X2', busto: '-', cintura: '112 - 120 cm', quadril: '136 cm', comprimento: '56 cm' },
       { size: 'X3', busto: '-', cintura: '120 - 130 cm', quadril: '144 cm', comprimento: '57 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1433,7 +1400,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G3', busto: '136 cm', cintura: '116 - 122 cm', quadril: '142 cm', comprimento: '108 cm' },
       { size: 'G4', busto: '144 cm', cintura: '124 - 130 cm', quadril: '150 cm', comprimento: '109 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1474,7 +1440,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '104 cm', cintura: '90 cm', quadril: '108 cm', comprimento: '60 cm' },
       { size: 'GG', busto: '112 cm', cintura: '98 cm', quadril: '116 cm', comprimento: '62 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1528,7 +1493,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '104 cm', cintura: '90 cm', quadril: '108 cm', comprimento: '60 cm' },
       { size: 'GG', busto: '112 cm', cintura: '98 cm', quadril: '116 cm', comprimento: '62 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1571,7 +1535,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G1', busto: '120 cm', cintura: '106 cm', quadril: '124 cm', comprimento: '64 cm' },
       { size: 'G2', busto: '128 cm', cintura: '114 cm', quadril: '132 cm', comprimento: '66 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1615,7 +1578,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G2', busto: '128 cm', cintura: '114 cm', quadril: '132 cm', comprimento: '66 cm' },
       { size: 'G3', busto: '136 cm', cintura: '122 cm', quadril: '140 cm', comprimento: '68 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1658,7 +1620,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: '50', busto: '-', cintura: '100 - 104 cm', quadril: '122 - 126 cm', comprimento: '106 cm' },
       { size: '52', busto: '-', cintura: '104 - 108 cm', quadril: '126 - 130 cm', comprimento: '107 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1699,7 +1660,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '104 cm', cintura: '90 cm', quadril: '110 cm', comprimento: '102 cm' },
       { size: 'GG', busto: '112 cm', cintura: '98 cm', quadril: '118 cm', comprimento: '104 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1739,7 +1699,6 @@ export const PRODUCTS_DATA: Product[] = [
     measurements: [
       { size: 'G2', busto: '128 cm', cintura: '112 cm', quadril: '138 cm', comprimento: '106 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1783,7 +1742,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G1', busto: '120 cm', cintura: '106 cm', quadril: '124 cm', comprimento: '64 cm' },
       { size: 'G2', busto: '128 cm', cintura: '114 cm', quadril: '132 cm', comprimento: '66 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1824,7 +1782,6 @@ export const PRODUCTS_DATA: Product[] = [
     measurements: [
       { size: 'Único', busto: '96 - 110 cm', cintura: '76 - 94 cm', quadril: '104 - 120 cm', comprimento: 'Blusa 60 cm / Calça 106 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1869,7 +1826,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G2', busto: '128 cm', cintura: '114 cm', quadril: '134 cm', comprimento: '106 cm' },
       { size: 'G3', busto: '136 cm', cintura: '122 cm', quadril: '142 cm', comprimento: '107 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1911,7 +1867,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G2', busto: '130 cm', cintura: '112 cm', quadril: '140 cm', comprimento: '106 cm' },
       { size: 'G3', busto: '138 cm', cintura: '120 cm', quadril: '148 cm', comprimento: '107 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1956,7 +1911,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '104 cm', cintura: '86 - 94 cm', quadril: '112 cm', comprimento: 'Blusa 60 cm / Calça 104 cm' },
       { size: 'GG', busto: '112 cm', cintura: '98 cm', quadril: '120 cm', comprimento: 'Blusa 62 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -1999,7 +1953,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G', busto: '104 cm', cintura: '90 cm', quadril: '110 cm', comprimento: '119 cm' },
       { size: 'GG', busto: '112 cm', cintura: '98 cm', quadril: '118 cm', comprimento: '120 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -2039,7 +1992,6 @@ export const PRODUCTS_DATA: Product[] = [
     measurements: [
       { size: 'G1', busto: '122 cm', cintura: '106 cm', quadril: '130 cm', comprimento: '104 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
   {
@@ -2091,7 +2043,6 @@ export const PRODUCTS_DATA: Product[] = [
       { size: 'G1', busto: '120 cm', cintura: '106 cm', quadril: '124 cm', comprimento: '64 cm' },
       { size: 'G2', busto: '128 cm', cintura: '114 cm', quadril: '132 cm', comprimento: '66 cm' },
     ],
-    badge: 'Novo',
     tag: 'new',
   },
 ];

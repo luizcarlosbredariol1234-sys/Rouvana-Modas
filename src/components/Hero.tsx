@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { CATEGORY_CARDS, COMPANY_INFO } from '../data/products';
 import { ProductCategory } from '../types/catalog';
@@ -11,40 +11,37 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, onSelectCategory }) => {
-  const [activeSlide, setActiveSlide] = useState(0);
-
-  const heroSlides = [
-    {
-      kicker: 'Rouvana Modas',
-      titlePart1: 'Moda que Respeita',
-      titlePart2: 'o Seu Estilo',
-      subtitle: 'Descubra peças femininas pensadas para valorizar a sua essência.',
-      modelImg: '/products/vestido-viscolycra-9394.jpg',
-    },
-    {
-      kicker: 'Rouvana Modas',
-      titlePart1: 'Elegância Pura',
-      titlePart2: 'Feita a Você',
-      subtitle: 'Descubra peças femininas sofisticadas com modelagem impecável, do P ao G6.',
-      modelImg: '/products/vestido-viscolycra-9401.jpg',
-    },
-    {
-      kicker: 'Rouvana Modas',
-      titlePart1: 'Grade do P ao G6,',
-      titlePart2: 'Voltado para Moda Mulher',
-      subtitle: 'Modelagens exclusivas que abraçam e valorizam suas curvas com caimento impecável e elegância pura.',
-      modelImg: '/products/vestido-viscolycra-9402.jpg',
-    },
-    {
-      kicker: 'Rouvana Modas',
-      titlePart1: 'Moda Noite & Casual',
-      titlePart2: 'Beleza & Conforto',
-      subtitle: 'Peças com corte impecável para acompanhar todos os seus momentos com estilo e bem-estar.',
-      modelImg: '/products/pijama-canelado-101156.jpg',
-    },
+  const modelImages = [
+    '/products/vestido-viscolycra-9394.jpg',
+    '/products/vestido-viscolycra-9401.jpg',
+    '/products/vestido-viscolycra-9402.jpg',
+    '/products/pijama-canelado-101156.jpg',
+    '/products/look-calca-linho-12592-blusa-so1913.jpg',
+    '/products/vestido-viscolycra-33525.jpg',
+    '/products/vestido-malha-23279.jpg',
+    '/products/vestido-malha-6170365-cores.jpg',
   ];
 
-  const currentSlide = heroSlides[activeSlide];
+  const [activeImageIndex, setActiveImageIndex] = useState(() =>
+    Math.floor(Math.random() * modelImages.length)
+  );
+
+  // Random automatic rotation of ONLY the model photos in the top banner
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveImageIndex((prev) => {
+        const available = modelImages
+          .map((_, i) => i)
+          .filter((i) => i !== prev);
+        const randomIndex = available[Math.floor(Math.random() * available.length)];
+        return randomIndex;
+      });
+    }, 4000); // changes photo every 4 seconds randomly
+
+    return () => clearInterval(interval);
+  }, [modelImages.length]);
+
+  const currentModelImg = modelImages[activeImageIndex];
 
   const handleCardClick = (catId: ProductCategory) => {
     if (onSelectCategory) {
@@ -92,28 +89,28 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full z-10">
-            {/* Left text column */}
+            {/* Left text column - 100% fixed phrases exactly as original */}
             <div className="lg:col-span-7 flex flex-col items-start text-left">
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#60315F] flex items-center gap-1.5 bg-white/80 px-3 py-1 rounded-full border border-[#60315F]/20">
                   <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
-                  {currentSlide.kicker}
+                  Rouvana Modas
                 </span>
               </div>
 
               <h1 className="font-display font-bold text-[#331632] text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.1] mb-4">
-                {currentSlide.titlePart1} <br />
+                Moda que Respeita <br />
                 <span className="text-[#60315F] underline decoration-[#DFB77C]/70 decoration-wavy decoration-2">
-                  {currentSlide.titlePart2}
+                  o Seu Estilo
                 </span>
               </h1>
 
               <p className="text-sm sm:text-base text-[#553954] max-w-lg mb-8 leading-relaxed font-normal">
-                {currentSlide.subtitle}
+                Descubra peças femininas pensadas para valorizar a sua essência.
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-2">
                 <button
                   onClick={onExploreProducts}
                   className="px-7 py-3.5 rounded-full bg-gradient-to-r from-[#60315F] via-[#6D366B] to-[#7A3D76] hover:from-[#4D254C] hover:to-[#60315F] text-[#FAF6EE] font-bold text-sm shadow-md shadow-[#60315F]/25 flex items-center gap-2 transition-transform hover:scale-105 cursor-pointer"
@@ -129,33 +126,24 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProducts, onContactClick, o
                   <span>Fale Conosco</span>
                 </button>
               </div>
-
-              {/* Carousel navigation dots */}
-              <div className="flex items-center gap-2">
-                {heroSlides.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setActiveSlide(idx)}
-                    aria-label={`Slide ${idx + 1}`}
-                    className={`h-2 rounded-full transition-all cursor-pointer ${
-                      activeSlide === idx
-                        ? 'w-7 bg-[#60315F]'
-                        : 'w-2 bg-[#60315F]/25 hover:bg-[#60315F]/50'
-                    }`}
-                  />
-                ))}
-              </div>
             </div>
 
-            {/* Right model image column */}
+            {/* Right model image column: only photos rotate randomly */}
             <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
-              <div className="relative">
+              <div className="relative w-72 sm:w-84 lg:w-96 h-80 sm:h-96 lg:h-[420px] rounded-3xl overflow-hidden shadow-xl border-4 border-white/90 bg-[#F5EDF4]">
                 <div className="absolute inset-0 bg-[#60315F]/15 rounded-full blur-2xl transform scale-90" />
-                <img
-                  src={currentSlide.modelImg}
-                  alt="Modelo Rouvana Modas"
-                  className="relative z-10 w-72 sm:w-84 lg:w-96 h-80 sm:h-96 lg:h-[420px] object-cover object-top rounded-3xl shadow-xl border-4 border-white/90"
-                />
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentModelImg}
+                    src={currentModelImg}
+                    alt="Modelo Rouvana Modas"
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.45, ease: 'easeInOut' }}
+                    className="relative z-10 w-full h-full object-cover object-top"
+                  />
+                </AnimatePresence>
               </div>
             </div>
           </div>

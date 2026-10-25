@@ -3,7 +3,6 @@ import { motion } from 'motion/react';
 import {
   Heart,
   ShoppingBag,
-  Star,
   Instagram,
   ShieldCheck,
   Headphones,
@@ -69,7 +68,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
         );
       }
       if (activeTab === 'bestseller') return p.tag === 'bestseller' || p.rating >= 5;
-      if (activeTab === 'new') return p.tag === 'new' || p.badge?.includes('Novo');
+      if (activeTab === 'new') return p.tag === 'new';
       if (activeTab === 'top_rated') return p.reviewsCount >= 70;
       return true;
     });
@@ -218,13 +217,6 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                         : 'bg-slate-50'
                     } flex items-center justify-center cursor-pointer border border-[#60315F]/10`}
                   >
-                    {product.badge && (
-                      <div className="absolute top-2 left-2 z-10 bg-[#60315F] text-[#FAF6EE] text-[9px] font-black px-2 py-0.5 rounded-full shadow-md border border-[#DFB77C]/60 flex items-center gap-1">
-                        <Sparkles className="w-2.5 h-2.5 text-[#DFB77C]" />
-                        <span>{product.badge}</span>
-                      </div>
-                    )}
-
                     <img
                       src={product.image}
                       alt={product.name}
@@ -258,18 +250,6 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                         <Eye className="w-4 h-4" />
                       </button>
                     </div>
-                  </div>
-
-                  {/* Rating stars */}
-                  <div className="flex items-center gap-1 mb-1">
-                    <div className="flex text-[#DFB77C]">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 fill-[#DFB77C]" />
-                      ))}
-                    </div>
-                    <span className="text-[10px] text-slate-400 font-medium">
-                      ({product.reviewsCount})
-                    </span>
                   </div>
 
                   {/* Product Name */}
