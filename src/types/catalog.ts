@@ -8,7 +8,8 @@ export type ProductCategory =
   | 'camisas_blusas'
   | 'pantalonas_calcas'
   | 'bermudas'
-  | 'lingerie';
+  | 'lingerie'
+  | 'masculino';
 
 
 export interface ProductColor {
