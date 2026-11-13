@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Search, X, ShoppingBag, ArrowRight } from 'lucide-react';
 import { PRODUCTS_DATA } from '../data/products';
 import { Product } from '../types/catalog';
+import { getProductPriceSummary } from '../utils/pricing';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -107,37 +108,45 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   Nenhum produto encontrado para &quot;{query}&quot;
                 </div>
               ) : (
-                results.map((product) => (
-                  <div
-                    key={product.id}
-                    onClick={() => {
-                      onSelectProduct(product);
-                      onClose();
-                    }}
-                    className="flex items-center gap-3 p-3 rounded-2xl hover:bg-[#F5EDF4] cursor-pointer transition-colors"
-                  >
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className={`w-12 h-14 ${
-                        product.isLandscape || product.imageFit === 'contain'
-                          ? 'object-contain p-1 bg-white'
-                          : 'object-cover bg-slate-100'
-                      } rounded-xl shrink-0 border border-[#60315F]/15`}
-                    />
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-sm font-bold text-[#331632] truncate">
-                        {product.name}
-                      </h4>
-                      <p className="text-xs text-[#553954]">
-                        {product.categoryLabel} · {product.fiberHighlight}
-                      </p>
+                results.map((product) => {
+                  const priceSummary = getProductPriceSummary(product);
+                  return (
+                    <div
+                      key={product.id}
+                      onClick={() => {
+                        onSelectProduct(product);
+                        onClose();
+                      }}
+                      className="flex items-center gap-3 p-3 rounded-2xl hover:bg-[#F5EDF4] cursor-pointer transition-colors"
+                    >
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className={`w-12 h-14 ${
+                          product.isLandscape || product.imageFit === 'contain'
+                            ? 'object-contain p-1 bg-white'
+                            : 'object-cover bg-slate-100'
+                        } rounded-xl shrink-0 border border-[#60315F]/15`}
+                      />
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-sm font-bold text-[#331632] truncate">
+                          {product.name}
+                        </h4>
+                        <p className="text-xs text-[#553954]">
+                          {product.categoryLabel} · {product.fiberHighlight}
+                        </p>
+                        {priceSummary.hasPrice && (
+                          <p className="text-xs font-extrabold text-[#60315F] mt-0.5">
+                            {priceSummary.formatted}
+                          </p>
+                        )}
+                      </div>
+                      <span className="text-xs font-semibold text-[#60315F] bg-[#FAF5F9] px-2.5 py-1 rounded-lg border border-[#60315F]/15 shrink-0">
+                        Ver Peça
+                      </span>
                     </div>
-                    <span className="text-xs font-semibold text-[#60315F] bg-[#FAF5F9] px-2.5 py-1 rounded-lg border border-[#60315F]/15 shrink-0">
-                      Ver Peça
-                    </span>
-                  </div>
-                ))
+                  );
+                })
               )}
             </div>
           </motion.div>

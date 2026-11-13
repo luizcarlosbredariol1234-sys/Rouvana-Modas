@@ -15,6 +15,8 @@ import {
   RotateCcw,
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
+import { formatBRL, getProductPrice, getProductPriceSummary } from '../utils/pricing';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
 
 interface ProductModalProps {
   product: Product;
@@ -124,11 +126,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({
     }
   };
 
-  const handleWhatsAppInquiry = () => {
-    const text = `Olá, Rouvana Modas! Gostaria de solicitar um orçamento para a peça "${product.name}", tamanho ${selectedSize} e cor ${selectedColor.name}.`;
-    const url = `https://wa.me/${COMPANY_INFO.phoneClean}?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank');
-  };
+  const currentPrice = getProductPrice(product, selectedSize, selectedColor.name);
+  const priceSummary = getProductPriceSummary(product);
+  const hasColorPrices = product.colors.some((c) => (c.price ?? 0) > 0);
+
+  const priceText = currentPrice > 0 ? ` (${formatBRL(currentPrice)})` : '';
+  const whatsappInquiryText = `Olá, Rouvana Modas! Gostaria de solicitar informações sobre a peça "${product.name}", tamanho ${selectedSize}${priceText} e cor ${selectedColor.name}.`;
+  const whatsappInquiryUrl = buildWhatsAppUrl(COMPANY_INFO.phoneClean, whatsappInquiryText);
 
   const handleAdd = () => {
     onAddToCart(product, selectedSize, selectedColor);
@@ -239,17 +243,37 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 {product.name}
               </h2>
 
-              {/* Product Description Highlight */}
+              {/* Product Price & Description Highlight */}
               <div className="mb-4 pb-4 border-b border-[#60315F]/15 space-y-2.5">
+                {currentPrice > 0 && (
+                  <div className="flex flex-wrap items-baseline justify-between gap-2 bg-[#FAF4EB] px-4 py-3 rounded-xl border border-[#DEC295]/40">
+                    <div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A4B1A] block">
+                        {hasColorPrices ? 'Valor da peça selecionada' : `Valor (Tam. ${selectedSize})`}
+                      </span>
+                      <span className="text-2xl sm:text-3xl font-display font-extrabold text-[#331632]">
+                        {formatBRL(currentPrice)}
+                      </span>
+                    </div>
+                    {priceSummary.isRange && (
+                      <span className="text-[11px] font-semibold text-[#60315F] bg-white px-2.5 py-1 rounded-lg border border-[#60315F]/15">
+                        De {formatBRL(priceSummary.minPrice)} a {formatBRL(priceSummary.maxPrice)} {hasColorPrices ? 'conforme a peça' : 'conforme o tamanho'}
+                      </span>
+                    )}
+                  </div>
+                )}
+
                 <p className="text-xs sm:text-sm text-[#553954] font-medium leading-relaxed bg-[#FAF5F9] p-3 rounded-xl border border-[#60315F]/15 whitespace-pre-line">
                   {product.shortDescription}
                 </p>
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-semibold text-[#60315F] flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
-                    Orçamento sob consulta · Atendimento exclusivo
-                  </span>
-                </div>
+                {currentPrice === 0 && (
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-semibold text-[#60315F] flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-[#DFB77C]" />
+                      Orçamento sob consulta · Atendimento exclusivo
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Color swatches */}
@@ -275,6 +299,15 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                           style={{ backgroundColor: color.hex }}
                         />
                         <span>{color.name}</span>
+                        {color.price !== undefined && color.price > 0 && (
+                          <span
+                            className={`text-[11px] font-bold ${
+                              isSelected ? 'text-[#DFB77C]' : 'text-[#60315F]'
+                            }`}
+                          >
+                            · {formatBRL(color.price)}
+                          </span>
+                        )}
                       </button>
                     );
                   })}
@@ -301,17 +334,27 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {product.sizes.map((size) => {
                     const isSelected = selectedSize === size;
+                    const sizeSpecificPrice = product.sizePrices?.[size];
                     return (
                       <button
                         key={size}
                         onClick={() => setSelectedSize(size)}
-                        className={`min-w-[42px] h-9 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                        className={`min-w-[42px] h-9 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                           isSelected
                             ? 'bg-[#60315F] text-[#FAF6EE] shadow-xs'
                             : 'bg-[#F5EDF4] text-[#553954] hover:bg-[#EBD8E9]'
                         }`}
                       >
-                        {size}
+                        <span>{size}</span>
+                        {sizeSpecificPrice !== undefined && priceSummary.isRange && (
+                          <span
+                            className={`text-[10px] font-semibold ${
+                              isSelected ? 'text-[#DFB77C]' : 'text-[#60315F]/80'
+                            }`}
+                          >
+                            · {formatBRL(sizeSpecificPrice)}
+                          </span>
+                        )}
                       </button>
                     );
                   })}
@@ -356,13 +399,15 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                     <span>{addedNotice ? 'Adicionado com Sucesso!' : 'Adicionar à Sacola'}</span>
                   </button>
 
-                  <button
-                    onClick={handleWhatsAppInquiry}
+                  <a
+                    href={whatsappInquiryUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="py-3.5 px-5 rounded-2xl bg-[#60315F] hover:bg-[#4D254C] text-[#FAF6EE] font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer transition-colors"
                   >
                     <MessageCircle className="w-4 h-4 text-emerald-400" />
-                    <span>Solicitar Orçamento no WhatsApp</span>
-                  </button>
+                    <span>{currentPrice > 0 ? 'Pedir pelo WhatsApp' : 'Solicitar Orçamento no WhatsApp'}</span>
+                  </a>
                 </div>
 
                 {/* Botão Voltar Inferior */}

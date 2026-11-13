@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Plus, Minus, Trash2, ShoppingBag, MessageCircle, ArrowRight } from 'lucide-react';
+import { X, Plus, Minus, Trash2, ShoppingBag, MessageCircle } from 'lucide-react';
 import { CartItem } from '../types/catalog';
 import { COMPANY_INFO } from '../data/products';
+import { formatBRL, getProductPrice } from '../utils/pricing';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -22,20 +24,36 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   onCheckout,
 }) => {
   const totalItemsCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const pricedSubtotal = items.reduce(
+    (sum, item) =>
+      sum + getProductPrice(item.product, item.selectedSize, item.selectedColor.name) * item.quantity,
+    0
+  );
+  const hasAnyPricedItem = items.some(
+    (item) => getProductPrice(item.product, item.selectedSize, item.selectedColor.name) > 0
+  );
+  const hasAnyUnpricedItem = items.some(
+    (item) => getProductPrice(item.product, item.selectedSize, item.selectedColor.name) === 0
+  );
 
-  const handleWhatsAppCheckout = () => {
-    if (items.length === 0) return;
-    const itemsList = items
-      .map(
-        (it) =>
-          `• ${it.quantity}x ${it.product.name} (Tamanho: ${it.selectedSize}, Cor: ${it.selectedColor.name})`
-      )
-      .join('\n');
+  const itemsList = items
+    .map((it) => {
+      const unitPrice = getProductPrice(it.product, it.selectedSize, it.selectedColor.name);
+      const priceInfo = unitPrice > 0 ? ` - ${formatBRL(unitPrice)} cada` : '';
+      return `- ${it.quantity}x ${it.product.name} (Tamanho: ${it.selectedSize}, Cor: ${it.selectedColor.name})${priceInfo}`;
+    })
+    .join('\n');
 
-    const msg = `Olá, Rouvana Modas! Gostaria de solicitar um orçamento para as seguintes peças da minha sacola:\n\n${itemsList}\n\n*Total de itens: ${totalItemsCount}*\n\nComo posso prosseguir com o orçamento e disponibilidade para o meu endereço?`;
-    const url = `https://wa.me/${COMPANY_INFO.phoneClean}?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank');
-  };
+  const totalLine = hasAnyPricedItem
+    ? `\n*Subtotal dos itens com valor: ${formatBRL(pricedSubtotal)}*${hasAnyUnpricedItem ? ' (+ peças sob consulta)' : ''}`
+    : '';
+
+  const checkoutMessage =
+    items.length === 0
+      ? ''
+      : `Olá, Rouvana Modas! Gostaria de solicitar um pedido/orçamento para as seguintes peças da minha sacola:\n\n${itemsList}\n\n*Total de itens: ${totalItemsCount}*${totalLine}\n\nComo posso prosseguir com o atendimento e disponibilidade para o meu endereço?`;
+
+  const whatsappCheckoutUrl = buildWhatsAppUrl(COMPANY_INFO.phoneClean, checkoutMessage);
 
   return (
     <AnimatePresence>
@@ -117,6 +135,19 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <p className="text-[11px] text-slate-500 mt-0.5">
                         Tamanho: <strong className="text-[#331632]">{item.selectedSize}</strong> · Cor: <strong className="text-[#331632]">{item.selectedColor.name}</strong>
                       </p>
+                      {getProductPrice(item.product, item.selectedSize, item.selectedColor.name) > 0 && (
+                        <p className="text-xs font-extrabold text-[#60315F] mt-1">
+                          {formatBRL(
+                            getProductPrice(item.product, item.selectedSize, item.selectedColor.name) *
+                              item.quantity
+                          )}
+                          {item.quantity > 1 && (
+                            <span className="text-[10px] font-normal text-slate-500 ml-1">
+                              ({formatBRL(getProductPrice(item.product, item.selectedSize, item.selectedColor.name))} un.)
+                            </span>
+                          )}
+                        </p>
+                      )}
                       <div className="flex items-center justify-between mt-2">
                         <span className="text-[11px] font-semibold text-[#60315F] bg-[#FAF5F9] px-2 py-0.5 rounded-md border border-[#60315F]/15">
                           {item.quantity} {item.quantity === 1 ? 'unidade' : 'unidades'}
@@ -160,18 +191,30 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     {totalItemsCount} {totalItemsCount === 1 ? 'peça selecionada' : 'peças selecionadas'}
                   </span>
                 </div>
+                {hasAnyPricedItem && (
+                  <div className="flex items-center justify-between text-sm pt-1 border-t border-[#60315F]/10">
+                    <span className="text-[#553954] font-medium">
+                      {hasAnyUnpricedItem ? 'Subtotal (peças com valor)' : 'Valor Total'}
+                    </span>
+                    <span className="font-display font-extrabold text-[#331632] text-lg">
+                      {formatBRL(pricedSubtotal)}
+                    </span>
+                  </div>
+                )}
                 <div className="text-[11px] text-[#60315F] bg-[#F5EDF4] border border-[#60315F]/20 p-2.5 rounded-xl">
                   <div className="text-center font-medium">
                     ✨ Atendimento exclusivo • Consultamos disponibilidade e valores para você!
                   </div>
                 </div>
-                <button
-                  onClick={handleWhatsAppCheckout}
+                <a
+                  href={whatsappCheckoutUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full py-3.5 px-4 rounded-xl bg-[#60315F] hover:bg-[#4D254C] text-[#FAF6EE] font-semibold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4 text-[#DFB77C]" />
-                  <span>Solicitar Orçamento</span>
-                </button>
+                  <span>{hasAnyPricedItem && !hasAnyUnpricedItem ? 'Finalizar pelo WhatsApp' : 'Solicitar Orçamento no WhatsApp'}</span>
+                </a>
                 <button
                   onClick={onClose}
                   className="w-full py-2.5 text-xs text-[#553954] hover:text-[#60315F] text-center font-semibold cursor-pointer"

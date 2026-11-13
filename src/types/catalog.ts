@@ -16,6 +16,7 @@ export interface ProductColor {
   name: string;
   hex: string;
   border?: boolean;
+  price?: number;
 }
 
 export interface SizeMeasurement {
@@ -42,6 +43,7 @@ export interface Product {
   imageFit?: 'contain' | 'cover';
   isLandscape?: boolean;
   price: number;
+  sizePrices?: Record<string, number>;
   originalPrice?: number;
   discount?: string;
   rating: number;

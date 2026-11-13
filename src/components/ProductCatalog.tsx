@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { PRODUCTS_DATA, COMPANY_INFO, CATEGORIES_LIST } from '../data/products';
 import { Product, ProductCategory } from '../types/catalog';
+import { getProductPriceSummary } from '../utils/pricing';
 
 interface ProductCatalogProps {
   onSelectProduct: (product: Product) => void;
@@ -181,6 +182,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
             {filteredProducts.map((product) => {
               const isWishlisted = wishlistIds.includes(product.id);
+              const priceSummary = getProductPriceSummary(product);
 
               return (
                 <div
@@ -263,6 +265,14 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                   <p className="text-[11px] text-[#553954] line-clamp-1 mb-2">
                     {product.shortDescription}
                   </p>
+
+                  {priceSummary.hasPrice && (
+                    <div className="mb-2 flex items-baseline gap-1.5">
+                      <span className="font-display font-extrabold text-sm sm:text-base text-[#60315F]">
+                        {priceSummary.formatted}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Add to bag button */}
                   <div className="mt-auto pt-2">

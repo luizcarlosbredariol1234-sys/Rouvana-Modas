@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { MapPin, Phone, MessageCircle, Clock, Send, ChevronDown, CheckCircle2, Sparkles, Navigation, Instagram, Ruler, Scissors, Maximize2, X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import { COMPANY_INFO } from '../data/products';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
 
 export const ContactSection: React.FC = () => {
   const [name, setName] = useState('');
@@ -66,15 +67,22 @@ export const ContactSection: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const formattedText = `Olá, Rouvana Modas! Meu nome é ${name || 'Cliente'}.
+  const formattedContactText = `Olá, Rouvana Modas! Meu nome é ${name || 'Cliente'}.
 Tenho interesse em: *${interest}*.
 Telefone: ${phone || 'Não informado'}
 ${message ? `Mensagem: ${message}` : ''}`;
 
-    const url = `https://wa.me/${COMPANY_INFO.phoneClean}?text=${encodeURIComponent(formattedText)}`;
-    window.open(url, '_blank');
+  const whatsappContactUrl = buildWhatsAppUrl(COMPANY_INFO.phoneClean, formattedContactText);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const link = document.createElement('a');
+    link.href = whatsappContactUrl;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     setSentSuccess(true);
   };
 
@@ -331,9 +339,20 @@ ${message ? `Mensagem: ${message}` : ''}`;
               </button>
 
               {sentSuccess && (
-                <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-2 text-xs text-emerald-800">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Mensagem preparada com sucesso! Abrindo sua conversa no WhatsApp...</span>
+                <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex flex-wrap items-center justify-between gap-2 text-xs text-emerald-800">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>Mensagem preparada com sucesso!</span>
+                  </div>
+                  <a
+                    href={whatsappContactUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition-colors"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span>Abrir no WhatsApp</span>
+                  </a>
                 </div>
               )}
             </form>

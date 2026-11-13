@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Heart, ShoppingBag, Trash2 } from 'lucide-react';
 import { Product } from '../types/catalog';
+import { getProductPriceSummary } from '../utils/pricing';
 
 interface WishlistDrawerProps {
   isOpen: boolean;
@@ -77,35 +78,42 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                   </button>
                 </div>
               ) : (
-                wishlistProducts.map((product) => (
-                  <div key={product.id} className="py-4 flex gap-3.5 items-center">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      onClick={() => {
-                        onSelectProduct(product);
-                        onClose();
-                      }}
-                      className={`w-16 h-20 ${
-                        product.isLandscape || product.imageFit === 'contain'
-                          ? 'object-contain p-1 bg-white'
-                          : 'object-cover bg-slate-50'
-                      } rounded-xl border border-[#60315F]/15 shrink-0 cursor-pointer`}
-                    />
-                    <div className="flex-1 min-w-0">
-                      <h4
+                wishlistProducts.map((product) => {
+                  const priceSummary = getProductPriceSummary(product);
+                  return (
+                    <div key={product.id} className="py-4 flex gap-3.5 items-center">
+                      <img
+                        src={product.image}
+                        alt={product.name}
                         onClick={() => {
                           onSelectProduct(product);
                           onClose();
                         }}
-                        className="text-xs font-bold text-[#331632] truncate cursor-pointer hover:text-[#60315F]"
-                      >
-                        {product.name}
-                      </h4>
-                      <p className="text-[11px] text-slate-500 mt-0.5">
-                        {product.categoryLabel}
-                      </p>
-                    </div>
+                        className={`w-16 h-20 ${
+                          product.isLandscape || product.imageFit === 'contain'
+                            ? 'object-contain p-1 bg-white'
+                            : 'object-cover bg-slate-50'
+                        } rounded-xl border border-[#60315F]/15 shrink-0 cursor-pointer`}
+                      />
+                      <div className="flex-1 min-w-0">
+                        <h4
+                          onClick={() => {
+                            onSelectProduct(product);
+                            onClose();
+                          }}
+                          className="text-xs font-bold text-[#331632] truncate cursor-pointer hover:text-[#60315F]"
+                        >
+                          {product.name}
+                        </h4>
+                        <p className="text-[11px] text-slate-500 mt-0.5">
+                          {product.categoryLabel}
+                        </p>
+                        {priceSummary.hasPrice && (
+                          <p className="text-xs font-extrabold text-[#60315F] mt-0.5">
+                            {priceSummary.formatted}
+                          </p>
+                        )}
+                      </div>
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => onAddToCart(product)}
@@ -122,7 +130,8 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                       </button>
                     </div>
                   </div>
-                ))
+                  );
+                })
               )}
             </div>
           </motion.div>
