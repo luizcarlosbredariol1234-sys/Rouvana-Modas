@@ -14,7 +14,7 @@ export function getProductPrice(
 ): number {
   if (colorName) {
     const matchedColor = product.colors.find((c) => c.name === colorName);
-    if (matchedColor?.price !== undefined && matchedColor.price > 0) {
+    if (matchedColor?.price !== undefined) {
       return matchedColor.price;
     }
   }
